@@ -1,0 +1,1012 @@
+Content-Type: multipart/related; start=<op.mhtml.1415556476400.d987603c0460934e@2a01:e35:2434:2e0:483d:4128:9ff2:a832>; boundary=----------7wDFchDuneLYGVPBL7nl7A
+Content-Location: http://tools.ietf.org/html/rfc6209
+Subject: =?utf-8?Q?RFC=206209=20-=20Addition=20of=20the=20ARIA=20Cipher=20Suites=20to=20Transport=20Layer=20Security=20(TLS)?=
+MIME-Version: 1.0
+
+------------7wDFchDuneLYGVPBL7nl7A
+Content-Disposition: inline; filename=rfc6209.html
+Content-Type: text/html; charset=UTF-8; name=rfc6209.html
+Content-ID: <op.mhtml.1415556476400.d987603c0460934e@2a01:e35:2434:2e0:483d:4128:9ff2:a832>
+Content-Location: http://tools.ietf.org/html/rfc6209
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xml:lang=3D"en" lang=3D"en"=
+>
+<head profile=3D"http://dublincore.org/documents/2008/08/04/dc-html/">
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dut=
+f-8" />
+    <meta name=3D"robots" content=3D"index,follow" />
+    <meta name=3D"creator" content=3D"rfcmarkup version 1.109" />
+    <link rel=3D"schema.DC" href=3D"http://purl.org/dc/elements/1.1/" />=
+
+<meta name=3D"DC.Identifier" content=3D"urn:ietf:rfc:6209" />
+<meta name=3D"DC.Description.Abstract" content=3D"This document specifie=
+s a set of cipher suites for the Transport Layer\nSecurity (TLS) protoco=
+l to support the ARIA encryption algorithm as a\nblock cipher. This docu=
+ment is not an Internet Standards Track\nspecification; it is published =
+for informational purposes." />
+<meta name=3D"DC.Creator" content=3D"Kwon, Daesung" />
+<meta name=3D"DC.Creator" content=3D"Kim, Woo-Hwan" />
+<meta name=3D"DC.Creator" content=3D"Park, Je-Hong" />
+<meta name=3D"DC.Creator" content=3D"Lee, Jungkeun" />
+<meta name=3D"DC.Date.Issued" content=3D"April, 2011" />
+<meta name=3D"DC.Title" content=3D"Addition of the ARIA Cipher Suites to=
+ Transport Layer Security (TLS)" />
+
+    <link rel=3D"icon" href=3D"/images/rfc.png" type=3D"image/png" />
+    <link rel=3D"shortcut icon" href=3D"/images/rfc.png" type=3D"image/p=
+ng" />
+    <title>RFC 6209 - Addition of the ARIA Cipher Suites to Transport La=
+yer Security (TLS)</title>
+    =
+
+    =
+
+    <style type=3D"text/css">
+	body {
+	    margin: 0px 8px;
+            font-size: 1em;
+	}
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	    font-weight: bold;
+            line-height: 0pt;
+            display: inline;
+            white-space: pre;
+            font-family: monospace;
+            font-size: 1em;
+	    font-weight: bold;
+        }
+        pre {
+            font-size: 1em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+	.pre {
+	    white-space: pre;
+	    font-family: monospace;
+	}
+	.header{
+	    font-weight: bold;
+	}
+        .newpage {
+            page-break-before: always;
+        }
+        .invisible {
+            text-decoration: none;
+            color: white;
+        }
+        a.selflink {
+          color: black;
+          text-decoration: none;
+        }
+        @media print {
+            body {
+                font-family: monospace;
+                font-size: 10.5pt;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-size: 1em;
+            }
+        =
+
+            a:link, a:visited {
+                color: inherit;
+                text-decoration: none;
+            }
+            .noprint {
+                display: none;
+            }
+        }
+	@media screen {
+	    .grey, .grey a:link, .grey a:visited {
+		color: #777;
+	    }
+            .docinfo {
+                background-color: #EEE;
+            }
+            .top {
+                border-top: 7px solid #EEE;
+            }
+            .bgwhite  { background-color: white; }
+            .bgred    { background-color: #F44; }
+            .bggrey   { background-color: #666; }
+            .bgbrown  { background-color: #840; }            =
+
+            .bgorange { background-color: #FA0; }
+            .bgyellow { background-color: #EE0; }
+            .bgmagenta{ background-color: #F4F; }
+            .bgblue   { background-color: #66F; }
+            .bgcyan   { background-color: #4DD; }
+            .bggreen  { background-color: #4F4; }
+
+            .legend   { font-size: 90%; }
+            .cplate   { font-size: 70%; border: solid grey 1px; }
+	}
+    </style>
+    <!--[if IE]>
+    <style>
+    body {
+       font-size: 13px;
+       margin: 10px 10px;
+    }
+    </style>
+    <![endif]-->
+
+    <script type=3D"text/javascript"><!--
+    function addHeaderTags() {
+	var spans =3D document.getElementsByTagName("span");
+	for (var i=3D0; i < spans.length; i++) {
+	    var elem =3D spans[i];
+	    if (elem) {
+		var level =3D elem.getAttribute("class");
+                if (level =3D=3D "h1" || level =3D=3D "h2" || level =3D=3D=
+ "h3" || level =3D=3D "h4" || level =3D=3D "h5" || level =3D=3D "h6") {
+                    elem.innerHTML =3D "<"+level+">"+elem.innerHTML+"</"=
++level+">";		=
+
+                }
+	    }
+	}
+    }
+    var legend_html =3D "Colour legend:<br />      <table>         <tr><=
+td>Unknown:</td>                   <td><span class=3D'cplate bgwhite'>&n=
+bsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Draft:</td>     =
+                <td><span class=3D'cplate bgred'>&nbsp;&nbsp;&nbsp;&nbsp=
+;</span></td></tr>         <tr><td>Informational:</td>             <td><=
+span class=3D'cplate bgorange'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>=
+         <tr><td>Experimental:</td>              <td><span class=3D'cpla=
+te bgyellow'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>B=
+est Common Practice:</td>      <td><span class=3D'cplate bgmagenta'>&nbs=
+p;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Proposed Standard:=
+</td>         <td><span class=3D'cplate bgblue'>&nbsp;&nbsp;&nbsp;&nbsp;=
+</span></td></tr>         <tr><td>Draft Standard (old designation):</td>=
+ <td><span class=3D'cplate bgcyan'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td><=
+/tr>         <tr><td>Internet Standard:</td>         <td><span class=3D'=
+cplate bggreen'>&nbsp;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><t=
+d>Historic:</td>                  <td><span class=3D'cplate bggrey'>&nbs=
+p;&nbsp;&nbsp;&nbsp;</span></td></tr>         <tr><td>Obsolete:</td>    =
+              <td><span class=3D'cplate bgbrown'>&nbsp;&nbsp;&nbsp;&nbsp=
+;</span></td></tr>     </table>";
+    function showElem(id) {
+        var elem =3D document.getElementById(id);
+        elem.innerHTML =3D eval(id+"_html");
+        elem.style.visibility=3D'visible';
+    }
+    function hideElem(id) {
+        var elem =3D document.getElementById(id);
+        elem.style.visibility=3D'hidden';        =
+
+        elem.innerHTML =3D "";
+    }
+    // -->
+    </script>
+</head>
+<body onload=3D"addHeaderTags()">
+   <div style=3D"height: 13px;">
+      <div onmouseover=3D"this.style.cursor=3D'pointer';"
+         onclick=3D"showElem('legend');"
+         onmouseout=3D"hideElem('legend')"
+	 style=3D"height: 6px; position: absolute;"
+         class=3D"pre noprint docinfo bgorange"
+         title=3D"Click for colour legend." >                           =
+                                             </div>
+      <div id=3D"legend"
+           class=3D"docinfo noprint pre legend"
+           style=3D"position:absolute; top: 4px; left: 4ex; visibility:h=
+idden; background-color: white; padding: 4px 9px 5px 7px; border: solid =
+#345 1px; "
+           onmouseover=3D"showElem('legend');"
+           onmouseout=3D"hideElem('legend');">
+      </div>
+   </div>
+<span class=3D"pre noprint docinfo top">[<a href=3D"../html/" title=3D"D=
+ocument search and retrieval page">Docs</a>] [<a href=3D"/rfc/rfc6209.tx=
+t" title=3D"Plaintext version of this document">txt</a>|<a href=3D"/pdf/=
+rfc6209" title=3D"PDF version of this document">pdf</a>] [<a href=3D"./d=
+raft-nsri-tls-aria" title=3D"draft-nsri-tls-aria">draft-nsri-tls-aria</a=
+>] [<a href=3D"/rfcdiff?difftype=3D--hwdiff&amp;url2=3Drfc6209" title=3D=
+"Inline diff (wdiff)">Diff1</a>] [<a href=3D"/rfcdiff?url2=3Drfc6209" ti=
+tle=3D"Side-by-side diff">Diff2</a>]                  </span><br />
+<span class=3D"pre noprint docinfo">                                    =
+                                    </span><br />
+<span class=3D"pre noprint docinfo">                                    =
+                       INFORMATIONAL</span><br />
+<span class=3D"pre noprint docinfo">                                    =
+                                    </span><br />
+<pre>
+Internet Engineering Task Force (IETF)                            W. Kim=
+
+Request for Comments: 6209                                        J. Lee=
+
+Category: Informational                                          J. Park=
+
+ISSN: 2070-1721                                                  D. Kwon=
+
+                                                                    NSRI=
+
+                                                              April 2011=
+
+
+
+  <span class=3D"h1">Addition of the ARIA Cipher Suites to Transport Lay=
+er Security (TLS)</span>
+
+Abstract
+
+   This document specifies a set of cipher suites for the Transport
+   Layer Security (TLS) protocol to support the ARIA encryption
+   algorithm as a block cipher.
+
+Status of This Memo
+
+   This document is not an Internet Standards Track specification; it is=
+
+   published for informational purposes.
+
+   This document is a product of the Internet Engineering Task Force
+   (IETF).  It represents the consensus of the IETF community.  It has
+   received public review and has been approved for publication by the
+   Internet Engineering Steering Group (IESG).  Not all documents
+   approved by the IESG are a candidate for any level of Internet
+   Standard; see <a href=3D"./rfc5741#section-2">Section&nbsp;2 of RFC 5=
+741</a>.
+
+   Information about the current status of this document, any errata,
+   and how to provide feedback on it may be obtained at
+   <a href=3D"http://www.rfc-editor.org/info/rfc6209">http://www.rfc-edi=
+tor.org/info/rfc6209</a>.
+
+Copyright Notice
+
+   Copyright (c) 2011 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to <a href=3D"./bcp78">BCP 78</a> and the IE=
+TF Trust's Legal
+   Provisions Relating to IETF Documents
+   (<a href=3D"http://trustee.ietf.org/license-info">http://trustee.ietf=
+.org/license-info</a>) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect=
+
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in <a href=3D"#secti=
+on-4">Section 4</a>.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 1]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-2" id=3D"page=
+-2" href=3D"#page-2" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+Table of Contents
+
+   <a href=3D"#section-1">1</a>.  Introduction  . . . . . . . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-2">2</a>
+     <a href=3D"#section-1.1">1.1</a>.  ARIA  . . . . . . . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-2">2</a>
+     <a href=3D"#section-1.2">1.2</a>.  Terminology . . . . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-3">3</a>
+   <a href=3D"#section-2">2</a>.  Proposed Cipher Suites  . . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-3">3</a>
+     <a href=3D"#section-2.1">2.1</a>.  HMAC-Based Cipher Suites  . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-3">3</a>
+     <a href=3D"#section-2.2">2.2</a>.  GCM-Based Cipher Suites . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-3">3</a>
+     <a href=3D"#section-2.3">2.3</a>.  PSK Cipher Suites . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-4">4</a>
+   <a href=3D"#section-3">3</a>.  Cipher Suite Definitions  . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+     <a href=3D"#section-3.1">3.1</a>.  Key Exchange  . . . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+     <a href=3D"#section-3.2">3.2</a>.  Cipher  . . . . . . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+     <a href=3D"#section-3.3">3.3</a>.  PRFs  . . . . . . . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+     <a href=3D"#section-3.4">3.4</a>.  PSK Cipher Suites . . . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+   <a href=3D"#section-4">4</a>.  Security Considerations . . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-5">5</a>
+   <a href=3D"#section-5">5</a>.  IANA Considerations . . . . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-6">6</a>
+   <a href=3D"#section-6">6</a>.  References  . . . . . . . . . . . . . =
+. . . . . . . . . . . . . <a href=3D"#page-7">7</a>
+     <a href=3D"#section-6.1">6.1</a>.  Normative References  . . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-7">7</a>
+     <a href=3D"#section-6.2">6.2</a>.  Informative References  . . . . =
+. . . . . . . . . . . . . . <a href=3D"#page-8">8</a>
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-1" href=3D"#sec=
+tion-1">1</a>.  Introduction</span>
+
+   This document specifies cipher suites for the Transport Layer
+   Security (TLS) [<a href=3D"./rfc5246" title=3D"&quot;The Transport La=
+yer Security (TLS) Protocol Version 1.2&quot;">RFC5246</a>] protocol to =
+support the ARIA [<a href=3D"./rfc5794" title=3D"&quot;A Description of =
+the ARIA Encryption Algorithm&quot;">RFC5794</a>]
+   encryption algorithm as a block cipher algorithm.  The cipher suites
+   include variants using the SHA-2 family of cryptographic hash
+   functions and ARIA Galois counter mode.  Elliptic curve cipher suites=
+
+   and pre-shared key (PSK) cipher suites are also defined.
+
+   The cipher suites with SHA-1 are not included in this document.  Due
+   to recent analytic work on SHA-1 [<a href=3D"#ref-Wang05" title=3D"&q=
+uot;Finding Collisions in the Full SHA-1&quot;">Wang05</a>], the IETF is=
+ gradually
+   moving away from SHA-1 and towards stronger hash algorithms.
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-1.1" href=3D"#s=
+ection-1.1">1.1</a>.  ARIA</span>
+
+   ARIA is a general-purpose block cipher algorithm developed by Korean
+   cryptographers in 2003.  It is an iterated block cipher with 128-,
+   192-, and 256-bit keys and encrypts 128-bit blocks in 12, 14, and 16
+   rounds, depending on the key size.  It is secure and suitable for
+   most software and hardware implementations on 32-bit and 8-bit
+   processors.  It was established as a Korean standard block cipher
+   algorithm in 2004 [<a href=3D"#ref-ARIAKS" title=3D"&quot;128 bit blo=
+ck encryption algorithm ARIA - Part 1: General (in Korean)&quot;">ARIAKS=
+</a>] and has been widely used in Korea,
+   especially for government-to-public services.  It was included in
+   PKCS #11 in 2007 [<a href=3D"#ref-ARIAPKCS" title=3D"&quot;Additional=
+ PKCS #11 Mechanisms&quot;">ARIAPKCS</a>].  The algorithm specification =
+and object
+   identifiers are described in [<a href=3D"./rfc5794" title=3D"&quot;A =
+Description of the ARIA Encryption Algorithm&quot;">RFC5794</a>].
+
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 2]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-3" id=3D"page=
+-3" href=3D"#page-3" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-1.2" href=3D"#s=
+ection-1.2">1.2</a>.  Terminology</span>
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [<a href=3D"./rfc2119"=
+ title=3D"&quot;Key words for use in RFCs to Indicate Requirement Levels=
+&quot;">RFC2119</a>].
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-2" href=3D"#sec=
+tion-2">2</a>.  Proposed Cipher Suites</span>
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-2.1" href=3D"#s=
+ection-2.1">2.1</a>.  HMAC-Based Cipher Suites</span>
+
+   The first twenty cipher suites use ARIA [<a href=3D"./rfc5794" title=3D=
+"&quot;A Description of the ARIA Encryption Algorithm&quot;">RFC5794</a>=
+] in Cipher Block
+   Chaining (CBC) mode with a SHA-2 family Hashed Message Authentication=
+
+   Code (HMAC).  Eight out of twenty use elliptic curves.
+
+   CipherSuite TLS_RSA_WITH_ARIA_128_CBC_SHA256         =3D { 0xC0,0x3C =
+};
+   CipherSuite TLS_RSA_WITH_ARIA_256_CBC_SHA384         =3D { 0xC0,0x3D =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_128_CBC_SHA256      =3D { 0xC0,0x3E =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_256_CBC_SHA384      =3D { 0xC0,0x3F =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_128_CBC_SHA256      =3D { 0xC0,0x40 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_256_CBC_SHA384      =3D { 0xC0,0x41 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x42 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x43 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x44 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x45 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x46 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x47 =
+};
+
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 =3D { 0xC0,0x48 =
+};
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 =3D { 0xC0,0x49 =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256  =3D { 0xC0,0x4A =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384  =3D { 0xC0,0x4B =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256   =3D { 0xC0,0x4C =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384   =3D { 0xC0,0x4D =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256    =3D { 0xC0,0x4E =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384    =3D { 0xC0,0x4F =
+};
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-2.2" href=3D"#s=
+ection-2.2">2.2</a>.  GCM-Based Cipher Suites</span>
+
+   The next twenty cipher suites use the same asymmetric algorithms as
+   those in the previous section but use the authenticated encryption
+   modes defined in TLS 1.2 with the ARIA in Galois Counter Mode (GCM)
+   [<a href=3D"#ref-GCM" title=3D"&quot;Recommendation for Block Cipher =
+Modes of Operation: Galois/Counter Mode (GCM) and GMAC&quot;">GCM</a>].
+
+
+
+
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 3]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-4" id=3D"page=
+-4" href=3D"#page-4" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+   CipherSuite TLS_RSA_WITH_ARIA_128_GCM_SHA256         =3D { 0xC0,0x50 =
+};
+   CipherSuite TLS_RSA_WITH_ARIA_256_GCM_SHA384         =3D { 0xC0,0x51 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x52 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x53 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_128_GCM_SHA256      =3D { 0xC0,0x54 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_256_GCM_SHA384      =3D { 0xC0,0x55 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x56 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x57 =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_128_GCM_SHA256      =3D { 0xC0,0x58 =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384      =3D { 0xC0,0x59 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x5A =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x5B =
+};
+
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256 =3D { 0xC0,0x5C =
+};
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384 =3D { 0xC0,0x5D =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256  =3D { 0xC0,0x5E =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384  =3D { 0xC0,0x5F =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256   =3D { 0xC0,0x60 =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384   =3D { 0xC0,0x61 =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256    =3D { 0xC0,0x62 =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384    =3D { 0xC0,0x63 =
+};
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-2.3" href=3D"#s=
+ection-2.3">2.3</a>.  PSK Cipher Suites</span>
+
+   The next fourteen cipher suites describe PSK cipher suites.  Eight
+   cipher suites use an HMAC and six cipher suites use the ARIA Galois
+   Counter Mode.
+
+   CipherSuite TLS_PSK_WITH_ARIA_128_CBC_SHA256         =3D { 0xC0,0x64 =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_256_CBC_SHA384         =3D { 0xC0,0x65 =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x66 =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x67 =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x68 =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x69 =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_128_GCM_SHA256         =3D { 0xC0,0x6A =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_256_GCM_SHA384         =3D { 0xC0,0x6B =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x6C =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x6D =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x6E =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x6F =
+};
+   CipherSuite TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256   =3D { 0xC0,0x70 =
+};
+   CipherSuite TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384   =3D { 0xC0,0x71 =
+};
+
+
+
+
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 4]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-5" id=3D"page=
+-5" href=3D"#page-5" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-3" href=3D"#sec=
+tion-3">3</a>.  Cipher Suite Definitions</span>
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-3.1" href=3D"#s=
+ection-3.1">3.1</a>.  Key Exchange</span>
+
+   The RSA, DHE_RSA, DH_RSA, DHE_DSS, DH_DSS, DH_anon, ECDH, and ECDHE
+   key exchanges are performed as defined in [<a href=3D"./rfc5246" titl=
+e=3D"&quot;The Transport Layer Security (TLS) Protocol Version 1.2&quot;=
+">RFC5246</a>].
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-3.2" href=3D"#s=
+ection-3.2">3.2</a>.  Cipher</span>
+
+   The ARIA_128_CBC cipher suites use ARIA [<a href=3D"./rfc5794" title=3D=
+"&quot;A Description of the ARIA Encryption Algorithm&quot;">RFC5794</a>=
+] in CBC mode with a
+   128-bit key and 128-bit Initialization Vector (IV); the ARIA_256_CBC
+   cipher suites use a 256-bit key and 128-bit IV.
+
+   AES-authenticated encryption with additional data algorithms,
+   AEAD_AES_128_GCM, and AEAD_AES_256_GCM are described in [<a href=3D".=
+/rfc5116" title=3D"&quot;An Interface and Algorithms for Authenticated E=
+ncryption&quot;">RFC5116</a>].
+   AES GCM cipher suites for TLS are described in [<a href=3D"./rfc5288"=
+ title=3D"&quot;AES Galois Counter Mode (GCM) Cipher Suites for TLS&quot=
+;">RFC5288</a>].  AES and
+   ARIA share common characteristics, including key sizes and block
+   length.  ARIA_128_GCM and ARIA_256_GCM are defined according to those=
+
+   characteristics of AES.
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-3.3" href=3D"#s=
+ection-3.3">3.3</a>.  PRFs</span>
+
+   The pseudorandom functions (PRFs) SHALL be as follows:
+
+   a.  For cipher suites ending with _SHA256, the PRF is the TLS PRF
+       [<a href=3D"./rfc5246" title=3D"&quot;The Transport Layer Securit=
+y (TLS) Protocol Version 1.2&quot;">RFC5246</a>] using SHA-256 as the ha=
+sh function.
+
+   b.  For cipher suites ending with _SHA384, the PRF is the TLS PRF
+       [<a href=3D"./rfc5246" title=3D"&quot;The Transport Layer Securit=
+y (TLS) Protocol Version 1.2&quot;">RFC5246</a>] using SHA-384 as the ha=
+sh function.
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-3.4" href=3D"#s=
+ection-3.4">3.4</a>.  PSK Cipher Suites</span>
+
+   Pre-shared key cipher suites for TLS are described in [<a href=3D"./r=
+fc4279" title=3D"&quot;Pre-Shared Key Ciphersuites for Transport Layer S=
+ecurity (TLS)&quot;">RFC4279</a>],
+   [<a href=3D"./rfc4785" title=3D"&quot;Pre-Shared Key (PSK) Ciphersuit=
+es with NULL Encryption for Transport Layer Security (TLS)&quot;">RFC478=
+5</a>], [<a href=3D"./rfc5487" title=3D"&quot;Pre-Shared Key Cipher Suit=
+es for TLS with SHA-256/384 and AES Galois Counter Mode&quot;">RFC5487</=
+a>], and [<a href=3D"./rfc5489" title=3D"&quot;ECDHE_PSK Cipher Suites f=
+or Transport Layer Security (TLS)&quot;">RFC5489</a>].
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-4" href=3D"#sec=
+tion-4">4</a>.  Security Considerations</span>
+
+   At the time of writing this document, no security problems have been
+   found on ARIA (see [<a href=3D"#ref-YWL" title=3D"&quot;Integral atta=
+cks on reduced-round ARIA block cipher&quot;">YWL</a>]).
+
+   The security considerations in the following RFCs apply to this
+   document as well: [<a href=3D"./rfc4279" title=3D"&quot;Pre-Shared Ke=
+y Ciphersuites for Transport Layer Security (TLS)&quot;">RFC4279</a>] [<=
+a href=3D"./rfc4785" title=3D"&quot;Pre-Shared Key (PSK) Ciphersuites wi=
+th NULL Encryption for Transport Layer Security (TLS)&quot;">RFC4785</a>=
+] [<a href=3D"./rfc5116" title=3D"&quot;An Interface and Algorithms for =
+Authenticated Encryption&quot;">RFC5116</a>] [<a href=3D"./rfc5288" titl=
+e=3D"&quot;AES Galois Counter Mode (GCM) Cipher Suites for TLS&quot;">RF=
+C5288</a>] [<a href=3D"./rfc5289" title=3D"&quot;TLS Elliptic Curve Ciph=
+er Suites with SHA- 256/384 and AES Galois Counter Mode (GCM)&quot;">RFC=
+5289</a>]
+   [<a href=3D"./rfc5487" title=3D"&quot;Pre-Shared Key Cipher Suites fo=
+r TLS with SHA-256/384 and AES Galois Counter Mode&quot;">RFC5487</a>] a=
+nd [<a href=3D"#ref-GCM" title=3D"&quot;Recommendation for Block Cipher =
+Modes of Operation: Galois/Counter Mode (GCM) and GMAC&quot;">GCM</a>].
+
+
+
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 5]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-6" id=3D"page=
+-6" href=3D"#page-6" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-5" href=3D"#sec=
+tion-5">5</a>.  IANA Considerations</span>
+
+   IANA has allocated the following numbers in the TLS Cipher Suite
+   Registry:
+
+   CipherSuite TLS_RSA_WITH_ARIA_128_CBC_SHA256         =3D { 0xC0,0x3C =
+};
+   CipherSuite TLS_RSA_WITH_ARIA_256_CBC_SHA384         =3D { 0xC0,0x3D =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_128_CBC_SHA256      =3D { 0xC0,0x3E =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_256_CBC_SHA384      =3D { 0xC0,0x3F =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_128_CBC_SHA256      =3D { 0xC0,0x40 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_256_CBC_SHA384      =3D { 0xC0,0x41 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x42 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x43 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x44 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x45 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x46 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x47 =
+};
+
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_128_CBC_SHA256 =3D { 0xC0,0x48 =
+};
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_256_CBC_SHA384 =3D { 0xC0,0x49 =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_128_CBC_SHA256  =3D { 0xC0,0x4A =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_256_CBC_SHA384  =3D { 0xC0,0x4B =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_128_CBC_SHA256   =3D { 0xC0,0x4C =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_256_CBC_SHA384   =3D { 0xC0,0x4D =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_128_CBC_SHA256    =3D { 0xC0,0x4E =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_256_CBC_SHA384    =3D { 0xC0,0x4F =
+};
+
+   CipherSuite TLS_RSA_WITH_ARIA_128_GCM_SHA256         =3D { 0xC0,0x50 =
+};
+   CipherSuite TLS_RSA_WITH_ARIA_256_GCM_SHA384         =3D { 0xC0,0x51 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x52 =
+};
+   CipherSuite TLS_DHE_RSA_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x53 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_128_GCM_SHA256      =3D { 0xC0,0x54 =
+};
+   CipherSuite TLS_DH_RSA_WITH_ARIA_256_GCM_SHA384      =3D { 0xC0,0x55 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x56 =
+};
+   CipherSuite TLS_DHE_DSS_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x57 =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_128_GCM_SHA256      =3D { 0xC0,0x58 =
+};
+   CipherSuite TLS_DH_DSS_WITH_ARIA_256_GCM_SHA384      =3D { 0xC0,0x59 =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x5A =
+};
+   CipherSuite TLS_DH_anon_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x5B =
+};
+
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_128_GCM_SHA256 =3D { 0xC0,0x5C =
+};
+   CipherSuite TLS_ECDHE_ECDSA_WITH_ARIA_256_GCM_SHA384 =3D { 0xC0,0x5D =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_128_GCM_SHA256  =3D { 0xC0,0x5E =
+};
+   CipherSuite TLS_ECDH_ECDSA_WITH_ARIA_256_GCM_SHA384  =3D { 0xC0,0x5F =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_128_GCM_SHA256   =3D { 0xC0,0x60 =
+};
+   CipherSuite TLS_ECDHE_RSA_WITH_ARIA_256_GCM_SHA384   =3D { 0xC0,0x61 =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_128_GCM_SHA256    =3D { 0xC0,0x62 =
+};
+   CipherSuite TLS_ECDH_RSA_WITH_ARIA_256_GCM_SHA384    =3D { 0xC0,0x63 =
+};
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 6]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-7" id=3D"page=
+-7" href=3D"#page-7" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+   CipherSuite TLS_PSK_WITH_ARIA_128_CBC_SHA256         =3D { 0xC0,0x64 =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_256_CBC_SHA384         =3D { 0xC0,0x65 =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x66 =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x67 =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_128_CBC_SHA256     =3D { 0xC0,0x68 =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_256_CBC_SHA384     =3D { 0xC0,0x69 =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_128_GCM_SHA256         =3D { 0xC0,0x6A =
+};
+   CipherSuite TLS_PSK_WITH_ARIA_256_GCM_SHA384         =3D { 0xC0,0x6B =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x6C =
+};
+   CipherSuite TLS_DHE_PSK_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x6D =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_128_GCM_SHA256     =3D { 0xC0,0x6E =
+};
+   CipherSuite TLS_RSA_PSK_WITH_ARIA_256_GCM_SHA384     =3D { 0xC0,0x6F =
+};
+   CipherSuite TLS_ECDHE_PSK_WITH_ARIA_128_CBC_SHA256   =3D { 0xC0,0x70 =
+};
+   CipherSuite TLS_ECDHE_PSK_WITH_ARIA_256_CBC_SHA384   =3D { 0xC0,0x71 =
+};
+
+<span class=3D"h2"><a class=3D"selflink" name=3D"section-6" href=3D"#sec=
+tion-6">6</a>.  References</span>
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-6.1" href=3D"#s=
+ection-6.1">6.1</a>.  Normative References</span>
+
+   [<a name=3D"ref-GCM" id=3D"ref-GCM">GCM</a>]       Dworkin, M., "Reco=
+mmendation for Block Cipher Modes of
+               Operation: Galois/Counter Mode (GCM) and GMAC", NIST
+               SP 800-38D, November 2007.
+
+   [<a name=3D"ref-RFC2119" id=3D"ref-RFC2119">RFC2119</a>]   Bradner, S=
+., "Key words for use in RFCs to Indicate
+               Requirement Levels", <a href=3D"./bcp14">BCP 14</a>, <a h=
+ref=3D"./rfc2119">RFC 2119</a>, March 1997.
+
+   [<a name=3D"ref-RFC4279" id=3D"ref-RFC4279">RFC4279</a>]   Eronen, P.=
+ and H. Tschofenig, "Pre-Shared Key
+               Ciphersuites for Transport Layer Security (TLS)",
+               <a href=3D"./rfc4279">RFC 4279</a>, December 2005.
+
+   [<a name=3D"ref-RFC4785" id=3D"ref-RFC4785">RFC4785</a>]   Blumenthal=
+, U. and P. Goel, "Pre-Shared Key (PSK)
+               Ciphersuites with NULL Encryption for Transport Layer
+               Security (TLS)", <a href=3D"./rfc4785">RFC 4785</a>, Janu=
+ary 2007.
+
+   [<a name=3D"ref-RFC5116" id=3D"ref-RFC5116">RFC5116</a>]   McGrew, D.=
+, "An Interface and Algorithms for
+               Authenticated Encryption", <a href=3D"./rfc5116">RFC 5116=
+</a>, January 2008.
+
+   [<a name=3D"ref-RFC5246" id=3D"ref-RFC5246">RFC5246</a>]   Dierks, T.=
+ and E. Rescorla, "The Transport Layer Security
+               (TLS) Protocol Version 1.2", <a href=3D"./rfc5246">RFC 52=
+46</a>, August 2008.
+
+   [<a name=3D"ref-RFC5288" id=3D"ref-RFC5288">RFC5288</a>]   Salowey, J=
+., Choudhury, A., and D. McGrew, "AES Galois
+               Counter Mode (GCM) Cipher Suites for TLS", <a href=3D"./r=
+fc5288">RFC 5288</a>,
+               August 2008.
+
+   [<a name=3D"ref-RFC5289" id=3D"ref-RFC5289">RFC5289</a>]   Rescorla, =
+E., "TLS Elliptic Curve Cipher Suites with SHA-
+               256/384 and AES Galois Counter Mode (GCM)", <a href=3D"./=
+rfc5289">RFC 5289</a>,
+               August 2008.
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 7]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-8" id=3D"page=
+-8" href=3D"#page-8" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+   [<a name=3D"ref-RFC5487" id=3D"ref-RFC5487">RFC5487</a>]   Badra, M.,=
+ "Pre-Shared Key Cipher Suites for TLS with
+               SHA-256/384 and AES Galois Counter Mode", <a href=3D"./rf=
+c5487">RFC 5487</a>,
+               March 2009.
+
+   [<a name=3D"ref-RFC5489" id=3D"ref-RFC5489">RFC5489</a>]   Badra, M. =
+and I. Hajjeh, "ECDHE_PSK Cipher Suites for
+               Transport Layer Security (TLS)", <a href=3D"./rfc5489">RF=
+C 5489</a>, March 2009.
+
+   [<a name=3D"ref-RFC5794" id=3D"ref-RFC5794">RFC5794</a>]   Lee, J., L=
+ee, J., Kim, J., Kwon, D., and C. Kim, "A
+               Description of the ARIA Encryption Algorithm", <a href=3D=
+"./rfc5794">RFC 5794</a>,
+               March 2010.
+
+<span class=3D"h3"><a class=3D"selflink" name=3D"section-6.2" href=3D"#s=
+ection-6.2">6.2</a>.  Informative References</span>
+
+   [<a name=3D"ref-ARIAKS" id=3D"ref-ARIAKS">ARIAKS</a>]    Korean Agenc=
+y for Technology and Standards, "128 bit
+               block encryption algorithm ARIA - Part 1: General (in
+               Korean)", KS X 1213-1:2009, December 2009.
+
+   [<a name=3D"ref-ARIAPKCS" id=3D"ref-ARIAPKCS">ARIAPKCS</a>]  RSA Labo=
+ratories, "Additional PKCS #11 Mechanisms",
+               PKCS #11 v2.20 Amendment 3 Revision 1, January 2007.
+
+   [<a name=3D"ref-Wang05" id=3D"ref-Wang05">Wang05</a>]    Wang, X., Yi=
+n, Y., and H. Yu, "Finding Collisions in the
+               Full SHA-1", CRYPTO 2005, LNCS vol.3621, pp.17-36,
+               August 2005.
+
+   [<a name=3D"ref-YWL" id=3D"ref-YWL">YWL</a>]       Li, Y., Wu, W., an=
+d L. Zhang, "Integral attacks on
+               reduced-round ARIA block cipher", ISPEC 2010,
+               LNCS Vol.6047, pp. 19-29, May 2010.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class=3D"grey">Kim, et al.                   Informational        =
+             [Page 8]</span>
+</pre><!--NewPage--><pre class=3D'newpage'><a name=3D"page-9" id=3D"page=
+-9" href=3D"#page-9" class=3D"invisible"> </a>
+<span class=3D"grey"><a href=3D"./rfc6209">RFC 6209</a>               AR=
+IA Cipher Suites for TLS             April 2011</span>
+
+
+Authors' Addresses
+
+   Woo-Hwan Kim
+   National Security Research Institute
+   P.O.Box 1, Yuseong
+   Daejeon  305-350
+   Korea
+
+   EMail: whkim5@ensec.re.kr
+
+
+   Jungkeun Lee
+   National Security Research Institute
+   P.O.Box 1, Yuseong
+   Daejeon  305-350
+   Korea
+
+   EMail: jklee@ensec.re.kr
+
+
+   Je-Hong Park
+   National Security Research Institute
+   P.O.Box 1, Yuseong
+   Daejeon  305-350
+   Korea
+
+   EMail: jhpark@ensec.re.kr
+
+
+   Daesung Kwon
+   National Security Research Institute
+   P.O.Box 1, Yuseong
+   Daejeon  305-350
+   Korea
+
+   EMail: ds_kwon@ensec.re.kr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kim, et al.                   Informational                     [Page 9]=
+
+
+</pre><br />
+<span class=3D"noprint"><small><small>Html markup produced by rfcmarkup =
+1.109, available from
+<a href=3D"https://tools.ietf.org/tools/rfcmarkup/">https://tools.ietf.o=
+rg/tools/rfcmarkup/</a>
+</small></small></span>
+</body></html>
+
+------------7wDFchDuneLYGVPBL7nl7A
+Content-Disposition: inline; filename=rfc.png
+Content-Type: image/png; name=rfc.png
+Content-Location: http://tools.ietf.org/images/rfc.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAALHRFWHRDcmVhdGlv
+biBUaW1lAFRodSAxOSBEZWMgMjAwMiAxNDozOToxOSArMDEwMAbxpfkAAAAHdElN
+RQfSDBULOgQfhKipAAAACXBIWXMAAArwAAAK8AFCrDSYAAAABGdBTUEAALGPC/xh
+BQAAAwBQTFRFAAAAMwAAZgAAmQAAzAAA/wAAADMAMzMAZjMAmTMAzDMA/zMAAGYA
+M2YAZmYAmWYAzGYA/2YAAJkAM5kAZpkAmZkAzJkA/5kAAMwAM8wAZswAmcwAzMwA
+/8wAAP8AM/8AZv8Amf8AzP8A//8AAAAzMwAzZgAzmQAzzAAz/wAzADMzMzMzZjMz
+mTMzzDMz/zMzAGYzM2YzZmYzmWYzzGYz/2YzAJkzM5kzZpkzmZkzzJkz/5kzAMwz
+M8wzZswzmcwzzMwz/8wzAP8zM/8zZv8zmf8zzP8z//8zAABmMwBmZgBmmQBmzABm
+/wBmADNmMzNmZjNmmTNmzDNm/zNmAGZmM2ZmZmZmmWZmzGZm/2ZmAJlmM5lmZplm
+mZlmzJlm/5lmAMxmM8xmZsxmmcxmzMxm/8xmAP9mM/9mZv9mmf9mzP9m//9mAACZ
+MwCZZgCZmQCZzACZ/wCZADOZMzOZZjOZmTOZzDOZ/zOZAGaZM2aZZmaZmWaZzGaZ
+/2aZAJmZM5mZZpmZmZmZzJmZ/5mZAMyZM8yZZsyZmcyZzMyZ/8yZAP+ZM/+ZZv+Z
+mf+ZzP+Z//+ZAADMMwDMZgDMmQDMzADM/wDMADPMMzPMZjPMmTPMzDPM/zPMAGbM
+M2bMZmbMmWbMzGbM/2bMAJnMM5nMZpnMmZnMzJnM/5nMAMzMM8zMZszMmczMzMzM
+/8zMAP/MM//MZv/Mmf/MzP/M///MAAD/MwD/ZgD/mQD/zAD//wD/ADP/MzP/ZjP/
+mTP/zDP//zP/AGb/M2b/Zmb/mWb/zGb//2b/AJn/M5n/Zpn/mZn/zJn//5n/AMz/
+M8z/Zsz/mcz/zMz//8z/AP//M///Zv//mf//zP//////AAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAA3jnFswAAAFZJREFUeNptjoENACEIA91/ni7RCbrOQyGPGhGRnLW4
+dMUCQCkqxGwTxOGaBQFU6U2MwmD32EDL/yfs2zFlqXrs62NHPBRCDWV4RG/grGn2
+KNBrFDLEB5CVxULY70vUAAAAAElFTkSuQmCC
+
+------------7wDFchDuneLYGVPBL7nl7A--
