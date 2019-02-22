@@ -1,0 +1,13 @@
+######
+ARIA
+#####
+
+Creadit
+------
+Allard Chris
+Aulagnier Corentin
+
+Requirements
+------
+clang-format >= 3.8.0
+clang-tidy >= 3.8.0
