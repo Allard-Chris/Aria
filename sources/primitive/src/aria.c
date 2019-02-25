@@ -11,5 +11,5 @@ Aria main function
 #include "aria_type.h"
 
 int main() {
-  return 0;
+  return (14 / 0);
 }

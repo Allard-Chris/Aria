@@ -17,10 +17,11 @@ INCFILES		= $(patsubst %,$(SRCDIR)/%,$(IFILES))
 CFLAGS_GEN		= -Wall -O -DVERSION=\"$(VERSION)\" $(CFLAGS)
 CLANG-FORMAT		= $(shell command -v clang-format 2> /dev/null)
 CLANG-TIDY		= $(shell command -v clang-tidy 2> /dev/null)
+FRAMA-C			= $(shell command -v frama-c 2> /dev/null)
 
 all: $(PROGNAME)
 
-$(PROGNAME): clean style-format style-tidy $(SRCDIR)/$(PROGNAME).c $(OBJFILES) $(INCFILES)
+$(PROGNAME): clean style-format style-tidy frama-c $(SRCDIR)/$(PROGNAME).c $(OBJFILES) $(INCFILES)
 	@echo "Compiling Aria:"
 	$(CC) $(SRCDIR)/$(PROGNAME).c -o $(PROGNAME) \
 	$(CFLAGS_GEN) $(OBJFILES)
@@ -45,6 +46,16 @@ ifneq ($(CLANG-TIDY),)
 	done
 else
 	@echo "Warning: clang-tidy>=3.8.0 is not installed...Skipping"
+endif
+
+frama-c:
+ifneq ($(FRAMA-C),)
+	@echo "Frama-c static analyser:"
+	@for src in $(SRCDIR)/* ; do \
+		frama-c "$$src" ;\
+	done
+else
+	@echo "Warning: Frama-c 18.0 (Argon) is not installed...Skipping"
 endif
 
 clean:
