@@ -19,7 +19,7 @@ typedef unsigned long long u64;  // 64 bits variable
 
 typedef struct {
   int size;
-  u8* key[];
+  u8  key[];
 } ariaKey_t;
 
 /*

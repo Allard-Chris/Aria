@@ -27,11 +27,11 @@ void help() {
   fprintf(stderr, "-out: output file\n");
 }
 
+/* function to extract, from a file, a key */
 ariaKey_t* extractKeyFromFile(const char* filename) {
   char       current_char;
   ariaKey_t* key = NULL;
-  int        size = 0;
-  int        i = 0;
+  int        size = 0, i = 0, peer = 0;
 
   /* Getting size of current key */
   FILE* keyfile = fopen(filename, "r");
@@ -41,26 +41,42 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
   }
 
   /* init ariaKey struct to store key */
+  printf("%d\n", size);
   if ((size != 128) && (size != 192) && (size != 256)) goto error;
   key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
   key->size = size;
-  *key->key = calloc(size, sizeof(u8));
+  *key->key = malloc((size / sizeof(u8)) * sizeof(u8));
 
   /* read current key */
   fseek(keyfile, 0, SEEK_SET);
-  printf("%lu", sizeof(key->key[0]));
   while ((current_char = fgetc(keyfile)) != EOF) {
-    if (atoh(current_char) == -1) goto error;
+    current_char = atoh(current_char);
+    if (current_char == -1) goto error;
+
+    /* first 4 bits of u8 */
+    if (peer == 0) {
+      peer++;
+      key->key[i] = current_char;
+    }
+
+    /* last 4 bits of u8 */
+    else {
+      key->key[i] = (key->key[i] << 4) + current_char;
+      i++;
+      peer = 0;
+    }
   }
   fclose(keyfile);
   return key;
 
+/* in case of error */
 error:
   fprintf(stderr, "Error in parsing keyfile\n");
   free(key);
   return NULL;
 }
 
+/* main function starting Aria cipher */
 int main(int argc, const char** argv) {
   const char* infile = NULL;
   const char* outfile = NULL;
@@ -113,7 +129,7 @@ int main(int argc, const char** argv) {
   } else
     goto error;
 
-  free(key);
+  // free(key);
   return 0;
 
 error:
