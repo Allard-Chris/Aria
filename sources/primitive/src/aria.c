@@ -6,13 +6,13 @@ Version : 0.1
 ###
 Aria main functions
 **********************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "aria_const.h"
 #include "aria_core.h"
 #include "aria_type.h"
 #include "aria_utils.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 
 void help() {
   fprintf(stderr, "How to use aria :\n");
@@ -21,7 +21,8 @@ void help() {
           "-out <output_file_name>\n");
   fprintf(stderr, "Mode: -encrypt or -decrypt\n");
   fprintf(stderr,
-          "-key: file with key inside in only one line without spaces\n");
+          "-key: file with hexa key inside in only one line without spaces and "
+          "Feed Line\n");
   fprintf(stderr, "-in : file with plain-text\n");
   fprintf(stderr, "-out: output file\n");
 }
@@ -29,15 +30,35 @@ void help() {
 ariaKey_t* extractKeyFromFile(const char* filename) {
   char       current_char;
   ariaKey_t* key = NULL;
+  int        size = 0;
+  int        i = 0;
 
+  /* Getting size of current key */
   FILE* keyfile = fopen(filename, "r");
-  if (keyfile == NULL) return key;
-  key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
+  if (keyfile == NULL) goto error;
   while ((current_char = fgetc(keyfile)) != EOF) {
-    if (atoh(current_char) == -1) return key;
+    size += 4;
+  }
+
+  /* init ariaKey struct to store key */
+  if ((size != 128) && (size != 192) && (size != 256)) goto error;
+  key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
+  key->size = size;
+  *key->key = calloc(size, sizeof(u8));
+
+  /* read current key */
+  fseek(keyfile, 0, SEEK_SET);
+  printf("%lu", sizeof(key->key[0]));
+  while ((current_char = fgetc(keyfile)) != EOF) {
+    if (atoh(current_char) == -1) goto error;
   }
   fclose(keyfile);
   return key;
+
+error:
+  fprintf(stderr, "Error in parsing keyfile\n");
+  free(key);
+  return NULL;
 }
 
 int main(int argc, const char** argv) {
