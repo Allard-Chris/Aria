@@ -11,6 +11,7 @@ Aria primitive functions
 #include "aria_const.h"
 #include "aria_type.h"
 
+/*
 // Init function, prepare each struct with parameters
 state_t* ariaInit(char* plain_text, unsigned char* init_key);
 
@@ -34,5 +35,5 @@ int ariaDiffusionLayer(state_t* current_state);
 
 // Function for last steps after rounds opertaion
 int ariaKeyExpansion(state_t* current_state);
-
+*/
 #endif
