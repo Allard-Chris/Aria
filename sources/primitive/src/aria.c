@@ -41,7 +41,6 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
   }
 
   /* init ariaKey struct to store key */
-  printf("%d\n", size);
   if ((size != 128) && (size != 192) && (size != 256)) goto error;
   key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
   key->size = size;
@@ -129,7 +128,7 @@ int main(int argc, const char** argv) {
   } else
     goto error;
 
-  // free(key);
+  free(key);
   return 0;
 
 error:
