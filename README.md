@@ -15,5 +15,5 @@ Another Aria OpenSSL implementation
 
 ## Members :
 
-ALLARD Chris
+ALLARD Chris  
 AULAGNIER Corentin
