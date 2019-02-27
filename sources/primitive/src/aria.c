@@ -15,7 +15,7 @@ Aria main functions
 #include "aria_utils.h"
 
 void help() {
-  fprintf(stderr, "How to use aria :\n");
+  fprintf(stderr, "How to use aria:\n");
   fprintf(stderr,
           "Usage: ./aria [mode] -key <key_file_name> -in <input_file_name> "
           "-out <output_file_name>\n");
@@ -28,6 +28,7 @@ void help() {
 }
 
 /* function to extract, from a file, a key */
+/* return filled ariaKey struct */
 ariaKey_t* extractKeyFromFile(const char* filename) {
   char       current_char;
   ariaKey_t* key = NULL;
@@ -44,7 +45,6 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
   if ((size != 128) && (size != 192) && (size != 256)) goto error;
   key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
   key->size = size;
-  *key->key = malloc((size / sizeof(u8)) * sizeof(u8));
 
   /* read current key */
   fseek(keyfile, 0, SEEK_SET);
@@ -55,12 +55,12 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
     /* first 4 bits of u8 */
     if (peer == 0) {
       peer++;
-      key->key[i] = current_char;
+      key->key[i] = (u8)current_char;
     }
 
     /* last 4 bits of u8 */
     else {
-      key->key[i] = (key->key[i] << 4) + current_char;
+      key->key[i] = (u8)(key->key[i] << 4) + current_char;
       i++;
       peer = 0;
     }
@@ -128,10 +128,33 @@ int main(int argc, const char** argv) {
   } else
     goto error;
 
+  /* open input file */
+  FILE* in = fopen(infile, "r");
+  if (in == NULL) goto error;
+
+  /* open output file */
+  FILE* out = fopen(outfile, "r");
+  if (out == NULL) goto error;
+
+  /* for every 128-bit chunk of it */
+  /* init a new state_t struct */
+
+  /* send it to Aria core */
+  /* check no null return from Aria_core */
+  /* write into output file 128-bit chunk of result */
+
+  /* free new unused state_t struct */
+  /* end for */
+
+  /* close */
+  fclose(in);
+  fclose(out);
+
   free(key);
   return 0;
 
 error:
+  fprintf(stderr, "Runtime error!\n");
   help();
   return 1;
 }

@@ -9,6 +9,7 @@ AlignConsecutiveDeclarations: 'true'
 AlignEscapedNewlinesLeft: 'true'
 AlignOperands: 'true'
 AllowShortIfStatementsOnASingleLine: 'true'
+AllowShortBlocksOnASingleLine: 'true'
 AlwaysBreakTemplateDeclarations: 'false'
 NamespaceIndentation: Inner
 PointerAlignment: Left

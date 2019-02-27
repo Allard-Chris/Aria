@@ -8,6 +8,8 @@ Aria utils functions
 **********************************************/
 #include "aria_utils.h"
 
+/* convert Hexa Ascii character to hexa value */
+/* example: 'f' => 0xf */
 char atoh(const char C) {
   /* for ABCEDF characters */
   if ((0x41 <= C) && (C <= 0x46)) return (C - 0x37);
