@@ -12,7 +12,7 @@ Globals types and structures for Aria primitive
 #define DECRYPT 0
 #define ENCRYPT 1
 #define MAX_KEY_SIZE 256
-#define CHUNK_SIZE 128
+#define CHUNK_SIZE_OCTET 16
 
 typedef unsigned char      u8;   // 8 bits variable
 typedef unsigned short     u16;  // 16 bits variable
@@ -32,7 +32,7 @@ typedef struct {
 /* operation in each round modifies the state */
 typedef struct {
   char remaining_round;
-  u8   array[CHUNK_SIZE / 8];
+  u8   array[CHUNK_SIZE_OCTET];
 } state_t;
 
 /*

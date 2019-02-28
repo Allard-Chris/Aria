@@ -9,7 +9,6 @@ Aria main functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "aria_const.h"
 #include "aria_core.h"
 #include "aria_type.h"
 #include "aria_utils.h"
@@ -43,7 +42,10 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
 
   /* init ariaKey struct to store key */
   if ((size != 128) && (size != 192) && (size != 256)) goto error;
-  key = (ariaKey_t*)malloc(sizeof(ariaKey_t));
+  if ((key = (ariaKey_t*)malloc(sizeof(ariaKey_t))) == NULL) {
+    fprintf(stderr, "Can't get enough memory\n");
+    goto error;
+  }
   key->size = size;
 
   /* read current key */
@@ -77,11 +79,14 @@ error:
 
 /* main function starting Aria cipher */
 int main(int argc, const char** argv) {
-  const char* infile = NULL;
-  const char* outfile = NULL;
-  const char* keyfile = NULL;
-  int         mode = -1;
-  ariaKey_t*  key;
+  const char*    infile = NULL;
+  const char*    outfile = NULL;
+  const char*    keyfile = NULL;
+  unsigned char* working_input_buffer = NULL;
+  unsigned char* working_output_buffer = NULL;
+  int            working_length;
+  int            mode = -1;
+  ariaKey_t*     key;
   argc--;
   argv++;
 
@@ -128,28 +133,52 @@ int main(int argc, const char** argv) {
   } else
     goto error;
 
+  /* check mode */
+  if (mode == -1) goto error;
+
   /* open input file */
   FILE* in = fopen(infile, "r");
   if (in == NULL) goto error;
 
   /* open output file */
-  FILE* out = fopen(outfile, "r");
+  FILE* out = fopen(outfile, "w");
   if (out == NULL) goto error;
 
-  /* for every 128-bit chunk of it */
-  /* init a new state_t struct */
+  /* create input/output buffer for chunks */
+  working_input_buffer = malloc(CHUNK_SIZE_OCTET);
+  working_output_buffer = malloc(CHUNK_SIZE_OCTET);
 
-  /* send it to Aria core */
-  /* check no null return from Aria_core */
-  /* write into output file 128-bit chunk of result */
+  /* for every 128-bit chunk of input file */
+  /* check malloc result here, in one if, to avoid memory leaks */
+  if ((working_input_buffer != NULL) && (working_output_buffer != NULL)) {
+    do {
+      /* fill buffer */
+      working_length =
+          fread(working_input_buffer, sizeof(u8), (CHUNK_SIZE_OCTET), in);
 
-  /* free new unused state_t struct */
-  /* end for */
+      /*
+      if (working_length) // if still have data in inputfile
+
+      ..if (working_length < CHUNK_SIZE_OCTET)
+      ....fill it with zero
+
+      ..send to ariacore with:
+      ....address of key
+      ....mode (encrypt or decrypt)
+      ....address of working_input_buffer
+      ....address of working_output_buffer
+
+      ..write into output file with contents inside working_output_buffer
+      */
+    } while (working_length);
+  }
 
   /* close */
   fclose(in);
   fclose(out);
 
+  free(working_input_buffer);
+  free(working_output_buffer);
   free(key);
   return 0;
 

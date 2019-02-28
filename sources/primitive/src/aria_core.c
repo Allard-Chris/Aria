@@ -7,7 +7,12 @@ Version : 0.1
 Aria primitive functions
 **********************************************/
 #include "aria_core.h"
-
-int main2() {
-  return 0;
+#include <stdio.h>
+#include <string.h>
+unsigned char* ariaCore(int            mode,
+                        ariaKey_t*     key,
+                        unsigned char* working_input_buffer,
+                        int            working_length) {
+  printf("OK\n");
+  return working_input_buffer;
 }

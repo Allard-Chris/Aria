@@ -11,6 +11,11 @@ Aria primitive functions
 #include "aria_const.h"
 #include "aria_type.h"
 
+unsigned char* ariaCore(int            mode,
+                        ariaKey_t*     key,
+                        unsigned char* working_input_buffer,
+                        int            working_length);
+
 /*
 // Init function, prepare each struct with parameters
 state_t* ariaInit(char* plain_text, unsigned char* init_key);
