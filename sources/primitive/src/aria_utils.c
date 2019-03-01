@@ -7,6 +7,10 @@ Version : 0.1
 Aria utils functions
 **********************************************/
 #include "aria_utils.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "aria_type.h"
 
 /* convert Hexa Ascii character to hexa value */
 /* example: 'f' => 0xf */
@@ -22,4 +26,22 @@ char atoh(const char C) {
   /* not an hexa character */
   else
     return -1;
+}
+
+/* fill remaining spaces in buffer with value 0 */
+unsigned char* fillBuffer(unsigned char* buffer, int length) {
+  for (int i = length; i < CHUNK_SIZE_OCTET; i++) {
+    buffer[i] = 0;
+  }
+  return buffer;
+}
+
+/* print data inside buffer. just for debug */
+void printBuffer(unsigned char* buffer, int length) {
+  printf("Buffer size: %d octets\n", length);
+  printf("Data: ");
+  for (int i = 0; i < length; i++) {
+    printf("%hhu(%c) ", buffer[i], buffer[i]);
+  }
+  printf("\n");
 }

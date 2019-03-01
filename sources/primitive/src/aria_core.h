@@ -9,26 +9,16 @@ Aria primitive functions
 #ifndef ARIA_CORE
 #define ARIA_CORE
 #include "aria_const.h"
+#include "aria_debug.h"
 #include "aria_type.h"
 
-unsigned char* ariaCore(int            mode,
-                        ariaKey_t*     key,
-                        unsigned char* working_input_buffer,
-                        int            working_length);
+/* global function for operations */
+void ariaCore(int            mode,
+              ariaKey_t*     key,
+              unsigned char* working_input_buffer,
+              unsigned char* working_output_buffer);
 
 /*
-// Init function, prepare each struct with parameters
-state_t* ariaInit(char* plain_text, unsigned char* init_key);
-
-// Main function for Aria encryption
-char* ariaEncrypt(char* plain_text, unsigned char* key);
-
-// Main function for Aria decryption
-char* ariaDecryption(char* cipher_text, unsigned char* key);
-
-// Function for global rounds operations
-int ariaRound(state_t* init_state);
-
 // Function for Step 1 inside rounds operations
 int ariaRoundKeyAddition(state_t* current_state);
 

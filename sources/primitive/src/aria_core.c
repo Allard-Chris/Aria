@@ -9,10 +9,19 @@ Aria primitive functions
 #include "aria_core.h"
 #include <stdio.h>
 #include <string.h>
-unsigned char* ariaCore(int            mode,
-                        ariaKey_t*     key,
-                        unsigned char* working_input_buffer,
-                        int            working_length) {
-  printf("OK\n");
-  return working_input_buffer;
+
+void ariaCore(int            mode,
+              ariaKey_t*     key,
+              unsigned char* working_input_buffer,
+              unsigned char* working_output_buffer) {
+  char round;
+
+  /* fixed round number */
+  if (key->size == 128)
+    round = 12;
+  else if (key->size == 192)
+    round = 14;
+  else
+    round = 16;
+  DBG(fprintf(stdout, "rounder number: %d\n", round));
 }

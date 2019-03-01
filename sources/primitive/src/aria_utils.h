@@ -9,6 +9,12 @@ Aria utils functions
 #ifndef ARIA_UTILS
 #define ARIA_UTILS
 
+/* convert Hexa Ascii character to hexa value */
 char atoh(const char C);
 
+/* fill remaining spaces in buffer with value 0 */
+unsigned char* fillBuffer(unsigned char* buffer, int length);
+
+/* print data inside buffer. just for debug */
+void printBuffer(unsigned char* buffer, int length);
 #endif

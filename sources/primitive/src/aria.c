@@ -10,6 +10,7 @@ Aria main functions
 #include <stdlib.h>
 #include <string.h>
 #include "aria_core.h"
+#include "aria_debug.h"
 #include "aria_type.h"
 #include "aria_utils.h"
 
@@ -46,7 +47,9 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
     fprintf(stderr, "Can't get enough memory\n");
     goto error;
   }
+
   key->size = size;
+  DBG(fprintf(stdout, "Key size: %d\n", size));
 
   /* read current key */
   fseek(keyfile, 0, SEEK_SET);
@@ -156,20 +159,17 @@ int main(int argc, const char** argv) {
       working_length =
           fread(working_input_buffer, sizeof(u8), (CHUNK_SIZE_OCTET), in);
 
-      /*
-      if (working_length) // if still have data in inputfile
+      /* if still have data in inputfile */
+      if (working_length) {
+        if (working_length < CHUNK_SIZE_OCTET)
+          fillBuffer(working_input_buffer, working_length);
 
-      ..if (working_length < CHUNK_SIZE_OCTET)
-      ....fill it with zero
+        DBG(fprintf(stdout, "Buffer size: %d\n", working_length));
+        /* printBuffer(working_input_buffer, CHUNK_SIZE_OCTET); */
 
-      ..send to ariacore with:
-      ....address of key
-      ....mode (encrypt or decrypt)
-      ....address of working_input_buffer
-      ....address of working_output_buffer
-
-      ..write into output file with contents inside working_output_buffer
-      */
+        ariaCore(mode, key, working_input_buffer, working_output_buffer);
+        /* write into output file with contents inside working_output_buffer */
+      }
     } while (working_length);
   }
 
