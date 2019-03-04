@@ -50,7 +50,39 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
   expansion_key->w2 = FE() ^ expansion_key->w0;
   expansion_key->w3 = F0() ^ expansion_key->w1;
   */
+
   /* Round key generation */
+  round_key_t* round_key = malloc(sizeof(round_key_t));
+  round_key->size = key->size - 1;
+
+  /* from 0 to 15, be carefull on paper it's from 1 to 16 /!\
+  if (round_key->size >= 12) {
+    round_key->EK[0] = expansion_key->w0 ^ (expansion_key->w1 >> 19);
+    round_key->EK[1] = expansion_key->w1 ^ (expansion_key->w2 >> 19);
+    round_key->EK[2] = expansion_key->w2 ^ (expansion_key->w3 >> 19);
+    round_key->EK[3] = (expansion_key->w0 >> 19) ^ expansion_key->w3;
+    round_key->EK[4] = expansion_key->w0 ^ (expansion_key->w1 >> 31);
+    round_key->EK[5] = expansion_key->w1 ^ (expansion_key->w1 >> 31);
+    round_key->EK[6] = expansion_key->w2 ^ (expansion_key->w1 >> 31);
+    round_key->EK[7] = (expansion_key->w0 >> 31) ^ expansion_key->w3;
+    round_key->EK[8] = expansion_key->w0 ^ (expansion_key->w1 << 61);
+    round_key->EK[9] = expansion_key->w1 ^ (expansion_key->w1 << 61);
+    round_key->EK[10] = expansion_key->w2 ^ (expansion_key->w1 << 61);
+    round_key->EK[11] = (expansion_key->w0 << 61) ^ expansion_key->w3;
+    round_key->EK[12] = expansion_key->w0 ^ (expansion_key->w1 << 31);
+
+    if (round_key->size >= 14) {
+      round_key->EK[13] = expansion_key->w1 ^ (expansion_key->w1 << 31);
+      round_key->EK[14] = expansion_key->w2 ^ (expansion_key->w1 << 31);
+
+      if (round_key->size == 16) {
+        round_key->EK[15] = (expansion_key->w0 << 31) ^ expansion_key->w3;
+        round_key->EK[16] = expansion_key->w0 ^ (expansion_key->w1 << 19);
+
+      }
+    }
+  }
+*/
 
   return 0;
 }
