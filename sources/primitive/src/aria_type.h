@@ -56,6 +56,7 @@ typedef struct {
 
 /* structure used to store round key */
 typedef struct {
+  int size;
   u8 EK[16];
 } round_key_t;
 
