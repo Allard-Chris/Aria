@@ -36,9 +36,9 @@ typedef struct {
 
 /* structure used to store all data for tests */
 typedef struct {
-  u8* key_add;
-  u8* s_box;
-  u8* diff_layer;
+  const u8 key_add[CHUNK_SIZE_OCTET];
+  const u8 s_box[CHUNK_SIZE_OCTET];
+  const u8 diff_layer[CHUNK_SIZE_OCTET];
 } round_t;
 
 /* structure used to store factional constant */

@@ -105,6 +105,8 @@ int ariaCore(int            mode,
   /* Last XORing the round input and the round_key ek */
 
   /* write result in working_output_buffer*/
+  memcpy(working_output_buffer, state, CHUNK_SIZE_OCTET);
+
   free(state);
   return 0;
 }
