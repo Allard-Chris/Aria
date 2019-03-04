@@ -13,10 +13,13 @@ Aria primitive functions
 #include "aria_type.h"
 
 /* global function for operations */
-void ariaCore(int            mode,
-              ariaKey_t*     key,
-              unsigned char* working_input_buffer,
-              unsigned char* working_output_buffer);
+/* valid parameter only to test aria algorithm with plaintext.txt input */
+/* return 0 : all is ok, -1 error during process */
+int ariaCore(int            mode,
+             ariaKey_t*     key,
+             unsigned char* working_input_buffer,
+             unsigned char* working_output_buffer,
+             int            valid);
 
 /*
 // Function for Step 1 inside rounds operations

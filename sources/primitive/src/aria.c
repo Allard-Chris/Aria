@@ -25,6 +25,9 @@ void help() {
           "Feed Line\n");
   fprintf(stderr, "-in : file with plain-text\n");
   fprintf(stderr, "-out: output file\n");
+  fprintf(stderr,
+          "[optional]: -valid: use with valid/plaintext.txt input to test aria "
+          "algorithm\n");
 }
 
 /* function to extract, from a file, a key */
@@ -89,6 +92,7 @@ int main(int argc, const char** argv) {
   unsigned char* working_output_buffer = NULL;
   int            working_length;
   int            mode = -1;
+  int            valid = 0;
   ariaKey_t*     key;
   argc--;
   argv++;
@@ -120,6 +124,11 @@ int main(int argc, const char** argv) {
       outfile = *(++argv);
     }
 
+    /* checking output file */
+    else if (strcmp(*argv, "-valid") == 0) {
+      valid = 1;
+    }
+
     /* bad arguments */
     else {
       fprintf(stderr, "Unknown option %s\n", *argv);
@@ -140,11 +149,11 @@ int main(int argc, const char** argv) {
   if (mode == -1) goto error;
 
   /* open input file */
-  FILE* in = fopen(infile, "r");
+  FILE* in = fopen(infile, "rb");
   if (in == NULL) goto error;
 
   /* open output file */
-  FILE* out = fopen(outfile, "w");
+  FILE* out = fopen(outfile, "wb");
   if (out == NULL) goto error;
 
   /* create input/output buffer for chunks */
@@ -164,10 +173,16 @@ int main(int argc, const char** argv) {
         if (working_length < CHUNK_SIZE_OCTET)
           fillBuffer(working_input_buffer, working_length);
 
-        DBG(fprintf(stdout, "Buffer size: %d\n", working_length));
-        /* printBuffer(working_input_buffer, CHUNK_SIZE_OCTET); */
+        DBG(fprintf(stdout,
+                    "New chunk extracted from input file, size of buffer: %d\n",
+                    working_length));
+        DBG(printBuffer(working_input_buffer, CHUNK_SIZE_OCTET));
 
-        ariaCore(mode, key, working_input_buffer, working_output_buffer);
+        /* call aria algorithm */
+        if (ariaCore(mode, key, working_input_buffer, working_output_buffer,
+                     valid) == -1)
+          goto error;
+
         /* write into output file with contents inside working_output_buffer */
       }
     } while (working_length);

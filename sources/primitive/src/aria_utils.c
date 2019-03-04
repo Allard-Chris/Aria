@@ -38,10 +38,9 @@ unsigned char* fillBuffer(unsigned char* buffer, int length) {
 
 /* print data inside buffer. just for debug */
 void printBuffer(unsigned char* buffer, int length) {
-  printf("Buffer size: %d octets\n", length);
-  printf("Data: ");
+  printf("Buffer Data: ");
   for (int i = 0; i < length; i++) {
-    printf("%hhu(%c) ", buffer[i], buffer[i]);
+    printf("0x%x ", buffer[i]);
   }
   printf("\n");
 }

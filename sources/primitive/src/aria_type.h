@@ -35,6 +35,13 @@ typedef struct {
   u8   array[CHUNK_SIZE_OCTET];
 } state_t;
 
+/* structure used to store all data for tests */
+typedef struct {
+  u8* key_add;
+  u8* s_box;
+  u8* diff_layer;
+} round_t;
+
 /*
 typedef struct {
   u8 w0;
