@@ -94,7 +94,6 @@ int main(int argc, const char** argv) {
   unsigned char* working_output_buffer = NULL;
   int            working_length;
   int            mode = -1;
-  int            valid = 0;
   ariaKey_t*     key;
   argc--;
   argv++;
@@ -124,11 +123,6 @@ int main(int argc, const char** argv) {
     else if (strcmp(*argv, "--out") == 0) {
       if (--argc < 1) goto error;
       outfile = *(++argv);
-    }
-
-    /* checking output file */
-    else if (strcmp(*argv, "--valid") == 0) {
-      valid = 1;
     }
 
     /* bad arguments */
@@ -181,8 +175,8 @@ int main(int argc, const char** argv) {
         DBG(printBuffer(working_input_buffer, CHUNK_SIZE_OCTET));
 
         /* call aria algorithm */
-        if (ariaCore(mode, key, working_input_buffer, working_output_buffer,
-                     valid) == -1)
+        if (ariaCore(mode, key, working_input_buffer, working_output_buffer) ==
+            -1)
           goto error;
 
         /* write into output file with contents inside working_output_buffer */

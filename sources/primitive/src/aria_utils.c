@@ -10,6 +10,8 @@ Aria utils functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "aria_debug.h"
+#include "aria_test.h"
 #include "aria_type.h"
 
 /* convert Hexa Ascii character to hexa value */
@@ -43,4 +45,10 @@ void printBuffer(unsigned char* buffer, int length) {
     printf("0x%x ", buffer[i]);
   }
   printf("\n");
+}
+
+/* compare values between two arrays */
+int compareBuffer(unsigned char* buffer1, unsigned char* buffer2, int length) {
+  /* NOT IMPLEMENTED */
+  return 0;
 }

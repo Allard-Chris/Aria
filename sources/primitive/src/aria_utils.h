@@ -17,4 +17,8 @@ unsigned char* fillBuffer(unsigned char* buffer, int length);
 
 /* print data inside buffer. just for debug */
 void printBuffer(unsigned char* buffer, int length);
+
+/* compare values between two arrays */
+int compareBuffer(unsigned char* buffer1, unsigned char* buffer2, int length);
+
 #endif

@@ -18,8 +18,7 @@ Aria primitive functions
 int ariaCore(int            mode,
              ariaKey_t*     key,
              unsigned char* working_input_buffer,
-             unsigned char* working_output_buffer,
-             int            valid);
+             unsigned char* working_output_buffer);
 
 /*
 // Function for Step 1 inside rounds operations

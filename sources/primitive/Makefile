@@ -10,8 +10,8 @@
 PROGNAME 		= aria
 VERSION 		= 0.1
 SRCDIR			= src
-SFILES			= aria_core.c aria_utils.c aria_test.c
-IFILES			= aria_core.h aria_const.h aria_type.h aria_utils.h
+SFILES			= aria_core.c aria_utils.c
+IFILES			= aria_core.h aria_const.h aria_type.h aria_utils.h aria_test.h
 OBJFILES		= $(patsubst %,$(SRCDIR)/%,$(SFILES))
 INCFILES		= $(patsubst %,$(SRCDIR)/%,$(IFILES))
 CFLAGS_GEN		= -Wall -O -DVERSION=\"$(VERSION)\" $(CFLAGS)
