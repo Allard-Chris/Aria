@@ -17,17 +17,19 @@ Aria main functions
 void help() {
   fprintf(stderr, "How to use aria:\n");
   fprintf(stderr,
-          "Usage: ./aria [mode] -key <key_file_name> -in <input_file_name> "
-          "-out <output_file_name>\n");
-  fprintf(stderr, "Mode: -encrypt or -decrypt\n");
-  fprintf(stderr,
-          "-key: file with hexa key inside in only one line without spaces and "
-          "Feed Line\n");
-  fprintf(stderr, "-in : file with plain-text\n");
-  fprintf(stderr, "-out: output file\n");
-  fprintf(stderr,
-          "[optional]: -valid: use with valid/plaintext.txt input to test aria "
-          "algorithm\n");
+          "Usage: ./aria [mode] --key <key_file_name> --in <input_file_name> "
+          "--out <output_file_name>\n");
+  fprintf(stderr, "Mode: --encrypt or --decrypt\n");
+  fprintf(
+      stderr,
+      "--key: file with hexa key inside in only one line without spaces and "
+      "Feed Line\n");
+  fprintf(stderr, "--in : file with plain-text\n");
+  fprintf(stderr, "--out: output file\n");
+  fprintf(
+      stderr,
+      "[optional]: --valid: use with valid/plaintext.txt input to test aria "
+      "algorithm\n");
 }
 
 /* function to extract, from a file, a key */
@@ -100,32 +102,32 @@ int main(int argc, const char** argv) {
   /* parsing arguments */
   while (argc >= 1) {
     /* checking mode */
-    if (strcmp(*argv, "-decrypt") == 0) {
+    if (strcmp(*argv, "--decrypt") == 0) {
       mode = DECRYPT;
-    } else if (strcmp(*argv, "-encrypt") == 0) {
+    } else if (strcmp(*argv, "--encrypt") == 0) {
       mode = ENCRYPT;
     }
 
     /* checking key file */
-    else if (strcmp(*argv, "-key") == 0) {
+    else if (strcmp(*argv, "--key") == 0) {
       if (--argc < 1) goto error;
       keyfile = *(++argv);
     }
 
     /* checking input file */
-    else if (strcmp(*argv, "-in") == 0) {
+    else if (strcmp(*argv, "--in") == 0) {
       if (--argc < 1) goto error;
       infile = *(++argv);
     }
 
     /* checking output file */
-    else if (strcmp(*argv, "-out") == 0) {
+    else if (strcmp(*argv, "--out") == 0) {
       if (--argc < 1) goto error;
       outfile = *(++argv);
     }
 
     /* checking output file */
-    else if (strcmp(*argv, "-valid") == 0) {
+    else if (strcmp(*argv, "--valid") == 0) {
       valid = 1;
     }
 
@@ -166,7 +168,7 @@ int main(int argc, const char** argv) {
     do {
       /* fill buffer */
       working_length =
-          fread(working_input_buffer, sizeof(u8), (CHUNK_SIZE_OCTET), in);
+          fread(working_input_buffer, sizeof(u8), CHUNK_SIZE_OCTET, in);
 
       /* if still have data in inputfile */
       if (working_length) {
@@ -184,6 +186,7 @@ int main(int argc, const char** argv) {
           goto error;
 
         /* write into output file with contents inside working_output_buffer */
+        fwrite(working_output_buffer, sizeof(u8), CHUNK_SIZE_OCTET, out);
       }
     } while (working_length);
   }

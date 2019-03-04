@@ -10,7 +10,7 @@
 PROGNAME 		= aria
 VERSION 		= 0.1
 SRCDIR			= src
-SFILES			= aria_core.c aria_utils.c
+SFILES			= aria_core.c aria_utils.c aria_test.c
 IFILES			= aria_core.h aria_const.h aria_type.h aria_utils.h
 OBJFILES		= $(patsubst %,$(SRCDIR)/%,$(SFILES))
 INCFILES		= $(patsubst %,$(SRCDIR)/%,$(IFILES))
@@ -61,5 +61,3 @@ endif
 clean:
 	@echo "Cleaning:"
 	rm -f $(PROGNAME) *.exe *.o *~ a.out core core.[1-9][0-9]* *.stackdump
-
-

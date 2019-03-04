@@ -30,10 +30,7 @@ typedef struct {
 /* Aria algorithm can be considered as a series of operations done to */
 /* 128-bit array called state. Initialized with plaintext input and each */
 /* operation in each round modifies the state */
-typedef struct {
-  char remaining_round;
-  u8   array[CHUNK_SIZE_OCTET];
-} state_t;
+typedef struct { u8 array[CHUNK_SIZE_OCTET]; } state_t;
 
 /* structure used to store all data for tests */
 typedef struct {

@@ -36,6 +36,8 @@ int ariaCore(int            mode,
   /* copy input buffer into state */
   memcpy(state, working_input_buffer, CHUNK_SIZE_OCTET);
 
+  /* round key EK */
+
   /* loop for all rounds */
   /* start at 1 to be egal with Aria specification description in PDF file */
   for (int i = 1; i <= nb_round; i++) {
