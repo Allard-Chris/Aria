@@ -11,6 +11,50 @@ Aria primitive functions
 #include <stdlib.h>
 #include <string.h>
 
+/* Put in aria_util.c file */
+void cpy(u64 dest[2], u64 src[2]) {
+  dest[0] = src[0];
+  dest[1] = src[1];
+}
+
+int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
+  fractional_t* fractional = malloc(sizeof(fractional_t));
+
+  /* Initialisation figure 4 */
+  if (key->size == 128) {
+    cpy(fractional->CK[1], C1);
+    cpy(fractional->CK[2], C2);
+    cpy(fractional->CK[3], C3);
+
+  } else if (key->size == 192) {
+    cpy(fractional->CK[1], C2);
+    cpy(fractional->CK[2], C3);
+    cpy(fractional->CK[3], C1);
+
+  } else if (key->size == 256) {
+    cpy(fractional->CK[1], C3);
+    cpy(fractional->CK[2], C1);
+    cpy(fractional->CK[3], C2);
+
+  } else {
+    return -1;
+  }
+
+  /* Expension key generation */
+  /*
+  expansion_key_t* expansion_key = malloc(sizeof(expansion_key_t));
+  KL = ;
+  KR = ;
+  expansion_key->w0 = key->key;
+  expansion_key->w1 = F0() ^ ;
+  expansion_key->w2 = FE() ^ expansion_key->w0;
+  expansion_key->w3 = F0() ^ expansion_key->w1;
+  */
+  /* Round key generation */
+
+  return 0;
+}
+
 int ariaCore(int            mode,
              ariaKey_t*     key,
              unsigned char* working_input_buffer,
@@ -37,6 +81,8 @@ int ariaCore(int            mode,
   memcpy(state, working_input_buffer, CHUNK_SIZE_OCTET);
 
   /* round key EK */
+  round_key_t* round_key = malloc(sizeof(round_key_t));
+  if (roundKeyGeneration(key, round_key) == -1) return -1;
 
   /* loop for all rounds */
   /* start at 1 to be egal with Aria specification description in PDF file */

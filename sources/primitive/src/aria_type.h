@@ -41,12 +41,22 @@ typedef struct {
   u8* diff_layer;
 } round_t;
 
-/*
+/* structure used to store factional constant */
+typedef struct {
+  u64 CK[3][2];
+} fractional_t;
+
+/* structure used to store expansion key */
 typedef struct {
   u8 w0;
   u8 w1;
   u8 w2;
   u8 w3;
 } expansion_key_t;
-*/
+
+/* structure used to store round key */
+typedef struct {
+  u8 EK[16];
+} round_key_t;
+
 #endif
