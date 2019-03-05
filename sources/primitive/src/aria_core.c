@@ -11,6 +11,47 @@ Aria primitive functions
 #include <stdlib.h>
 #include <string.h>
 
+/* doign left circle rotation on array values */
+void lCircleRotation(unsigned char* array, unsigned int length) {
+  u64 left = 0;
+  u64 right = 0;
+  u64 tmp_left = 0;
+  u64 tmp_right = 0;
+
+  /* first, converting array of 16 * u8 into 2 array of u64 */
+  /* it's avoid limitation about shiffting with high length */
+  for (int i = 0; i < (CHUNK_SIZE_OCTET / 2); i++) {
+    left = left << sizeof(u8);
+    left += array[i];
+  }
+  for (int i = ((CHUNK_SIZE_OCTET / 2) - 1); i < CHUNK_SIZE_OCTET; i++) {
+    right = right << sizeof(u8);
+    right += array[i];
+  }
+
+  /* doing circle shiffting */
+  /* example : */
+  /* start with : [x1, x2, x3, x4, x5, x6, x7, x8] and shift << 3 */
+  /* give: [x4, x5, x6, x7, x8, 0, 0, 0] */
+  /* now doing [x1, x2, x3, x4, x5, x6, x7, x8] shiffted by 8 - 3 */
+  /* give: [0, 0, 0, 0, 0, x1, x2, x3] */
+  /* now [0, 0, 0, 0, 0, x1, x2, x3] XOR [x4, x5, x6, x7, x8, 0, 0, 0] */
+  /* result: [x4,x5, x6, x7, x8, x1, x2, x3] */
+  tmp_left = left;
+  tmp_right = right;
+
+  left = left << length;
+  tmp_left = tmp_left >> ((sizeof(u64) - length));
+
+  right = right << length;
+  tmp_right = tmp_right >> ((sizeof(u64) - length));
+
+  left = left || tmp_left;
+  right = right || tmp_right;
+
+  /* reconvert 2 array of u64 into one array of 16 * u8 */
+}
+
 void diffusion(u8 output[CHUNK_SIZE_OCTET], const u8 input[CHUNK_SIZE_OCTET]) {
   output[0] = input[3] ^ input[4] ^ input[6] ^ input[8] ^ input[9] ^ input[13] ^
               input[14];
@@ -46,11 +87,12 @@ void diffusion(u8 output[CHUNK_SIZE_OCTET], const u8 input[CHUNK_SIZE_OCTET]) {
                input[10] ^ input[15];
 }
 
-void xor(u8 output[16], u8 input1[16], u8 input2[16]) {
-  /*xor case à case*/
-}
+void xor
+    (u8 output[16], u8 input1[16], u8 input2[16]) {
+      /*xor case à case*/
+    }
 
-void sL2(u8 output[16], const u8 input[16]) {
+    void sL2(u8 output[16], const u8 input[16]) {
   for (int i = 0; i < 16; i++) { /*
      if (i % 4 < 2)
       output[i] = S_BOX[(i % 4) + 2][input[i]];
@@ -103,8 +145,8 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
 
   /* constant kl and kr generation */
   /* w0 = KL so avoid double array, and copy direct to w0*/
-  memcpy(round_key->expansion_key->w0, key->key,
-         CHUNK_SIZE_OCTET); /* copy first 128bit of Master Key */
+  memcpy(round_key->expansion_key->w0, key->key, CHUNK_SIZE_OCTET); /* copy
+      first 128bit of Master Key */
   u8 kr[CHUNK_SIZE_OCTET];
   memcpy(kr, (key->key + CHUNK_SIZE_OCTET), CHUNK_SIZE_OCTET - 1); /* copy
       last 128bit of Master Key */
