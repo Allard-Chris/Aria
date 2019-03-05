@@ -11,6 +11,77 @@ Aria primitive functions
 #include <stdlib.h>
 #include <string.h>
 
+void diffusion(u8 output[CHUNK_SIZE_OCTET], const u8 input[CHUNK_SIZE_OCTET]) {
+  output[0] = input[3] ^ input[4] ^ input[6] ^ input[8] ^ input[9] ^ input[13] ^
+              input[14];
+  output[1] = input[2] ^ input[5] ^ input[7] ^ input[8] ^ input[9] ^ input[12] ^
+              input[15];
+  output[2] = input[1] ^ input[4] ^ input[6] ^ input[10] ^ input[11] ^
+              input[12] ^ input[15];
+  output[3] = input[0] ^ input[5] ^ input[7] ^ input[10] ^ input[11] ^
+              input[13] ^ input[14];
+  output[4] = input[0] ^ input[2] ^ input[5] ^ input[8] ^ input[11] ^
+              input[14] ^ input[15];
+  output[5] = input[1] ^ input[3] ^ input[4] ^ input[9] ^ input[10] ^
+              input[14] ^ input[15];
+  output[6] = input[0] ^ input[2] ^ input[7] ^ input[9] ^ input[10] ^
+              input[12] ^ input[13];
+  output[7] = input[1] ^ input[3] ^ input[6] ^ input[8] ^ input[11] ^
+              input[12] ^ input[13];
+  output[8] = input[0] ^ input[1] ^ input[4] ^ input[7] ^ input[10] ^
+              input[13] ^ input[15];
+  output[9] = input[0] ^ input[1] ^ input[5] ^ input[6] ^ input[11] ^
+              input[12] ^ input[14];
+  output[10] = input[2] ^ input[3] ^ input[5] ^ input[6] ^ input[8] ^
+               input[13] ^ input[15];
+  output[11] = input[2] ^ input[3] ^ input[4] ^ input[7] ^ input[9] ^
+               input[12] ^ input[14];
+  output[12] = input[1] ^ input[2] ^ input[6] ^ input[7] ^ input[9] ^
+               input[11] ^ input[12];
+  output[13] = input[0] ^ input[3] ^ input[6] ^ input[7] ^ input[8] ^
+               input[10] ^ input[13];
+  output[14] = input[0] ^ input[3] ^ input[4] ^ input[5] ^ input[9] ^
+               input[11] ^ input[14];
+  output[15] = input[1] ^ input[2] ^ input[4] ^ input[5] ^ input[8] ^
+               input[10] ^ input[15];
+}
+
+void xor(u8 output[16], u8 input1[16], u8 input2[16]) {
+  /*xor case à case*/
+}
+
+void sL2(u8 output[16], const u8 input[16]) {
+  for (int i = 0; i < 16; i++) { /*
+     if (i % 4 < 2)
+      output[i] = S_BOX[(i % 4) + 2][input[i]];
+    else if (i % 4 >= 2)
+      output[i] = S_BOX[(i % 4) - 2][input[i]];*/
+  }
+}
+
+u8* fe(u8 w[CHUNK_SIZE_OCTET], u8 ck[CHUNK_SIZE_OCTET]) {
+  u8 return_value[CHUNK_SIZE_OCTET];
+  u8 tmp[CHUNK_SIZE_OCTET];
+  u8 tmp2[CHUNK_SIZE_OCTET];
+
+  xor(tmp, w, ck);
+
+  sL2(tmp2, tmp);
+  diffusion(return_value, tmp);
+}
+
+u8* fo(u8 w[CHUNK_SIZE_OCTET], u8 ck[CHUNK_SIZE_OCTET]) {
+  u8 return_value[CHUNK_SIZE_OCTET];
+  u8 tmp[CHUNK_SIZE_OCTET];
+
+  xor(tmp, w, ck);
+  /*
+    for (int i = 0; i < 16; i++)
+      tmp[i] = S_BOX[i % 4][tmp[i]];
+      */
+  diffusion(return_value, tmp);
+}
+
 int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
   /* Initialisation figure 4 */
   if (key->size == 128) {
@@ -35,14 +106,16 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
   memcpy(round_key->expansion_key->w0, key->key,
          CHUNK_SIZE_OCTET); /* copy first 128bit of Master Key */
   u8 kr[CHUNK_SIZE_OCTET];
-  memcpy(kr, (key->key + CHUNK_SIZE_OCTET), CHUNK_SIZE_OCTET - 1); /* copy last
-      128bit of Master Key */
+  memcpy(kr, (key->key + CHUNK_SIZE_OCTET), CHUNK_SIZE_OCTET - 1); /* copy
+      last 128bit of Master Key */
 
   /* expansion key generation
       expansion_key->w0 = key->key;
-      expansion_key->w1 = F0() ^ ;
-      expansion_key->w2 = FE() ^ expansion_key->w0;
-      expansion_key->w3 = F0() ^ expansion_key->w1;
+      expansion_key->w1 = FO(round_key->expansion_key->w0,
+     round_key->constants_key[0]) ^ kr; expansion_key->w2 =
+     FE(round_key->expansion_key->w1, round_key->constants_key[1]) ^
+     expansion_key->w0; expansion_key->w3 = FO(round_key->expansion_key->w2,
+     round_key->constants_key[2]) ^ expansion_key->w1;
       */
 
   /* Round key generation */
@@ -112,7 +185,8 @@ int ariaCore(int            mode,
     roundKeyGeneration(key, round_key);
 
     /* loop for all rounds */
-    /* start at 1 to be egal with Aria specification description in PDF file */
+    /* start at 1 to be egal with Aria specification description in PDF file
+     */
     for (int i = 1; i <= nb_round; i++) {
       DBG(fprintf(stdout, "Current round: %d\n", i));
       /* XORing the round input and the round_key ek */
