@@ -13,7 +13,9 @@ Aria utils functions
 char atoh(const char C);
 
 /* fill remaining spaces in buffer with value 0 */
-unsigned char* fillBuffer(unsigned char* buffer, unsigned int length);
+unsigned char* fillBuffer(unsigned char* buffer,
+                          unsigned int   start,
+                          unsigned int   end);
 
 /* print data inside buffer. just for debug */
 void printBuffer(unsigned char* buffer, unsigned int length);

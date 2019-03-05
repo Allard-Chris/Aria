@@ -76,6 +76,8 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
     }
   }
   fclose(keyfile);
+  fillBuffer(key->key, key->size, (MAX_KEY_SIZE / 8)); /* Adding zero on
+      remaining spaces */
   return key;
 
 /* in case of error */
@@ -167,7 +169,7 @@ int main(int argc, const char** argv) {
       /* if still have data in inputfile */
       if (working_length) {
         if (working_length < CHUNK_SIZE_OCTET)
-          fillBuffer(working_input_buffer, working_length);
+          fillBuffer(working_input_buffer, working_length, CHUNK_SIZE_OCTET);
 
         DBG(fprintf(stdout,
                     "New chunk extracted from input file, size of buffer: %d\n",

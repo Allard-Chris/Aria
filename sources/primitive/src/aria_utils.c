@@ -31,8 +31,10 @@ char atoh(const char C) {
 }
 
 /* fill remaining spaces in buffer with value 0 */
-unsigned char* fillBuffer(unsigned char* buffer, unsigned int length) {
-  for (int i = length; i < CHUNK_SIZE_OCTET; i++) {
+unsigned char* fillBuffer(unsigned char* buffer,
+                          unsigned int   start,
+                          unsigned int   end) {
+  for (int i = start; i < end; i++) {
     buffer[i] = 0;
   }
   return buffer;

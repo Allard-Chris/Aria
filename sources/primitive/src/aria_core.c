@@ -30,14 +30,14 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
     memcpy(round_key->constants_key[2], C2, CHUNK_SIZE_OCTET);
   }
 
-  /* Expension key generation *//*
-  KL = ;
-  KR = ;
-  expansion_key->w0 = key->key;
-  expansion_key->w1 = F0() ^ ;
-  expansion_key->w2 = FE() ^ expansion_key->w0;
-  expansion_key->w3 = F0() ^ expansion_key->w1;
-  */
+  /* Expension key generation */ /*
+   KL = ;
+   KR = ;
+   expansion_key->w0 = key->key;
+   expansion_key->w1 = F0() ^ ;
+   expansion_key->w2 = FE() ^ expansion_key->w0;
+   expansion_key->w3 = F0() ^ expansion_key->w1;
+   */
 
   /* Round key generation */
   // round_key_t* round_key = malloc(sizeof(round_key_t));
