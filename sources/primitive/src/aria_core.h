@@ -21,6 +21,15 @@ int ariaCore(int            mode,
              unsigned char* working_input_buffer,
              unsigned char* working_output_buffer);
 
+/* doign left circle rotation on array values */
+void lCircleRotation(unsigned char* input,
+                     unsigned char* output,
+                     unsigned int   length);
+
+/* doign right circle rotation on array values */
+void rCircleRotation(unsigned char* input,
+                     unsigned char* output,
+                     unsigned int   length);
 /*
 // Function for Step 1 inside rounds operations
 int ariaRoundKeyAddition(state_t* current_state);
