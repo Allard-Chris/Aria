@@ -77,7 +77,7 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
   }
   fclose(keyfile);
   fillBuffer(key->key, key->size, (MAX_KEY_SIZE / 8)); /* Adding zero on
-      remaining spaces */
+      remaining spaces*/
   return key;
 
 /* in case of error */
