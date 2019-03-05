@@ -41,23 +41,19 @@ typedef struct {
   const u8 diff_layer[CHUNK_SIZE_OCTET];
 } round_t;
 
-/* structure used to store factional constant */
-typedef struct {
-  u64 CK[3][2];
-} fractional_t;
-
 /* structure used to store expansion key */
 typedef struct {
-  u8 w0;
-  u8 w1;
-  u8 w2;
-  u8 w3;
+  u8 w0[CHUNK_SIZE_OCTET];
+  u8 w1[CHUNK_SIZE_OCTET];
+  u8 w2[CHUNK_SIZE_OCTET];
+  u8 w3[CHUNK_SIZE_OCTET];
 } expansion_key_t;
 
 /* structure used to store round key */
 typedef struct {
-  int size;
-  u8 EK[16];
+  u8               round_key[16];
+  u8               constants_key[3][CHUNK_SIZE_OCTET];
+  expansion_key_t* expansion_key;
 } round_key_t;
 
 #endif

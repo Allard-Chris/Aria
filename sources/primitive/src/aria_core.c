@@ -11,38 +11,26 @@ Aria primitive functions
 #include <stdlib.h>
 #include <string.h>
 
-/* Put in aria_util.c file */
-void cpy(u64 dest[2], u64 src[2]) {
-  dest[0] = src[0];
-  dest[1] = src[1];
-}
-
 int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
-  fractional_t* fractional = malloc(sizeof(fractional_t));
-
   /* Initialisation figure 4 */
   if (key->size == 128) {
-    cpy(fractional->CK[1], C1);
-    cpy(fractional->CK[2], C2);
-    cpy(fractional->CK[3], C3);
-
+    DBG(fprintf(stdout, "Constants key C1, C2, C3\n"));
+    memcpy(round_key->constants_key[0], C1, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[1], C2, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[2], C3, CHUNK_SIZE_OCTET);
   } else if (key->size == 192) {
-    cpy(fractional->CK[1], C2);
-    cpy(fractional->CK[2], C3);
-    cpy(fractional->CK[3], C1);
-
-  } else if (key->size == 256) {
-    cpy(fractional->CK[1], C3);
-    cpy(fractional->CK[2], C1);
-    cpy(fractional->CK[3], C2);
-
+    DBG(fprintf(stdout, "Constants key C2, C3, C1\n"));
+    memcpy(round_key->constants_key[0], C2, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[1], C3, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[2], C1, CHUNK_SIZE_OCTET);
   } else {
-    return -1;
+    DBG(fprintf(stdout, "Constants key C3, C1, C2\n"));
+    memcpy(round_key->constants_key[0], C3, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[1], C1, CHUNK_SIZE_OCTET);
+    memcpy(round_key->constants_key[2], C2, CHUNK_SIZE_OCTET);
   }
 
-  /* Expension key generation */
-  /*
-  expansion_key_t* expansion_key = malloc(sizeof(expansion_key_t));
+  /* Expension key generation *//*
   KL = ;
   KR = ;
   expansion_key->w0 = key->key;
@@ -52,8 +40,8 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
   */
 
   /* Round key generation */
-  round_key_t* round_key = malloc(sizeof(round_key_t));
-  round_key->size = key->size - 1;
+  // round_key_t* round_key = malloc(sizeof(round_key_t));
+  // round_key->size = key->size - 1;
 
   /* from 0 to 15, be carefull on paper it's from 1 to 16 /!\
   if (round_key->size >= 12) {
@@ -82,8 +70,7 @@ int roundKeyGeneration(ariaKey_t* key, round_key_t* round_key) {
       }
     }
   }
-*/
-
+  */
   return 0;
 }
 
@@ -91,8 +78,11 @@ int ariaCore(int            mode,
              ariaKey_t*     key,
              unsigned char* working_input_buffer,
              unsigned char* working_output_buffer) {
-  char     nb_round;
-  state_t* state = NULL;
+  char             nb_round;
+  int              result = 0;
+  u8               state[CHUNK_SIZE_OCTET];
+  expansion_key_t* expansion_key;
+  round_key_t*     round_key;
 
   /* fixed round number */
   if (key->size == 128)
@@ -101,43 +91,46 @@ int ariaCore(int            mode,
     nb_round = 14;
   else /* 256-bits key size */
     nb_round = 16;
-
   DBG(fprintf(stdout, "Total number of round: %d\n", nb_round));
-
-  /* create init state */
-  state = (state_t*)malloc(sizeof(state_t));
-  if (state == NULL) return -1;
 
   /* copy input buffer into state */
   memcpy(state, working_input_buffer, CHUNK_SIZE_OCTET);
 
+  /* allocation for round_key and expansion_key */
+  round_key = (round_key_t*)malloc(sizeof(round_key_t));
+  expansion_key = (expansion_key_t*)malloc(sizeof(expansion_key_t));
+
   /* round key EK */
-  round_key_t* round_key = malloc(sizeof(round_key_t));
-  if (roundKeyGeneration(key, round_key) == -1) return -1;
+  if ((round_key != NULL) && (expansion_key != NULL)) {
+    round_key->expansion_key = expansion_key;
+    roundKeyGeneration(key, round_key);
 
-  /* loop for all rounds */
-  /* start at 1 to be egal with Aria specification description in PDF file */
-  for (int i = 1; i <= nb_round; i++) {
-    DBG(fprintf(stdout, "Current round: %d\n", i));
-    /* XORing the round input and the round_key ek */
-    /* if (valid) test output from XOR*/
+    /* loop for all rounds */
+    /* start at 1 to be egal with Aria specification description in PDF file */
+    for (int i = 1; i <= nb_round; i++) {
+      DBG(fprintf(stdout, "Current round: %d\n", i));
+      /* XORing the round input and the round_key ek */
+      /* if (valid) test output from XOR*/
 
-    if (i % 2 != 0) DBG(fprintf(stdout, "Odd round\n"));
-    /* ..substition layer type 1 */
-    else
-      DBG(fprintf(stdout, "Even round\n"));
-    /* ..substition layer type 2 */
-    /* Test result if Test variable is defined */
+      if (i % 2 != 0) DBG(fprintf(stdout, "Odd round\n"));
+      /* ..substition layer type 1 */
+      else
+        DBG(fprintf(stdout, "Even round\n"));
+      /* ..substition layer type 2 */
+      /* Test result if Test variable is defined */
 
-    /* if (i < nb_round)*/
-    /* ..diffusion_layer */
-    /* ..Test result if Test variable is defined */
-  }
-  /* Last XORing the round input and the round_key ek */
+      /* if (i < nb_round)*/
+      /* ..diffusion_layer */
+      /* ..Test result if Test variable is defined */
+    }
+    /* Last XORing the round input and the round_key ek */
 
-  /* write result in working_output_buffer*/
-  memcpy(working_output_buffer, state, CHUNK_SIZE_OCTET);
+    /* write result in working_output_buffer*/
+    memcpy(working_output_buffer, state, CHUNK_SIZE_OCTET);
+  } else
+    result = -1;
 
-  free(state);
-  return 0;
+  free(round_key);
+  free(expansion_key);
+  return result;
 }

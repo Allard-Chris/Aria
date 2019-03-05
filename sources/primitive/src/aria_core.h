@@ -11,6 +11,7 @@ Aria primitive functions
 #include "aria_const.h"
 #include "aria_debug.h"
 #include "aria_type.h"
+#include "aria_utils.h"
 
 /* global function for operations */
 /* valid parameter only to test aria algorithm with plaintext.txt input */

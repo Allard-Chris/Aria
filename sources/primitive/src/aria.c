@@ -175,9 +175,7 @@ int main(int argc, const char** argv) {
         DBG(printBuffer(working_input_buffer, CHUNK_SIZE_OCTET));
 
         /* call aria algorithm */
-        if (ariaCore(mode, key, working_input_buffer, working_output_buffer) ==
-            -1)
-          goto error;
+        ariaCore(mode, key, working_input_buffer, working_output_buffer);
 
         /* write into output file with contents inside working_output_buffer */
         fwrite(working_output_buffer, sizeof(u8), CHUNK_SIZE_OCTET, out);

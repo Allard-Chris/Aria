@@ -31,7 +31,7 @@ char atoh(const char C) {
 }
 
 /* fill remaining spaces in buffer with value 0 */
-unsigned char* fillBuffer(unsigned char* buffer, int length) {
+unsigned char* fillBuffer(unsigned char* buffer, unsigned int length) {
   for (int i = length; i < CHUNK_SIZE_OCTET; i++) {
     buffer[i] = 0;
   }
@@ -39,7 +39,7 @@ unsigned char* fillBuffer(unsigned char* buffer, int length) {
 }
 
 /* print data inside buffer. just for debug */
-void printBuffer(unsigned char* buffer, int length) {
+void printBuffer(unsigned char* buffer, unsigned int length) {
   printf("Buffer Data: ");
   for (int i = 0; i < length; i++) {
     printf("0x%x ", buffer[i]);
@@ -48,7 +48,9 @@ void printBuffer(unsigned char* buffer, int length) {
 }
 
 /* compare values between two arrays */
-int compareBuffer(unsigned char* buffer1, unsigned char* buffer2, int length) {
+int compareBuffer(unsigned char* buffer1,
+                  unsigned char* buffer2,
+                  unsigned int   length) {
   /* NOT IMPLEMENTED */
   return 0;
 }
