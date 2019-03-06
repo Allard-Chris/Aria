@@ -33,11 +33,12 @@ void help() {
 }
 
 /* function to extract, from a file, a key */
+/* expect key in hexa format */
 /* return filled ariaKey struct */
 ariaKey_t* extractKeyFromFile(const char* filename) {
   char       current_char;
-  ariaKey_t* key = NULL;
-  int        size = 0, i = 0, peer = 0;
+  ariaKey_t* master_key = NULL;
+  int        size = 0, i = 0, carry = 0;
 
   /* Getting size of current key */
   FILE* keyfile = fopen(filename, "r");
@@ -48,42 +49,43 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
 
   /* init ariaKey struct to store key */
   if ((size != 128) && (size != 192) && (size != 256)) goto error;
-  if ((key = (ariaKey_t*)malloc(sizeof(ariaKey_t))) == NULL) {
+  if ((master_key = (ariaKey_t*)malloc(sizeof(ariaKey_t))) == NULL) {
     fprintf(stderr, "Can't get enough memory\n");
     goto error;
   }
 
-  key->size = size;
+  /* set size */
+  master_key->size = size;
   DBG(fprintf(stdout, "Key size: %d\n", size));
 
   /* read current key */
-  fseek(keyfile, 0, SEEK_SET);
+  fseek(keyfile, 0, SEEK_SET); /* reset to the beginning of the file*/
   while ((current_char = fgetc(keyfile)) != EOF) {
     current_char = atoh(current_char);
     if (current_char == -1) goto error;
 
     /* first 4 bits of u8 */
-    if (peer == 0) {
-      peer++;
-      key->key[i] = (u8)current_char;
+    if (carry == 0) {
+      carry++;
+      master_key->key[i] = (u8)current_char;
     }
 
     /* last 4 bits of u8 */
     else {
-      key->key[i] = (u8)(key->key[i] << 4) + current_char;
+      master_key->key[i] = (u8)(master_key->key[i] << 4) + current_char;
       i++;
-      peer = 0;
+      carry = 0;
     }
   }
   fclose(keyfile);
-  fillBuffer(key->key, key->size, (MAX_KEY_SIZE / 8)); /* Adding zero on
-      remaining spaces*/
-  return key;
+  fillArray(master_key->key, master_key->size, MAX_SIZE_OCTETS); /* Adding zero
+      on remaining spaces*/
+  return master_key;
 
 /* in case of error */
 error:
   fprintf(stderr, "Error in parsing keyfile\n");
-  free(key);
+  free(master_key);
   return NULL;
 }
 
@@ -92,15 +94,15 @@ int main(int argc, const char** argv) {
   const char*    infile = NULL;
   const char*    outfile = NULL;
   const char*    keyfile = NULL;
-  unsigned char* working_input_buffer = NULL;
-  unsigned char* working_output_buffer = NULL;
-  int            working_length;
+  unsigned char* input_buffer = NULL;
+  unsigned char* output_buffer = NULL;
+  int            nb_readed;
   int            mode = -1;
-  ariaKey_t*     key;
-  argc--;
-  argv++;
+  ariaKey_t*     master_key;
 
   /* parsing arguments */
+  argc--;
+  argv++;
   while (argc >= 1) {
     /* checking mode */
     if (strcmp(*argv, "--decrypt") == 0) {
@@ -134,17 +136,17 @@ int main(int argc, const char** argv) {
     }
     argc--;
     argv++;
-  }
-
-  /* extract key inside keyfile */
-  if (keyfile != NULL) {
-    key = extractKeyFromFile(keyfile);
-    if (key == NULL) goto error;
-  } else
-    goto error;
+  } /* end parsing arguments */
 
   /* check mode */
   if (mode == -1) goto error;
+
+  /* extract key inside keyfile */
+  if (keyfile != NULL) {
+    master_key = extractKeyFromFile(keyfile);
+    if (master_key == NULL) goto error;
+  } else
+    goto error;
 
   /* open input file */
   FILE* in = fopen(infile, "rb");
@@ -154,44 +156,41 @@ int main(int argc, const char** argv) {
   FILE* out = fopen(outfile, "wb");
   if (out == NULL) goto error;
 
-  /* create input/output buffer for chunks */
-  working_input_buffer = malloc(CHUNK_SIZE_OCTET);
-  working_output_buffer = malloc(CHUNK_SIZE_OCTET);
+  /* create input/output buffer for 128bit chunks */
+  input_buffer = malloc(CHUNK_16_OCTETS);
+  output_buffer = malloc(CHUNK_16_OCTETS);
 
-  /* for every 128-bit chunk of input file */
+  /* for every 128bit chunk of input file */
   /* check malloc result here, in one if, to avoid memory leaks */
-  if ((working_input_buffer != NULL) && (working_output_buffer != NULL)) {
+  if ((input_buffer != NULL) && (output_buffer != NULL)) {
     do {
       /* fill buffer */
-      working_length =
-          fread(working_input_buffer, sizeof(u8), CHUNK_SIZE_OCTET, in);
+      nb_readed = fread(input_buffer, sizeof(u8), CHUNK_16_OCTETS, in);
 
       /* if still have data in inputfile */
-      if (working_length) {
-        if (working_length < CHUNK_SIZE_OCTET)
-          fillBuffer(working_input_buffer, working_length, CHUNK_SIZE_OCTET);
+      if (nb_readed) {
+        if (nb_readed < CHUNK_16_OCTETS)
+          fillArray(input_buffer, nb_readed, CHUNK_16_OCTETS);
 
-        DBG(fprintf(stdout,
-                    "New chunk extracted from input file, size of buffer: %d\n",
-                    working_length));
-        DBG(printBuffer(working_input_buffer, CHUNK_SIZE_OCTET));
+        DBG(fprintf(stdout, "New chunk, size of buffer: %d\n", nb_readed));
+        DBG(printBuffer(input_buffer, CHUNK_16_OCTETS));
 
         /* call aria algorithm */
-        ariaCore(mode, key, working_input_buffer, working_output_buffer);
+        ariaCore(mode, master_key, input_buffer, output_buffer);
 
         /* write into output file with contents inside working_output_buffer */
-        fwrite(working_output_buffer, sizeof(u8), CHUNK_SIZE_OCTET, out);
+        fwrite(output_buffer, sizeof(u8), CHUNK_16_OCTETS, out);
       }
-    } while (working_length);
+    } while (nb_readed); /* until we read all data from inputfile */
   }
 
   /* close */
   fclose(in);
   fclose(out);
 
-  free(working_input_buffer);
-  free(working_output_buffer);
-  free(key);
+  free(input_buffer);
+  free(output_buffer);
+  free(master_key);
   return 0;
 
 error:

@@ -6,6 +6,8 @@ Version : 0.1
 ###
 Aria tests constants
 **********************************************/
+#ifndef ARIA_TEST
+#define ARIA_TEST
 
 #include "aria_type.h"
 
@@ -66,3 +68,5 @@ const round_t S128[] = {{S128_R1_KA, S128_R1_SL, S128_R1_DL},
                         {S128_R10_KA, S128_R10_SL, S128_R10_DL},
                         {S128_R11_KA, S128_R11_SL, S128_R11_DL},
                         {S128_R12_KA, S128_R12_SL, S128_R12_DL}};
+
+#endif

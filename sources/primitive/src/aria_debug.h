@@ -6,6 +6,9 @@ Version : 0.1
 ###
 Aria debug statements
 **********************************************/
+#ifndef ARIA_DEBUG
+#define ARIA_DEBUG
+
 #ifndef DEBUG
 #define DEBUG 1
 #endif
@@ -17,4 +20,6 @@ Aria debug statements
    (void)(_x))
 #else
 #define DBG(_x) ((void)0)
+#endif
+
 #endif

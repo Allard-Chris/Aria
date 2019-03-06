@@ -10,43 +10,39 @@ Aria utils functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "aria_debug.h"
-#include "aria_test.h"
-#include "aria_type.h"
 
 /* convert Hexa Ascii character to hexa value */
 /* example: 'f' => 0xf */
 char atoh(const char C) {
+  char i;
   /* for ABCEDF characters */
-  if ((0x41 <= C) && (C <= 0x46)) return (C - 0x37);
+  if ((0x41 <= C) && (C <= 0x46)) i = C - 0x37;
   /* for abcdef characters */
   else if ((0x61 <= C) && (C <= 0x66))
-    return (C - 0x57);
+    i = C - 0x57;
   /* for 01123456789 characters */
   else if ((0x30 <= C) && (C <= 0x39))
-    return (C - 0x30);
+    i = C - 0x30;
   /* not an hexa character */
   else
-    return -1;
+    i = -1;
+  return i;
 }
 
-/* fill remaining spaces in buffer with value 0 */
-unsigned char* fillBuffer(unsigned char* buffer,
-                          unsigned int   start,
-                          unsigned int   end) {
+/* fill remaining spaces in u8 array with value 0 */
+void fillArray(u8 array[], const unsigned int start, const unsigned int end) {
   for (int i = start; i < end; i++) {
-    buffer[i] = 0;
+    array[i] = 0;
   }
-  return buffer;
 }
 
 /* print data inside buffer. just for debug */
 void printBuffer(unsigned char* buffer, unsigned int length) {
-  printf("Buffer Data: ");
-  for (int i = 0; i < length; i++) {
-    printf("0x%x ", buffer[i]);
+  fprintf(stdout, "Buffer Data: ");
+  for (unsigned int i = 0; i < length; i++) {
+    fprintf(stdout, "0x%hhx ", buffer[i]);
   }
-  printf("\n");
+  fprintf(stdout, "\n");
 }
 
 /* compare values between two arrays */
@@ -55,4 +51,24 @@ int compareBuffer(unsigned char* buffer1,
                   unsigned int   length) {
   /* NOT IMPLEMENTED */
   return 0;
+}
+
+/* convert array of 16 * u8 into 2 u64 array */
+void u8ArrayToU64(unsigned char* input, u64* low_bytes, u64* high_bytes) {
+  for (unsigned int i = CHUNK_16_OCTETS - 1; i >= (CHUNK_16_OCTETS / 2); i--) {
+    *high_bytes <<= 8;
+    *high_bytes += (u8)input[i];
+    *low_bytes <<= 8;
+    *low_bytes += (u8)input[i - (CHUNK_16_OCTETS / 2)];
+  }
+}
+
+/* convert 2 array of u64 into array of 16 * 8 */
+void u64ToU8Array(unsigned char* output, u64* low_bytes, u64* high_bytes) {
+  for (unsigned int i = 0; i < (CHUNK_16_OCTETS / 2); i++) {
+    output[i] = (u8)*low_bytes;
+    *low_bytes >>= 8;
+    output[i + (CHUNK_16_OCTETS / 2)] = (u8)*high_bytes;
+    *high_bytes >>= 8;
+  }
 }
