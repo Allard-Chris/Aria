@@ -13,68 +13,56 @@ Aria primitive functions
 
 /* doign left circle rotation on array values */
 void lCircleRotation(unsigned char* array, const unsigned int length) {
-  u64  low_bytes = 0;
-  u64  high_bytes = 0;
-  u64  tmp_low_bytes = 0;
-  u64  tmp_high_bytes = 0;
-  u64* p_low_bytes = &low_bytes;
-  u64* p_high_bytes = &high_bytes;
+  u64 low_bytes = 0;
+  u64 high_bytes = 0;
+  u64 tmp_low_bytes = 0;
+  u64 tmp_high_bytes = 0;
 
   /* first, converting array of 16 * u8 into 2 array of u64 */
   /* it's avoid limitation about shiffting with high length */
-  u8ArrayToU64(array, p_low_bytes, p_high_bytes);
+  u8ArrayToU64(array, &low_bytes, &high_bytes);
 
   /* doing circle shiffting */
-  /* example to understand : */
-  /* start with: [x1, x2, x3, x4, x5, x6, x7, x8] and shift << 3 */
-  /* result    : [x4, x5, x6, x7, x8, 0, 0, 0] */
-  /* now doing : [x1, x2, x3, x4, x5, x6, x7, x8] shiffted by 8 - 3 */
-  /* result    : [0, 0, 0, 0, 0, x1, x2, x3] */
-  /* now doing : [0, 0, 0, 0, 0, x1, x2, x3] XOR [x4, x5, x6, x7, x8, 0, 0, 0]*/
-  /* result    : [x4,x5, x6, x7, x8, x1, x2, x3] */
-  //  tmp_low_bytes = *p_low_bytes;
-  //  tmp_high_bytes = *p_high_bytes;
-  //
-  //  *p_low_bytes <<= length;
-  //  tmp_low_bytes >>= ((sizeof(u64) * 8) - length);
-  //  *p_high_bytes <<= length;
-  //  tmp_high_bytes >>= ((sizeof(u64) * 8) - length);
-  //
-  //  *p_low_bytes = *p_low_bytes || tmp_low_bytes;
-  //  *p_high_bytes = *p_high_bytes || tmp_high_bytes;
+  tmp_low_bytes = low_bytes;
+  tmp_high_bytes = high_bytes;
+
+  low_bytes <<= length;
+  tmp_low_bytes >>= ((sizeof(u64) * 8) - length);
+  high_bytes <<= length;
+  tmp_high_bytes >>= ((sizeof(u64) * 8) - length);
+
+  low_bytes ^= tmp_high_bytes;
+  high_bytes ^= tmp_low_bytes;
 
   /* reconvert 2 array of u64 into one array of 16 * u8 */
-  u64ToU8Array(array, p_low_bytes, p_high_bytes);
+  u64ToU8Array(array, &low_bytes, &high_bytes);
 }
 
 /* doign right circle rotation on array values */
 void rCircleRotation(unsigned char* array, const unsigned int length) {
-  u64  left = 0;
-  u64  right = 0;
-  u64  tmp_left = 0;
-  u64  tmp_right = 0;
-  u64* p_left = &left;
-  u64* p_right = &right;
+  u64 low_bytes = 0;
+  u64 high_bytes = 0;
+  u64 tmp_low_bytes = 0;
+  u64 tmp_high_bytes = 0;
 
   /* first, converting array of 16 * u8 into 2 array of u64 */
   /* it's avoid limitation about shiffting with high length */
-  u8ArrayToU64(array, p_left, p_right);
+  u8ArrayToU64(array, &low_bytes, &high_bytes);
 
   /* doing circle shiffting */
-  /* example in lCircleRotation function */
-  // tmp_left = *p_left;
-  // tmp_right = *p_right;
+  tmp_low_bytes = low_bytes;
+  tmp_high_bytes = high_bytes;
 
-  //*p_left = *p_left >> length;
-  // tmp_left = tmp_left << ((sizeof(u64) - length));
-  //*p_right = *p_right >> length;
-  // tmp_right = tmp_right << ((sizeof(u64) - length));
+  low_bytes >>= length;
+  tmp_low_bytes <<= ((sizeof(u64) * 8) - length);
+  high_bytes >>= length;
+  tmp_high_bytes <<= ((sizeof(u64) * 8) - length);
 
-  //*p_left = *p_left || tmp_left;
-  //*p_right = *p_right || tmp_right;
+  low_bytes ^= tmp_high_bytes;
+  high_bytes ^= tmp_low_bytes;
 
-  //  /* reconvert 2 array of u64 into one array of 16 * u8 */
-  u64ToU8Array(array, p_left, p_right);
+  /* reconvert 2 array of u64 into one array of 16 * u8 */
+  u64ToU8Array(array, &low_bytes, &high_bytes);
 }
 
 /*
@@ -173,11 +161,7 @@ int roundKeyGeneration(const ariaKey_t* master_key, round_key_t* round_key) {
   u8 kr[CHUNK_16_OCTETS];
   memcpy(kr, (master_key->key + CHUNK_16_OCTETS), CHUNK_16_OCTETS - 1); /* copy
       last 128bit of Master Key */
-  DBG(printBuffer(round_key->expansion_key->w0, CHUNK_16_OCTETS));
-  lCircleRotation(round_key->expansion_key->w0, 16);
-  DBG(printBuffer(round_key->expansion_key->w0, CHUNK_16_OCTETS));
-  // rCircleRotation(round_key->expansion_key->w0, 16);
-  // DBG(printBuffer(round_key->expansion_key->w0, CHUNK_16_OCTETS));
+
   //  /* expansion key generation
   //      expansion_key->w0 = key->key;
   //      expansion_key->w1 = FO(round_key->expansion_key->w0,
