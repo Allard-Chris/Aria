@@ -21,22 +21,22 @@ int ariaCore(const int        mode,
              const u8*        input_buffer,
              u8*              output_buffer);
 
-/* doign left circle rotation on array values */
-u8 lCircleRotation(const u8* array, const unsigned int length);
+/* doign left circle rotation on a values, return u8 array */
+u8* lCircleRotation(const u8* a, const unsigned int length);
 
-/* doign right circle rotation on array values */
-u8 rCircleRotation(const u8* array, const unsigned int length);
+/* doign right circle rotation on a values, return u8 array */
+u8* rCircleRotation(const u8* a, const unsigned int length);
 
-// Function for Step 1 inside rounds operations
-int roundKeyGeneration(const ariaKey_t* master_key, round_key_t* round_key);
+/* doing XOR between a and b, results in output */
+void ariaXOR(const u8* a, const u8* b, u8* c);
 
-// Function for Step 2 inside rounds operations
-// int ariaSubstitutionLayer(state_t* current_state);
+/* Function for Step 1 inside rounds operations */
+int ariaRoundKeyGeneration(const ariaKey_t* master_key, round_key_t* round_key);
 
-// Function for Step 3 inside rounds operations
-// int ariaDiffusionLayer(state_t* current_state);
+/* Function for Step 2 inside rounds operations */
+void ariaSubstitutionLayer(u8* state, const int type);
 
-// Function for last steps after rounds opertaion
-// int ariaKeyExpansion(state_t* current_state);
+/* Function for Step 3 inside rounds operations */
+void ariaDiffusionLayer(u8* state);
 
-#endif
+#endif /* ARIA_CORE */

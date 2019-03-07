@@ -36,9 +36,11 @@ void help() {
 /* expect key in hexa format */
 /* return filled ariaKey struct */
 ariaKey_t* extractKeyFromFile(const char* filename) {
-  char       current_char;
+  char       current_char = 0;
   ariaKey_t* master_key = NULL;
-  int        size = 0, i = 0, carry = 0;
+  int        size = 0;
+  int        i = 0;
+  int        carry = 0;
 
   /* Getting size of current key */
   FILE* keyfile = fopen(filename, "r");
@@ -78,7 +80,7 @@ ariaKey_t* extractKeyFromFile(const char* filename) {
     }
   }
   fclose(keyfile);
-  fillArray(master_key->key, master_key->size, MAX_SIZE_OCTETS); /* Adding zero
+  fillBuffer(master_key->key, master_key->size, MAX_SIZE_OCTETS); /* Adding zero
       on remaining spaces*/
   return master_key;
 
@@ -91,14 +93,14 @@ error:
 
 /* main function starting Aria cipher */
 int main(int argc, const char** argv) {
-  const char*    infile = NULL;
-  const char*    outfile = NULL;
-  const char*    keyfile = NULL;
-  unsigned char* input_buffer = NULL;
-  unsigned char* output_buffer = NULL;
-  int            nb_readed;
-  int            mode = -1;
-  ariaKey_t*     master_key;
+  const char* infile = NULL;
+  const char* outfile = NULL;
+  const char* keyfile = NULL;
+  u8*         input_buffer = NULL;
+  u8*         output_buffer = NULL;
+  int         nb_readed = 0;
+  int         mode = -1;
+  ariaKey_t*  master_key = NULL;
 
   /* parsing arguments */
   argc--;
@@ -170,7 +172,7 @@ int main(int argc, const char** argv) {
       /* if still have data in inputfile */
       if (nb_readed) {
         if (nb_readed < CHUNK_16_OCTETS)
-          fillArray(input_buffer, nb_readed, CHUNK_16_OCTETS);
+          fillBuffer(input_buffer, nb_readed, CHUNK_16_OCTETS);
 
         DBG(fprintf(stdout, "New chunk, size of buffer: %d\n", nb_readed));
         DBG(printBuffer(input_buffer, CHUNK_16_OCTETS));

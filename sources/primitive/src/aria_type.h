@@ -13,6 +13,13 @@ Globals types and structures for Aria primitive
 #define ENCRYPT 1
 #define ODD 0
 #define EVEN 1
+#define W0 0
+#define W1 1
+#define W2 2
+#define W3 3
+#define CK1 0
+#define CK2 1
+#define CK3 2
 #define MAX_SIZE_OCTETS 32
 #define CHUNK_16_OCTETS 16
 
@@ -29,13 +36,6 @@ typedef struct {
   u8  key[MAX_SIZE_OCTETS];
 } ariaKey_t;
 
-/* Aria algorithm can be considered as a series of operations done to */
-/* 128-bit array called state. Initialized with plaintext input and each */
-/* operation in each round modifies the state */
-// typedef struct {
-//  u8 array[CHUNK_16_OCTETS];
-//} state_t;
-
 /* structure used to store all data for tests */
 typedef struct {
   const u8 key_add[CHUNK_16_OCTETS];
@@ -43,19 +43,11 @@ typedef struct {
   const u8 diff_layer[CHUNK_16_OCTETS];
 } round_t;
 
-/* structure used to store expansion key */
-typedef struct {
-  u8 w0[CHUNK_16_OCTETS];
-  u8 w1[CHUNK_16_OCTETS];
-  u8 w2[CHUNK_16_OCTETS];
-  u8 w3[CHUNK_16_OCTETS];
-} expansion_key_t;
-
 /* structure used to store round key */
 typedef struct {
-  u8               round_key[16];
-  u8               constants_key[3][CHUNK_16_OCTETS];
-  expansion_key_t* expansion_key;
+  u8 ek[17][CHUNK_16_OCTETS];
+  u8 constants_key[3][CHUNK_16_OCTETS];
+  u8 expansion_key[4][CHUNK_16_OCTETS];
 } round_key_t;
 
-#endif
+#endif /* ARIA_TYPE */

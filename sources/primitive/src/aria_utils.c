@@ -29,10 +29,10 @@ char atoh(const char C) {
   return i;
 }
 
-/* fill remaining spaces in u8 array with value 0 */
-void fillArray(u8 array[], const unsigned int start, const unsigned int end) {
+/* fill remaining spaces in u8 buffer with value 0 */
+void fillBuffer(u8* buffer, const unsigned int start, const unsigned int end) {
   for (int i = start; i < end; i++) {
-    array[i] = 0;
+    buffer[i] = 0;
   }
 }
 
@@ -45,14 +45,8 @@ void printBuffer(u8* buffer, unsigned int length) {
   fprintf(stdout, "\n");
 }
 
-/* compare values between two arrays */
-int compareBuffer(u8* buffer1, u8* buffer2, unsigned int length) {
-  /* NOT IMPLEMENTED */
-  return 0;
-}
-
 /* convert array of 16 * u8 into 2 u64 array */
-void u8ArrayToU64(u8* input, u64* low_bytes, u64* high_bytes) {
+void u8ArrayToU64(const u8* input, u64* low_bytes, u64* high_bytes) {
   for (unsigned int i = CHUNK_16_OCTETS - 1; i >= (CHUNK_16_OCTETS / 2); i--) {
     *high_bytes <<= 8;
     *high_bytes += (u8)input[i];
@@ -62,11 +56,13 @@ void u8ArrayToU64(u8* input, u64* low_bytes, u64* high_bytes) {
 }
 
 /* convert 2 array of u64 into array of 16 * 8 */
-void u64ToU8Array(u8* output, u64* low_bytes, u64* high_bytes) {
+void u64ToU8Array(u8* output, const u64* low_bytes, const u64* high_bytes) {
+  u64 tmp_low_bytes = *low_bytes;
+  u64 tmp_high_bytes = *high_bytes;
   for (unsigned int i = 0; i < (CHUNK_16_OCTETS / 2); i++) {
     output[i] = (u8)*low_bytes;
-    *low_bytes >>= 8;
+    tmp_low_bytes >>= 8;
     output[i + (CHUNK_16_OCTETS / 2)] = (u8)*high_bytes;
-    *high_bytes >>= 8;
+    tmp_high_bytes >>= 8;
   }
 }

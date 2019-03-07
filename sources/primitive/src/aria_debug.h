@@ -22,4 +22,4 @@ Aria debug statements
 #define DBG(_x) ((void)0)
 #endif
 
-#endif
+#endif /* ARIA_DEBUG */

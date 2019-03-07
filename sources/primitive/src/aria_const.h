@@ -104,13 +104,12 @@ static const u8 C3[CHUNK_16_OCTETS] = {0xdb, 0x92, 0x37, 0x1d, 0x21, 0x26,
                                        0xe9, 0x70, 0x03, 0x24, 0x97, 0x75,
                                        0x04, 0xe8, 0xc9, 0x0e};
 
-static const u8* sl_type1[16] = {S1_BOX, S2_INVBOX, S1_INVBOX, S2_INVBOX,
-                                 S1_BOX, S2_BOX,    S1_INVBOX, S2_INVBOX,
-                                 S1_BOX, S2_BOX,    S1_INVBOX, S2_INVBOX,
-                                 S1_BOX, S2_BOX,    S1_INVBOX, S2_INVBOX};
+static const u8* sl_type[2][16] = {
+    {S1_BOX, S2_INVBOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX,
+     S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX,
+     S2_INVBOX},
+    {S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX,
+     S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX,
+     S2_BOX}};
 
-static const u8* sl_type2[16] = {
-    S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX,
-    S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX};
-
-#endif
+#endif /* ARIA_CONST */
