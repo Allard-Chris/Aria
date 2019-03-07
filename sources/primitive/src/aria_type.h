@@ -11,6 +11,8 @@ Globals types and structures for Aria primitive
 
 #define DECRYPT 0
 #define ENCRYPT 1
+#define ODD 0
+#define EVEN 1
 #define MAX_SIZE_OCTETS 32
 #define CHUNK_16_OCTETS 16
 

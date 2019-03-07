@@ -16,27 +16,27 @@ Aria primitive functions
 /* global function for operations */
 /* valid parameter only to test aria algorithm with plaintext.txt input */
 /* return 0 : all is ok, -1 error during process */
-int ariaCore(const int            mode,
-             const ariaKey_t*     key,
-             const unsigned char* input_buffer,
-             unsigned char*       output_buffer);
+int ariaCore(const int        mode,
+             const ariaKey_t* key,
+             const u8*        input_buffer,
+             u8*              output_buffer);
 
 /* doign left circle rotation on array values */
-void lCircleRotation(unsigned char* array, const unsigned int length);
+u8 lCircleRotation(const u8* array, const unsigned int length);
 
 /* doign right circle rotation on array values */
-void rCircleRotation(unsigned char* array, const unsigned int length);
-/*
+u8 rCircleRotation(const u8* array, const unsigned int length);
+
 // Function for Step 1 inside rounds operations
-int ariaRoundKeyAddition(state_t* current_state);
+int roundKeyGeneration(const ariaKey_t* master_key, round_key_t* round_key);
 
 // Function for Step 2 inside rounds operations
-int ariaSubstitutionLayer(state_t* current_state);
+// int ariaSubstitutionLayer(state_t* current_state);
 
 // Function for Step 3 inside rounds operations
-int ariaDiffusionLayer(state_t* current_state);
+// int ariaDiffusionLayer(state_t* current_state);
 
 // Function for last steps after rounds opertaion
-int ariaKeyExpansion(state_t* current_state);
-*/
+// int ariaKeyExpansion(state_t* current_state);
+
 #endif

@@ -12,15 +12,19 @@ Aria primitive functions
 #include <string.h>
 
 /* doign left circle rotation on array values */
-void lCircleRotation(unsigned char* array, const unsigned int length) {
+u8 lCircleRotation(const u8* input, const unsigned int length) {
   u64 low_bytes = 0;
   u64 high_bytes = 0;
   u64 tmp_low_bytes = 0;
   u64 tmp_high_bytes = 0;
+  u8  output[CHUNK_16_OCTETS];
+
+  /* copy input into output */
+  memcpy(output, input, CHUNK_16_OCTETS);
 
   /* first, converting array of 16 * u8 into 2 array of u64 */
   /* it's avoid limitation about shiffting with high length */
-  u8ArrayToU64(array, &low_bytes, &high_bytes);
+  u8ArrayToU64(output, &low_bytes, &high_bytes);
 
   /* doing circle shiffting */
   tmp_low_bytes = low_bytes;
@@ -35,19 +39,25 @@ void lCircleRotation(unsigned char* array, const unsigned int length) {
   high_bytes ^= tmp_low_bytes;
 
   /* reconvert 2 array of u64 into one array of 16 * u8 */
-  u64ToU8Array(array, &low_bytes, &high_bytes);
+  u64ToU8Array(output, &low_bytes, &high_bytes);
+
+  return output;
 }
 
 /* doign right circle rotation on array values */
-void rCircleRotation(unsigned char* array, const unsigned int length) {
+u8 rCircleRotation(const u8* input, const unsigned int length) {
   u64 low_bytes = 0;
   u64 high_bytes = 0;
   u64 tmp_low_bytes = 0;
   u64 tmp_high_bytes = 0;
+  u8  output[CHUNK_16_OCTETS];
+
+  /* copy input into output */
+  memcpy(output, input, CHUNK_16_OCTETS);
 
   /* first, converting array of 16 * u8 into 2 array of u64 */
   /* it's avoid limitation about shiffting with high length */
-  u8ArrayToU64(array, &low_bytes, &high_bytes);
+  u8ArrayToU64(output, &low_bytes, &high_bytes);
 
   /* doing circle shiffting */
   tmp_low_bytes = low_bytes;
@@ -62,56 +72,65 @@ void rCircleRotation(unsigned char* array, const unsigned int length) {
   high_bytes ^= tmp_low_bytes;
 
   /* reconvert 2 array of u64 into one array of 16 * u8 */
-  u64ToU8Array(array, &low_bytes, &high_bytes);
+  u64ToU8Array(output, &low_bytes, &high_bytes);
+
+  return output;
 }
 
+/* send state array into SBOX */
+void substituionLayer(u8* state[], int type) {
+  if (type == ODD) {
+    for (int i = 0; i < CHUNK_16_OCTETS; i++) {
+      *state[i] = sl_type1[i][(u8)*state[i]];
+    }
+  } else {
+    for (int i = 0; i < CHUNK_16_OCTETS; i++) {
+      *state[i] = sl_type2[i][(u8)*state[i]];
+    }
+  }
+}
+
+/* Diffusion layer of Aria map inputs of 16 bytes into matrix multiplication */
+void diffusionLayer(u8* state) {
+  u8 copy_state[CHUNK_16_OCTETS];
+  memcpy(copy_state, state, CHUNK_16_OCTETS);
+  state[0] = copy_state[3] ^ copy_state[4] ^ copy_state[6] ^ copy_state[8] ^
+             copy_state[9] ^ copy_state[13] ^ copy_state[14];
+  state[1] = copy_state[2] ^ copy_state[5] ^ copy_state[7] ^ copy_state[8] ^
+             copy_state[9] ^ copy_state[12] ^ copy_state[15];
+  state[2] = copy_state[1] ^ copy_state[4] ^ copy_state[6] ^ copy_state[10] ^
+             copy_state[11] ^ copy_state[12] ^ copy_state[15];
+  state[3] = copy_state[0] ^ copy_state[5] ^ copy_state[7] ^ copy_state[10] ^
+             copy_state[11] ^ copy_state[13] ^ copy_state[14];
+  state[4] = copy_state[0] ^ copy_state[2] ^ copy_state[5] ^ copy_state[8] ^
+             copy_state[11] ^ copy_state[14] ^ copy_state[15];
+  state[5] = copy_state[1] ^ copy_state[3] ^ copy_state[4] ^ copy_state[9] ^
+             copy_state[10] ^ copy_state[14] ^ copy_state[15];
+  state[6] = copy_state[0] ^ copy_state[2] ^ copy_state[7] ^ copy_state[9] ^
+             copy_state[10] ^ copy_state[12] ^ copy_state[13];
+  state[7] = copy_state[1] ^ copy_state[3] ^ copy_state[6] ^ copy_state[8] ^
+             copy_state[11] ^ copy_state[12] ^ copy_state[13];
+  state[8] = copy_state[0] ^ copy_state[1] ^ copy_state[4] ^ copy_state[7] ^
+             copy_state[10] ^ copy_state[13] ^ copy_state[15];
+  state[9] = copy_state[0] ^ copy_state[1] ^ copy_state[5] ^ copy_state[6] ^
+             copy_state[11] ^ copy_state[12] ^ copy_state[14];
+  state[10] = copy_state[2] ^ copy_state[3] ^ copy_state[5] ^ copy_state[6] ^
+              copy_state[8] ^ copy_state[13] ^ copy_state[15];
+  state[11] = copy_state[2] ^ copy_state[3] ^ copy_state[4] ^ copy_state[7] ^
+              copy_state[9] ^ copy_state[12] ^ copy_state[14];
+  state[12] = copy_state[1] ^ copy_state[2] ^ copy_state[6] ^ copy_state[7] ^
+              copy_state[9] ^ copy_state[11] ^ copy_state[12];
+  state[13] = copy_state[0] ^ copy_state[3] ^ copy_state[6] ^ copy_state[7] ^
+              copy_state[8] ^ copy_state[10] ^ copy_state[13];
+  state[14] = copy_state[0] ^ copy_state[3] ^ copy_state[4] ^ copy_state[5] ^
+              copy_state[9] ^ copy_state[11] ^ copy_state[14];
+  state[15] = copy_state[1] ^ copy_state[2] ^ copy_state[4] ^ copy_state[5] ^
+              copy_state[8] ^ copy_state[10] ^ copy_state[15];
+}
 /*
-void diffusion(u8 output[CHUNK_SIZE_OCTET], const u8 input[CHUNK_SIZE_OCTET]) {
-  output[0] = input[3] ^ input[4] ^ input[6] ^ input[8] ^ input[9] ^ input[13] ^
-              input[14];
-  output[1] = input[2] ^ input[5] ^ input[7] ^ input[8] ^ input[9] ^ input[12] ^
-              input[15];
-  output[2] = input[1] ^ input[4] ^ input[6] ^ input[10] ^ input[11] ^
-              input[12] ^ input[15];
-  output[3] = input[0] ^ input[5] ^ input[7] ^ input[10] ^ input[11] ^
-              input[13] ^ input[14];
-  output[4] = input[0] ^ input[2] ^ input[5] ^ input[8] ^ input[11] ^
-              input[14] ^ input[15];
-  output[5] = input[1] ^ input[3] ^ input[4] ^ input[9] ^ input[10] ^
-              input[14] ^ input[15];
-  output[6] = input[0] ^ input[2] ^ input[7] ^ input[9] ^ input[10] ^
-              input[12] ^ input[13];
-  output[7] = input[1] ^ input[3] ^ input[6] ^ input[8] ^ input[11] ^
-              input[12] ^ input[13];
-  output[8] = input[0] ^ input[1] ^ input[4] ^ input[7] ^ input[10] ^
-              input[13] ^ input[15];
-  output[9] = input[0] ^ input[1] ^ input[5] ^ input[6] ^ input[11] ^
-              input[12] ^ input[14];
-  output[10] = input[2] ^ input[3] ^ input[5] ^ input[6] ^ input[8] ^
-               input[13] ^ input[15];
-  output[11] = input[2] ^ input[3] ^ input[4] ^ input[7] ^ input[9] ^
-               input[12] ^ input[14];
-  output[12] = input[1] ^ input[2] ^ input[6] ^ input[7] ^ input[9] ^
-               input[11] ^ input[12];
-  output[13] = input[0] ^ input[3] ^ input[6] ^ input[7] ^ input[8] ^
-               input[10] ^ input[13];
-  output[14] = input[0] ^ input[3] ^ input[4] ^ input[5] ^ input[9] ^
-               input[11] ^ input[14];
-  output[15] = input[1] ^ input[2] ^ input[4] ^ input[5] ^ input[8] ^
-               input[10] ^ input[15];
-}
-
 void xor (u8 output[16], u8 input1[16], u8 input2[16]) {
 }
 
-void sL2(u8 output[16], const u8 input[16]) {
-  for (int i = 0; i < 16; i++) {
-     if (i % 4 < 2)
-      output[i] = S_BOX[(i % 4) + 2][input[i]];
-    else if (i % 4 >= 2)
-      output[i] = S_BOX[(i % 4) - 2][input[i]];
-  }
-}
 
 u8* fe(u8 w[CHUNK_SIZE_OCTET], u8 ck[CHUNK_SIZE_OCTET]) {
   u8 return_value[CHUNK_SIZE_OCTET];
@@ -231,6 +250,7 @@ int ariaCore(const int            mode,
   /* allocation for round_key and expansion_key */
   round_key = (round_key_t*)malloc(sizeof(round_key_t));
   expansion_key = (expansion_key_t*)malloc(sizeof(expansion_key_t));
+  diffusionLayer(state);
 
   /* round key EK */
   if ((round_key != NULL) && (expansion_key != NULL)) {
@@ -240,7 +260,8 @@ int ariaCore(const int            mode,
     /* loop for all rounds */
     /* start at 1 to be egal with Aria specification description in PDF file
      */
-    for (int i = 1; i <= nb_round; i++) {
+    int i;
+    for (i = 1; i <= nb_round; i++) {
       DBG(fprintf(stdout, "Current round: %d\n", i));
       /* XORing the round input and the round_key ek */
       /* if (valid) test output from XOR*/
@@ -257,6 +278,7 @@ int ariaCore(const int            mode,
       /* ..Test result if Test variable is defined */
     }
     /* Last XORing the round input and the round_key ek */
+    DBG(fprintf(stdout, "Last round: %d\n", i++));
 
     /* write result in working_output_buffer*/
     memcpy(output_buffer, state, CHUNK_16_OCTETS);
