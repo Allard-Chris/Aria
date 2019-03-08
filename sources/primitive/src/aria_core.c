@@ -139,42 +139,43 @@ int ariaRoundKeyGeneration(const ariaKey_t* master_key,
   /* Initialisation figure 4 */
   if (master_key->size == 128) {
     DBG(fprintf(stdout, "Constants key C1, C2, C3\n"));
-    memcpy(round_key->constants_key[0], C1, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[1], C2, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[2], C3, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK1], C1, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK2], C2, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK3], C3, CHUNK_16_OCTETS);
   } else if (master_key->size == 192) {
     DBG(fprintf(stdout, "Constants key C2, C3, C1\n"));
-    memcpy(round_key->constants_key[0], C2, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[1], C3, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[2], C1, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK1], C2, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK2], C3, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK3], C1, CHUNK_16_OCTETS);
   } else {
     DBG(fprintf(stdout, "Constants key C3, C1, C2\n"));
-    memcpy(round_key->constants_key[0], C3, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[1], C1, CHUNK_16_OCTETS);
-    memcpy(round_key->constants_key[2], C2, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK1], C3, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK2], C1, CHUNK_16_OCTETS);
+    memcpy(round_key->constants_key[CK3], C2, CHUNK_16_OCTETS);
   }
 
   /* constant kl and kr generation */
   /* w0 = KL so avoid double array, and copy direct to w0*/
   /* copy first 128bit of Master Key */
   memcpy(round_key->expansion_key[W0], master_key->key, CHUNK_16_OCTETS);
+
   u8 kr[CHUNK_16_OCTETS];
-  memcpy(kr, (master_key->key + CHUNK_16_OCTETS), CHUNK_16_OCTETS - 1); /* copy
+  memcpy(kr, (master_key->key + CHUNK_16_OCTETS), CHUNK_16_OCTETS); /* copy
       last 128bit of Master Key */
 
   /* expansion key generation */
   ariaXOR(kr,
           ariaFeistelRound(round_key->expansion_key[W0],
                            round_key->constants_key[CK1], ODD),
-          round_key->expansion_key[W1]);
+          round_key->expansion_key[W1]); /* W1 */
   ariaXOR(round_key->expansion_key[W0],
           ariaFeistelRound(round_key->expansion_key[W1],
                            round_key->constants_key[CK2], EVEN),
-          round_key->expansion_key[W2]);
+          round_key->expansion_key[W2]); /* W2 */
   ariaXOR(round_key->expansion_key[W1],
           ariaFeistelRound(round_key->expansion_key[W2],
                            round_key->constants_key[CK3], ODD),
-          round_key->expansion_key[W3]);
+          round_key->expansion_key[W3]); /* W3 */
 
   /* round keys generation */
   /* ! Warning index 0 to 16 but in Aria paper it's 1 to 17  */
@@ -220,6 +221,7 @@ int ariaRoundKeyGeneration(const ariaKey_t* master_key,
             lCircleRotation(round_key->expansion_key[W1], 19),
             round_key->ek[16]);
   }
+
   return 0;
 }
 

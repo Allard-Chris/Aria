@@ -93,7 +93,7 @@ static const u8 S2_INVBOX[256] = {
 };
 // clang-format on
 static const u8 C1[CHUNK_16_OCTETS] = {0x51, 0x7c, 0xc1, 0xb7, 0x27, 0x22,
-                                       0x0a, 0x94, 0xfe, 0x12, 0xab, 0xe8,
+                                       0x0a, 0x94, 0xfe, 0x13, 0xab, 0xe8,
                                        0xfa, 0x9a, 0x6e, 0xe0};
 
 static const u8 C2[CHUNK_16_OCTETS] = {0x6d, 0xb1, 0x4a, 0xcc, 0x9e, 0x21,
@@ -105,8 +105,8 @@ static const u8 C3[CHUNK_16_OCTETS] = {0xdb, 0x92, 0x37, 0x1d, 0x21, 0x26,
                                        0x04, 0xe8, 0xc9, 0x0e};
 
 static const u8* sl_type[2][16] = {
-    {S1_BOX, S2_INVBOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX,
-     S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX,
+    {S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX,
+     S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX,
      S2_INVBOX},
     {S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX,
      S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX,

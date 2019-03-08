@@ -60,9 +60,9 @@ void u64ToU8Array(u8* output, const u64* low_bytes, const u64* high_bytes) {
   u64 tmp_low_bytes = *low_bytes;
   u64 tmp_high_bytes = *high_bytes;
   for (unsigned int i = 0; i < (CHUNK_16_OCTETS / 2); i++) {
-    output[i] = (u8)*low_bytes;
+    output[i] = (u8)tmp_low_bytes;
     tmp_low_bytes >>= 8;
-    output[i + (CHUNK_16_OCTETS / 2)] = (u8)*high_bytes;
+    output[i + (CHUNK_16_OCTETS / 2)] = (u8)tmp_high_bytes;
     tmp_high_bytes >>= 8;
   }
 }
