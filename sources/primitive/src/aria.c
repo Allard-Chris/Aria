@@ -28,10 +28,6 @@ void help() {
   fprintf(stderr, "-i, --in : file with plain-text\n");
   fprintf(stderr, "-o, --out: output file\n");
   fprintf(stderr, "\n-h, --help : give some help\n");
-  fprintf(
-      stderr,
-      "[optional]: --valid: use with valid/plaintext.txt input to test aria "
-      "algorithm\n");
 }
 
 /* function to extract, from a file, a key */
