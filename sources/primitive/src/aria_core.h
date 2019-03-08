@@ -39,4 +39,7 @@ void ariaSubstitutionLayer(u8* state, const int type);
 /* Function for Step 3 inside rounds operations */
 void ariaDiffusionLayer(u8* state);
 
+/* Function for running Feistel round */
+u8* ariaFeistelRound(u8* expansion_key, u8* constants_key, const int type);
+
 #endif /* ARIA_CORE */

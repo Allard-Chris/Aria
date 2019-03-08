@@ -123,29 +123,17 @@ void ariaXOR(const u8* a, const u8* b, u8* c) {
   }
 }
 
-/*
-u8* fe(u8 w[CHUNK_SIZE_OCTET], u8 ck[CHUNK_SIZE_OCTET]) {
-  u8 return_value[CHUNK_SIZE_OCTET];
-  u8 tmp[CHUNK_SIZE_OCTET];
-  u8 tmp2[CHUNK_SIZE_OCTET];
-
-  xor(tmp, w, ck);
-
-  sL2(tmp2, tmp);
-  diffusion(return_value, tmp);
+/* feistelRound */
+u8* ariaFeistelRound(u8* expansion_key, u8* constants_key, const int type) {
+  static u8 output[CHUNK_16_OCTETS];
+  memcpy(output, expansion_key, CHUNK_16_OCTETS);
+  ariaXOR(output, constants_key, output);
+  ariaSubstitutionLayer(output, type);
+  ariaDiffusionLayer(output);
+  return output;
 }
 
-u8* fo(u8 w[CHUNK_SIZE_OCTET], u8 ck[CHUNK_SIZE_OCTET]) {
-  u8 return_value[CHUNK_SIZE_OCTET];
-  u8 tmp[CHUNK_SIZE_OCTET];
-
-  xor(tmp, w, ck);
-    for (int i = 0; i < 16; i++)
-      tmp[i] = S_BOX[i % 4][tmp[i]];
-
-  diffusion(return_value, tmp);
-}
-*/
+/* create all Aria round key */
 int ariaRoundKeyGeneration(const ariaKey_t* master_key,
                            round_key_t*     round_key) {
   /* Initialisation figure 4 */
@@ -174,15 +162,19 @@ int ariaRoundKeyGeneration(const ariaKey_t* master_key,
   memcpy(kr, (master_key->key + CHUNK_16_OCTETS), CHUNK_16_OCTETS - 1); /* copy
       last 128bit of Master Key */
 
-  /* expansion key generation */ /*
-   ariaXOR(kr, FO(round_key->expansion_key[W0], round_key->constants_key[CK1]),
-           round_key->expansion_key[W1]);
-   ariaXOR(round_key->expansion_key[W0],
-           FE(round_key->expansion_key[W1], round_key->constants_key[CK2]),
-           round_key->expansion_key[W2]);
-   ariaXOR(round_key->expansion_key[W1],
-           F0(round_key->expansion_key[W2], round_key->constants_key[CK3]),
-           round_key->expansion_key[W3]);*/
+  /* expansion key generation */
+  ariaXOR(kr,
+          ariaFeistelRound(round_key->expansion_key[W0],
+                           round_key->constants_key[CK1], ODD),
+          round_key->expansion_key[W1]);
+  ariaXOR(round_key->expansion_key[W0],
+          ariaFeistelRound(round_key->expansion_key[W1],
+                           round_key->constants_key[CK2], EVEN),
+          round_key->expansion_key[W2]);
+  ariaXOR(round_key->expansion_key[W1],
+          ariaFeistelRound(round_key->expansion_key[W2],
+                           round_key->constants_key[CK3], ODD),
+          round_key->expansion_key[W3]);
 
   /* round keys generation */
   /* ! Warning index 0 to 16 but in Aria paper it's 1 to 17  */
@@ -265,7 +257,7 @@ int ariaCore(const int        mode,
     for (i = 1; i <= nb_round; i++) {
       DBG(fprintf(stdout, "Current round: %d\n", i));
       /* XORing the state input and the round_key ek */
-      // ariaXOR(state, round_key->ek[i-1], state);
+      ariaXOR(state, round_key->ek[i - 1], state);
 
       if (i % 2 != 0) { /* ..substition layer type 1 */
         DBG(fprintf(stdout, "Odd round\n"));
@@ -281,7 +273,7 @@ int ariaCore(const int        mode,
     DBG(fprintf(stdout, "Last round: %d\n", i++));
 
     /* Last XORing the state and the round_key ek */
-    // ariaXOR(state, round_key->ek[i-1], state);
+    ariaXOR(state, round_key->ek[i - 1], state);
 
     /* write result in working_output_buffer*/
     memcpy(output_buffer, state, CHUNK_16_OCTETS);
