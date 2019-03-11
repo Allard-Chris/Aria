@@ -15,21 +15,19 @@ Aria main functions
 #include "aria_utils.h"
 
 void help() {
-  fprintf(stderr, "How to use aria:\n");
+  fprintf(stderr, "How to use aria:\n\n");
   fprintf(stderr,
           "Usage: ./aria [mode] --key <key_file_name> --in <input_file_name> "
-          "--out <output_file_name>\n");
-  fprintf(stderr, "Mode: --encrypt or --decrypt\n");
-  fprintf(
-      stderr,
-      "--key: file with hexa key inside in only one line without spaces and "
-      "Feed Line\n");
-  fprintf(stderr, "--in : file with plain-text\n");
-  fprintf(stderr, "--out: output file\n");
-  fprintf(
-      stderr,
-      "[optional]: --valid: use with valid/plaintext.txt input to test aria "
-      "algorithm\n");
+          "--out <output_file_name>\n\n");
+  fprintf(stderr, "mode: \"e\" or \"encrypt\" for encryption mode\n");
+  fprintf(stderr, "      \"d\" or \"decrypt\" for decryption mode\n\n");
+  fprintf(stderr,
+          "-k, --key: file with hexa key inside in only one line without "
+          "spaces and "
+          "Feed Line\n");
+  fprintf(stderr, "-i, --in : file with plain-text\n");
+  fprintf(stderr, "-o, --out: output file\n");
+  fprintf(stderr, "\n-h, --help : give some help\n");
 }
 
 /* function to extract, from a file, a key */
@@ -106,27 +104,32 @@ int main(int argc, const char** argv) {
   argc--;
   argv++;
   while (argc >= 1) {
+    /* need help */
+    if ((strcmp(*argv, "--help") == 0) || (strcmp(*argv, "-h") == 0)) {
+      goto help;
+    }
+
     /* checking mode */
-    if (strcmp(*argv, "--decrypt") == 0) {
+    else if ((strcmp(*argv, "decrypt") == 0) || (strcmp(*argv, "d") == 0)) {
       mode = DECRYPT;
-    } else if (strcmp(*argv, "--encrypt") == 0) {
+    } else if ((strcmp(*argv, "encrypt") == 0) || (strcmp(*argv, "e") == 0)) {
       mode = ENCRYPT;
     }
 
     /* checking key file */
-    else if (strcmp(*argv, "--key") == 0) {
+    else if ((strcmp(*argv, "--key") == 0) || (strcmp(*argv, "-k") == 0)) {
       if (--argc < 1) goto error;
       keyfile = *(++argv);
     }
 
     /* checking input file */
-    else if (strcmp(*argv, "--in") == 0) {
+    else if ((strcmp(*argv, "--in") == 0) || (strcmp(*argv, "-i") == 0)) {
       if (--argc < 1) goto error;
       infile = *(++argv);
     }
 
     /* checking output file */
-    else if (strcmp(*argv, "--out") == 0) {
+    else if ((strcmp(*argv, "--out") == 0) || (strcmp(*argv, "-o") == 0)) {
       if (--argc < 1) goto error;
       outfile = *(++argv);
     }
@@ -197,6 +200,8 @@ int main(int argc, const char** argv) {
 
 error:
   fprintf(stderr, "Runtime error!\n");
+
+help:
   help();
   return 1;
 }

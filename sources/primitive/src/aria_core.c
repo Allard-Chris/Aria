@@ -11,7 +11,7 @@ Aria primitive functions
 #include <stdlib.h>
 #include <string.h>
 
-/* doign left circle rotation on array values */
+/* doing left circle rotation on array values */
 u8* lCircleRotation(const u8* a, const unsigned int length) {
   u64       low_bytes = 0;
   u64       high_bytes = 0;
