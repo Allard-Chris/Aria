@@ -234,7 +234,8 @@ int ariaCore(const int        mode,
   char         nb_round = 0;
   int          result = 0;
   int          i;
-  int          ek;
+  int          ek_d;
+  int          ek_e;
   u8           state[CHUNK_16_OCTETS];
   round_key_t* round_key = NULL;
 
@@ -257,18 +258,22 @@ int ariaCore(const int        mode,
   if (round_key != NULL) {
     ariaRoundKeyGeneration(master_key, round_key);
 
-    if (mode == DECRYPT) {
-      ek = nb_round;
-    } else {
-      ek = 0;
-    }
+    ek_d = nb_round;
+    ek_e = 0;
 
     /* loop for all rounds */
     /* start at 1 to be egal with Aria specification description in PDF file */
     for (i = 1; i <= nb_round; i++) {
       DBG(fprintf(stdout, "Current round: %d\n", i));
       /* XORing the state input and the round_key ek */
-      ariaXOR(state, round_key->ek[ek], state);
+      if ((mode == DECRYPT) & (i == 1)) {
+        ariaXOR(state, round_key->ek[ek_d], state);
+      } else if ((mode == DECRYPT) & (i != 1)) {
+        ariaDiffusionLayer(round_key->ek[ek_d]);
+        ariaXOR(state, round_key->ek[ek_d], state);
+      } else {
+        ariaXOR(state, round_key->ek[ek_e], state);
+      }
 
       if (i % 2 != 0) { /* ..substition layer type 1 */
         DBG(fprintf(stdout, "Odd round\n"));
@@ -282,15 +287,19 @@ int ariaCore(const int        mode,
       if (i < nb_round) ariaDiffusionLayer(state);
 
       if (mode == DECRYPT) {
-        ek--;
+        ek_d--;
       } else {
-        ek++;
+        ek_e++;
       }
     }
     DBG(fprintf(stdout, "Last round: %d\n", i));
 
     /* Last XORing the state and the round_key ek */
-    ariaXOR(state, round_key->ek[ek], state);
+    if (mode == DECRYPT) {
+      ariaXOR(state, round_key->ek[ek_d], state);
+    } else {
+      ariaXOR(state, round_key->ek[ek_e], state);
+    }
     DBG(fprintf(stdout, "results:\n"));
     DBG(printBuffer(state, CHUNK_16_OCTETS));
     /* write result in working_output_buffer*/
