@@ -32,8 +32,8 @@ u8* lCircleRotation(const u8* a, const unsigned int length) {
   high_bytes <<= length;
   tmp_high_bytes >>= ((sizeof(u64) * 8) - length);
 
-  low_bytes ^= tmp_high_bytes;
-  high_bytes ^= tmp_low_bytes;
+  low_bytes |= tmp_high_bytes;
+  high_bytes |= tmp_low_bytes;
 
   /* reconvert 2 array of u64 into one array of 16 * u8 */
   u64ToU8Array(output, &low_bytes, &high_bytes);
@@ -62,8 +62,8 @@ u8* rCircleRotation(const u8* a, const unsigned int length) {
   high_bytes >>= length;
   tmp_high_bytes <<= ((sizeof(u64) * 8) - length);
 
-  low_bytes ^= tmp_high_bytes;
-  high_bytes ^= tmp_low_bytes;
+  low_bytes |= tmp_high_bytes;
+  high_bytes |= tmp_low_bytes;
 
   /* reconvert 2 array of u64 into one array of 16 * u8 */
   u64ToU8Array(output, &low_bytes, &high_bytes);
@@ -181,6 +181,7 @@ int ariaRoundKeyGeneration(const ariaKey_t* master_key,
   /* ! Warning index 0 to 16 but in Aria paper it's 1 to 17  */
   ariaXOR(round_key->expansion_key[W0],
           rCircleRotation(round_key->expansion_key[W1], 19), round_key->ek[0]);
+
   ariaXOR(round_key->expansion_key[W1],
           rCircleRotation(round_key->expansion_key[W2], 19), round_key->ek[1]);
   ariaXOR(round_key->expansion_key[W2],
@@ -205,6 +206,7 @@ int ariaRoundKeyGeneration(const ariaKey_t* master_key,
           lCircleRotation(round_key->expansion_key[W0], 61), round_key->ek[11]);
   ariaXOR(round_key->expansion_key[W0],
           lCircleRotation(round_key->expansion_key[W1], 31), round_key->ek[12]);
+
   if (master_key->size >= 128) {
     ariaXOR(round_key->expansion_key[W1],
             lCircleRotation(round_key->expansion_key[W2], 31),
@@ -232,6 +234,7 @@ int ariaCore(const int        mode,
   char         nb_round = 0;
   int          result = 0;
   int          i;
+  int          ek;
   u8           state[CHUNK_16_OCTETS];
   round_key_t* round_key = NULL;
 
@@ -254,12 +257,18 @@ int ariaCore(const int        mode,
   if (round_key != NULL) {
     ariaRoundKeyGeneration(master_key, round_key);
 
+    if (mode == DECRYPT) {
+      ek = nb_round;
+    } else {
+      ek = 0;
+    }
+
     /* loop for all rounds */
     /* start at 1 to be egal with Aria specification description in PDF file */
     for (i = 1; i <= nb_round; i++) {
       DBG(fprintf(stdout, "Current round: %d\n", i));
       /* XORing the state input and the round_key ek */
-      ariaXOR(state, round_key->ek[i - 1], state);
+      ariaXOR(state, round_key->ek[ek], state);
 
       if (i % 2 != 0) { /* ..substition layer type 1 */
         DBG(fprintf(stdout, "Odd round\n"));
@@ -271,14 +280,22 @@ int ariaCore(const int        mode,
 
       /* ..diffusion_layer */
       if (i < nb_round) ariaDiffusionLayer(state);
+
+      if (mode == DECRYPT) {
+        ek--;
+      } else {
+        ek++;
+      }
     }
-    DBG(fprintf(stdout, "Last round: %d\n", i++));
+    DBG(fprintf(stdout, "Last round: %d\n", i));
 
     /* Last XORing the state and the round_key ek */
-    ariaXOR(state, round_key->ek[i - 1], state);
-
+    ariaXOR(state, round_key->ek[ek], state);
+    DBG(fprintf(stdout, "results:\n"));
+    DBG(printBuffer(state, CHUNK_16_OCTETS));
     /* write result in working_output_buffer*/
     memcpy(output_buffer, state, CHUNK_16_OCTETS);
+
   } else
     result = -1;
 

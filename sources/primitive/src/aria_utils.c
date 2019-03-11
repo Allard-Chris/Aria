@@ -47,11 +47,13 @@ void printBuffer(u8* buffer, unsigned int length) {
 
 /* convert array of 16 * u8 into 2 u64 array */
 void u8ArrayToU64(const u8* input, u64* low_bytes, u64* high_bytes) {
-  for (unsigned int i = CHUNK_16_OCTETS - 1; i >= (CHUNK_16_OCTETS / 2); i--) {
+  for (int i = 0; i < (CHUNK_16_OCTETS / 2); i++) {
+    *low_bytes <<= 8;
+    *low_bytes += (u8)input[i];
+  }
+  for (int i = (CHUNK_16_OCTETS / 2); i < CHUNK_16_OCTETS; i++) {
     *high_bytes <<= 8;
     *high_bytes += (u8)input[i];
-    *low_bytes <<= 8;
-    *low_bytes += (u8)input[i - (CHUNK_16_OCTETS / 2)];
   }
 }
 
@@ -59,10 +61,12 @@ void u8ArrayToU64(const u8* input, u64* low_bytes, u64* high_bytes) {
 void u64ToU8Array(u8* output, const u64* low_bytes, const u64* high_bytes) {
   u64 tmp_low_bytes = *low_bytes;
   u64 tmp_high_bytes = *high_bytes;
-  for (unsigned int i = 0; i < (CHUNK_16_OCTETS / 2); i++) {
+  for (int i = ((CHUNK_16_OCTETS / 2) - 1); i >= 0; i--) {
     output[i] = (u8)tmp_low_bytes;
     tmp_low_bytes >>= 8;
-    output[i + (CHUNK_16_OCTETS / 2)] = (u8)tmp_high_bytes;
+  }
+  for (int i = (CHUNK_16_OCTETS - 1); i >= (CHUNK_16_OCTETS / 2); i--) {
+    output[i] = (u8)tmp_high_bytes;
     tmp_high_bytes >>= 8;
   }
 }
