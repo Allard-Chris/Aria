@@ -19,9 +19,11 @@ Aria prototype functions for libreSSL integration
 #include <stdlib.h>
 #include <string.h>
 
-/*
- * Needed for libreSSL integration
- */
+struct aria_key_st {
+	unsigned int rd_key[4 *(AES_MAXNR + 1)];
+	int rounds;
+};
+typedef struct aria_key_st ARIA_KEY;
 
 /* Function for encryption */
 void ARIA_encrypt(const unsigned char *in, unsigned char *out, const ARIA_KEY *key);
