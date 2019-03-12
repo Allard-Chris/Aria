@@ -245,12 +245,12 @@ noinst_HEADERS += aes/aes_locl.h
 # aria
 libcrypto_la_SOURCES += aria/aria_core.c
 libcrypto_la_SOURCES += aria/aria_utils.c
-noinst_HEADERS += aes/aria_const.h
-noinst_HEADERS += aes/aria_core.h
-noinst_HEADERS += aes/aria_debug.h
-noinst_HEADERS += aes/aria_test.h
-noinst_HEADERS += aes/aria_type.h
-noinst_HEADERS += aes/aria_utils.h
+noinst_HEADERS += aria/aria_const.h
+noinst_HEADERS += aria/aria_core.h
+noinst_HEADERS += aria/aria_debug.h
+noinst_HEADERS += aria/aria_test.h
+noinst_HEADERS += aria/aria_type.h
+noinst_HEADERS += aria/aria_utils.h
 noinst_HEADERS += aria/aria_locl.h
 
 # asn1
