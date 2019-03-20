@@ -4,6 +4,7 @@ opensslincludedir=$(includedir)/openssl
 
 opensslinclude_HEADERS =
 opensslinclude_HEADERS += aes.h
+opensslinclude_HEADERS += aria.h
 opensslinclude_HEADERS += asn1.h
 opensslinclude_HEADERS += asn1t.h
 opensslinclude_HEADERS += bio.h
