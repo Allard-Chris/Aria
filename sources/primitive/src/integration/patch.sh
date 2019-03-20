@@ -26,7 +26,7 @@ cp ./crypto/aria/aria_locl.h $libressl_path/crypto/aria/aria_locl.h
 # Modifiyng makefiles and other files
 cp ./crypto/Makefile.am $libressl_path/crypto/Makefile.am
 cp ./crypto/objects/obj_dat.h $libressl_path/crypto/objects/obj_dat.h # no modifications for now
-cp ./crypto/CMakefile.txt $libressl_path/crypto/CMakefile.txt
+cp ./crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt
 cp ./crypto/Makefile.in $libressl_path/crypto/Makefile.in
 
 
