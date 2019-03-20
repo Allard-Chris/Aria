@@ -6,12 +6,12 @@ libressl_path="../../../libressl-2.9.0"
 
 #################################################
 ##### libressl/app/openssl
-cp ./app/openssl/openssl.c $libressl_path/app/openssl/openssl.c
-cp ./app/openssl/genrsa.c $libressl_path/app/openssl/genrsa.c
-cp ./app/openssl/gendsa.c $libressl_path/app/openssl/gendsa.c
-cp ./app/openssl/smime.c $libressl_path/app/openssl/smime.c
-cp ./app/openssl/pkcs12.c $libressl_path/app/openssl/pkcs12.c
-cp ./app/openssl/speed.c $libressl_path/app/openssl/speed.c
+cp ./apps/openssl/openssl.c $libressl_path/apps/openssl/openssl.c
+cp ./apps/openssl/genrsa.c $libressl_path/apps/openssl/genrsa.c
+cp ./apps/openssl/gendsa.c $libressl_path/apps/openssl/gendsa.c
+cp ./apps/openssl/smime.c $libressl_path/apps/openssl/smime.c
+cp ./apps/openssl/pkcs12.c $libressl_path/apps/openssl/pkcs12.c
+cp ./apps/openssl/speed.c $libressl_path/apps/openssl/speed.c
 
 
 #################################################
