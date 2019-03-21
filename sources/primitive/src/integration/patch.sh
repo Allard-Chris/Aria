@@ -28,7 +28,7 @@ cp ./crypto/Makefile.am $libressl_path/crypto/Makefile.am
 cp ./crypto/objects/obj_dat.h $libressl_path/crypto/objects/obj_dat.h # no modifications for now
 cp ./crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt
 cp ./crypto/Makefile.in $libressl_path/crypto/Makefile.in
-
+cp ./crypto/Makefile $libressl_path/crypto/Makefile
 
 #################################################
 ##### libressl/include/openssl
@@ -36,5 +36,5 @@ cp ./include/openssl/aria.h $libressl_path/include/openssl/aria.h
 
 # Modifiyng makefiles and other files
 cp ./include/openssl/Makefile.am $libressl_path/include/openssl/Makefile.am
-cp ./include/openssl/obj_mac.h $libressl_path/include/openssl/obj_mac.h
+cp ./include/openssl/obj_mac.h $libressl_path/include/openssl/obj_mac.h  # no modifications for now
 cp ./include/openssl/Makefile.in $libressl_path/include/openssl/Makefile.in
