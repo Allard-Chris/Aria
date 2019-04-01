@@ -459,7 +459,8 @@ am__objects_26 = aes/libcrypto_la-aes-elf-armv4.lo \
 	sha/libcrypto_la-sha256-elf-armv4.lo \
 	modes/libcrypto_la-ghash-elf-armv4.lo \
 	libcrypto_la-armv4cpuid.lo libcrypto_la-armcap.lo \
-	aes/libcrypto_la-aes_cbc.lo aria/libcrypto_la-aria_core.lo camellia/libcrypto_la-camellia.lo \
+	aes/libcrypto_la-aes_cbc.lo aria/libcrypto_la-aria_core.lo \
+	camellia/libcrypto_la-camellia.lo \
 	camellia/libcrypto_la-cmll_cbc.lo rc4/libcrypto_la-rc4_enc.lo \
 	rc4/libcrypto_la-rc4_skey.lo whrlpool/libcrypto_la-wp_block.lo
 #am__objects_27 = $(am__objects_26)
