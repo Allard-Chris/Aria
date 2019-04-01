@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # Important Path for patching
-libressl_path="../../../libressl-2.9.0"
+libressl_path=. #"../../../libressl-2.9.0"
 script_path="$( cd "$(dirname "$0")" ; pwd -P )"
 
 #################################################
