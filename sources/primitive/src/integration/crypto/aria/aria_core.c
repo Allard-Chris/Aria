@@ -24,6 +24,8 @@ Aria primitive
 #define ARIA_BLOCK_SIZE 16
 #define ARIA_MAX_ROUND 17
 
+#include <aria_locl.h>
+
 struct aria_key_st {
   u8 rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
   u8 w[4][ARIA_BLOCK_SIZE];
