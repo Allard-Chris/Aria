@@ -18,6 +18,7 @@ cp $script_path/apps/openssl/speed.c $libressl_path/apps/openssl/speed.c
 ##### libressl/crypto
 # Creating folder for aria primitive
 mkdir $libressl_path/crypto/aria
+mkdir $libressl_path/crypto/aria/.deps
 
 # Copy all aria files on crypto/aria
 cp $script_path/crypto/aria/aria_core.c $libressl_path/crypto/aria/aria_core.c
@@ -29,7 +30,8 @@ cp $script_path/crypto/objects/obj_dat.h $libressl_path/crypto/objects/obj_dat.h
 cp $script_path/crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt
 cp $script_path/crypto/Makefile.in $libressl_path/crypto/Makefile.in
 cp $script_path/crypto/Makefile $libressl_path/crypto/Makefile
-cp $script_path/crypto/.deps $libressl_path/crypto/.deps
+
+#cp $script_path/crypto/.deps/XXX $libressl_path/crypto/.deps/XXX
 
 #################################################
 ##### libressl/include/openssl
