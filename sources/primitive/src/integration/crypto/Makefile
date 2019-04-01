@@ -8307,9 +8307,10 @@ install-ps-am:
 
 installcheck-am:
 
-maintainer-clean: maintainer-clean-am
- 	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR)
+maintainer-clean: maintainer-clean-am \
+ 	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR) \
 	-rm -f Makefile
+
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
