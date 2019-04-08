@@ -281,7 +281,7 @@ am__libcrypto_la_SOURCES_DIST = aes/aes-elf-armv4.S \
 	bn/gf2m-elf-armv4.S bn/mont-elf-armv4.S sha/sha1-elf-armv4.S \
 	sha/sha512-elf-armv4.S sha/sha256-elf-armv4.S \
 	modes/ghash-elf-armv4.S armv4cpuid.S armcap.c aes/aes_cbc.c \
-	aria/aria.c aria/aria_cbc.c \
+	aria/aria.c \ #aria/aria_cbc.c \
 	camellia/camellia.c camellia/cmll_cbc.c rc4/rc4_enc.c \
 	rc4/rc4_skey.c whrlpool/wp_block.c aes/aes-elf-x86_64.S \
 	aes/bsaes-elf-x86_64.S aes/vpaes-elf-x86_64.S \
