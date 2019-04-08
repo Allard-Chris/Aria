@@ -201,7 +201,7 @@ if !HOST_ASM_ELF_X86_64
 if !HOST_ASM_MACOSX_X86_64
 libcrypto_la_SOURCES += aes/aes_cbc.c
 libcrypto_la_SOURCES += aes/aes_core.c
-libcrypto_la_SOURCES += aria/aria_cbc.c
+#libcrypto_la_SOURCES += aria/aria_cbc.c
 libcrypto_la_SOURCES += aria/aria_core.c
 libcrypto_la_SOURCES += camellia/camellia.c
 libcrypto_la_SOURCES += camellia/cmll_cbc.c
@@ -246,7 +246,7 @@ noinst_HEADERS += aes/aes_locl.h
 
 # aria
 libcrypto_la_SOURCES += aria/aria_core.c
-libcrypto_la_SOURCES += aria/aria_utils.c
+#libcrypto_la_SOURCES += aria/aria_utils.c
 #noinst_HEADERS += aria/aria_const.h
 #noinst_HEADERS += aria/aria_core.h
 #noinst_HEADERS += aria/aria_debug.h
