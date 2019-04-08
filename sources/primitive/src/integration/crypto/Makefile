@@ -452,6 +452,7 @@ am__libcrypto_la_SOURCES_DIST = aes/aes-elf-armv4.S \
 	x509v3/v3_prn.c x509v3/v3_purp.c x509v3/v3_skey.c \
 	x509v3/v3_sxnet.c x509v3/v3_utl.c x509v3/v3err.c
 am__objects_26 = aes/libcrypto_la-aes-elf-armv4.lo \
+	aria/libcrypto_la-aria_core.lo \ #aes/libcrypto_la-aes_cbc.lo 
 	bn/libcrypto_la-gf2m-elf-armv4.lo \
 	bn/libcrypto_la-mont-elf-armv4.lo \
 	sha/libcrypto_la-sha1-elf-armv4.lo \
@@ -459,7 +460,6 @@ am__objects_26 = aes/libcrypto_la-aes-elf-armv4.lo \
 	sha/libcrypto_la-sha256-elf-armv4.lo \
 	modes/libcrypto_la-ghash-elf-armv4.lo \
 	libcrypto_la-armv4cpuid.lo libcrypto_la-armcap.lo \
-	aria/libcrypto_la-aria_core.lo \ #aes/libcrypto_la-aes_cbc.lo 
 	camellia/libcrypto_la-camellia.lo \
 	camellia/libcrypto_la-cmll_cbc.lo rc4/libcrypto_la-rc4_enc.lo \
 	rc4/libcrypto_la-rc4_skey.lo whrlpool/libcrypto_la-wp_block.lo
