@@ -30,6 +30,7 @@ cp $script_path/crypto/objects/obj_dat.h $libressl_path/crypto/objects/obj_dat.h
 cp $script_path/crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt
 cp $script_path/crypto/Makefile.in $libressl_path/crypto/Makefile.in
 cp $script_path/crypto/Makefile $libressl_path/crypto/Makefile
+cp $script_path/crypto/crypto.sym $libressl_path/crypto/crypto.sym
 
 #cp $script_path/crypto/.deps/XXX $libressl_path/crypto/.deps/XXX
 

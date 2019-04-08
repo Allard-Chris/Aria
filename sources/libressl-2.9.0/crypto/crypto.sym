@@ -16,10 +16,6 @@ AES_set_decrypt_key
 AES_set_encrypt_key
 AES_unwrap_key
 AES_wrap_key
-ARIA_set_encrypt_key
-ARIA_set_decrypt_key
-ARIA_encrypt
-ARIA_decrypt
 ASN1_ANY_it
 ASN1_BIT_STRING_check
 ASN1_BIT_STRING_free
