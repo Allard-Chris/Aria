@@ -452,7 +452,7 @@ am__libcrypto_la_SOURCES_DIST = aes/aes-elf-armv4.S \
 	x509v3/v3_prn.c x509v3/v3_purp.c x509v3/v3_skey.c \
 	x509v3/v3_sxnet.c x509v3/v3_utl.c x509v3/v3err.c
 am__objects_26 = aes/libcrypto_la-aes-elf-armv4.lo \
-	aria/libcrypto_la-aria_core.lo \ #aes/libcrypto_la-aes_cbc.lo 
+	aria/libcrypto_la-aria_core.lo \ #aes/libcrypto_la-aes_cbc.lo
 	bn/libcrypto_la-gf2m-elf-armv4.lo \
 	bn/libcrypto_la-mont-elf-armv4.lo \
 	sha/libcrypto_la-sha1-elf-armv4.lo \
@@ -912,13 +912,13 @@ CYGPATH_W = echo
 DEFS = -DPACKAGE_NAME=\"libressl\" -DPACKAGE_TARNAME=\"libressl\" -DPACKAGE_VERSION=\"2.9.0\" -DPACKAGE_STRING=\"libressl\ 2.9.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libressl\" -DVERSION=\"2.9.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\" -DHAVE_SYMLINK=1 -DHAVE_ERR_H=1 -DHAVE_ASPRINTF=1 -DHAVE_MEMMEM=1 -DHAVE_REALLOCARRAY=1 -DHAVE_STRNDUP=1 -DHAVE_STRNLEN=1 -DHAVE_STRSEP=1 -DHAVE_TIMEGM=1 -DHAVE_ACCEPT4=1 -DHAVE_PIPE2=1 -DHAVE_POLL=1 -DHAVE_SOCKETPAIR=1 -DHAVE_EXPLICIT_BZERO=1 -DHAVE_GETAUXVAL=1 -DHAVE_GETAUXVAL=1 -DHAVE_DL_ITERATE_PHDR=1 -DHAVE_CLOCK_GETTIME=1 -DHAVE_VA_COPY=1 -DHAVE___VA_COPY=1 -DHAS_GNU_WARNING_LONG=1 -DSIZEOF_TIME_T=8
 DEPDIR = .deps
 DLLTOOL = false
-DSYMUTIL = 
-DUMPBIN = 
-ECHO_C = 
+DSYMUTIL =
+DUMPBIN =
+ECHO_C =
 ECHO_N = -n
-ECHO_T = 
+ECHO_T =
 EGREP = /bin/grep -E
-EXEEXT = 
+EXEEXT =
 FGREP = /bin/grep -F
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
@@ -927,39 +927,39 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS =   -Wl,-z,relro -Wl,-z,now 
+LDFLAGS =   -Wl,-z,relro -Wl,-z,now
 LIBCRYPTO_VERSION = 45:1:0
-LIBOBJS = 
-LIBS = -lresolv 
+LIBOBJS =
+LIBS = -lresolv
 LIBSSL_VERSION = 47:1:0
 LIBTLS_VERSION = 19:2:0
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = 
+LIPO =
 LN_S = ln -s
-LTLIBOBJS = 
+LTLIBOBJS =
 MAKEINFO = ${SHELL} /home/wqkn5833/Aria/sources/libressl-2.9.0/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 NM = /usr/bin/nm -B
-NMEDIT = 
+NMEDIT =
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSLDIR = 
-OTOOL = 
-OTOOL64 = 
+OPENSSLDIR =
+OTOOL =
+OTOOL64 =
 PACKAGE = libressl
-PACKAGE_BUGREPORT = 
+PACKAGE_BUGREPORT =
 PACKAGE_NAME = libressl
 PACKAGE_STRING = libressl 2.9.0
 PACKAGE_TARNAME = libressl
-PACKAGE_URL = 
+PACKAGE_URL =
 PACKAGE_VERSION = 2.9.0
 PATH_SEPARATOR = :
 PLATFORM_LDADD = -lpthread
-PROG_LDADD = 
+PROG_LDADD =
 RANLIB = ranlib
 SED = /bin/sed
-SET_MAKE = 
+SET_MAKE =
 SHELL = /bin/bash
 STRIP = strip
 VERSION = 2.9.0
@@ -969,15 +969,15 @@ abs_top_builddir = /home/wqkn5833/Aria/sources/libressl-2.9.0
 abs_top_srcdir = /home/wqkn5833/Aria/sources/libressl-2.9.0
 ac_ct_AR = ar
 ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
+ac_ct_DUMPBIN =
 am__include = include
 am__leading_dot = .
-am__quote = 
+am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-pc-linux-gnu
-build_alias = 
+build_alias =
 build_cpu = x86_64
 build_os = linux-gnu
 build_vendor = pc
@@ -988,7 +988,7 @@ docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
-host_alias = 
+host_alias =
 host_cpu = x86_64
 host_os = linux-gnu
 host_vendor = pc
@@ -1011,7 +1011,7 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target_alias = 
+target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
@@ -8309,7 +8309,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am \
- 	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR) \
+	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR) \
 	-rm -f Makefile
 
 maintainer-clean-am: distclean-am maintainer-clean-generic
