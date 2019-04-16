@@ -35,7 +35,7 @@ patch=$patch"\n"$(diff -u --new-file $script_path/crypto/aria/aria_locl.h $libre
 # Modifiyng makefiles and other files
 patch=$patch"\n"$(diff -u $script_path/crypto/Makefile.am $libressl_path/crypto/Makefile.am)
 patch=$patch"\n"$(diff -u $script_path/crypto/objects/obj_dat.h $libressl_path/crypto/objects/obj_dat.h) # no modifications for now
-patch=$patch"\n"$(diff -u $script_path/crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt)
+patch=$patch"\n"$(diff -u --new-file $script_path/crypto/CMakeLists.txt $libressl_path/crypto/CMakefile.txt)
 patch=$patch"\n"$(diff -u $script_path/crypto/Makefile.in $libressl_path/crypto/Makefile.in)
 patch=$patch"\n"$(diff -u $script_path/crypto/crypto.sym $libressl_path/crypto/crypto.sym)
 
@@ -44,10 +44,10 @@ patch=$patch"\n"$(diff -u $script_path/crypto/crypto.sym $libressl_path/crypto/c
 
 #################################################
 ##### libressl/include/openssl
-patch=$patch"\n"$(diff -u $script_path/include/openssl/aria.h $libressl_path/include/openssl/aria.h)
+patch=$patch"\n"$(diff -u --new-file $script_path/include/openssl/aria.h $libressl_path/include/openssl/aria.h)
 
 # Modifiyng makefiles and other files
-patch=$patch"\n"$(diff -u $script_path/include/openssl/Makefile.am $libressl_path/include/openssl/Makefile.am)
+#patch=$patch"\n"$(diff -u $script_path/include/openssl/Makefile.am $libressl_path/include/openssl/Makefile.am)
 patch=$patch"\n"$(diff -u $script_path/include/openssl/obj_mac.h $libressl_path/include/openssl/obj_mac.h)  # no modifications for now
 patch=$patch"\n"$(diff -u $script_path/include/openssl/Makefile.in $libressl_path/include/openssl/Makefile.in)
 
