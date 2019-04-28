@@ -1,6 +1,6 @@
-diff -Naur ./libressl-2.9.0/apps/openssl/gendsa.c ./libressl-2.9.0-aria/apps/openssl/gendsa.c
---- ./libressl-2.9.0/apps/openssl/gendsa.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/gendsa.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/gendsa.c libressl-2.9.0-aria/apps/openssl/gendsa.c
+--- libressl-2.9.0/apps/openssl/gendsa.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/gendsa.c	2019-04-16 09:27:07.661299000 +0200
 @@ -126,6 +126,14 @@
  		else if (strcmp(*argv, "-aes256") == 0)
  			enc = EVP_aes_256_cbc();
@@ -27,9 +27,9 @@ diff -Naur ./libressl-2.9.0/apps/openssl/gendsa.c ./libressl-2.9.0-aria/apps/ope
  #ifndef OPENSSL_NO_CAMELLIA
  		BIO_printf(bio_err, " -camellia128, -camellia192, -camellia256\n");
  		BIO_printf(bio_err, "                 encrypt PEM output with cbc camellia\n");
-diff -Naur ./libressl-2.9.0/apps/openssl/genrsa.c ./libressl-2.9.0-aria/apps/openssl/genrsa.c
---- ./libressl-2.9.0/apps/openssl/genrsa.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/genrsa.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/genrsa.c libressl-2.9.0-aria/apps/openssl/genrsa.c
+--- libressl-2.9.0/apps/openssl/genrsa.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/genrsa.c	2019-04-16 09:27:07.661299000 +0200
 @@ -147,6 +147,14 @@
  		else if (strcmp(*argv, "-aes256") == 0)
  			enc = EVP_aes_256_cbc();
@@ -56,9 +56,9 @@ diff -Naur ./libressl-2.9.0/apps/openssl/genrsa.c ./libressl-2.9.0-aria/apps/ope
  #ifndef OPENSSL_NO_CAMELLIA
  		BIO_printf(bio_err, " -camellia128, -camellia192, -camellia256\n");
  		BIO_printf(bio_err, "                 encrypt PEM output with cbc camellia\n");
-diff -Naur ./libressl-2.9.0/apps/openssl/openssl.c ./libressl-2.9.0-aria/apps/openssl/openssl.c
---- ./libressl-2.9.0/apps/openssl/openssl.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/openssl.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/openssl.c libressl-2.9.0-aria/apps/openssl/openssl.c
+--- libressl-2.9.0/apps/openssl/openssl.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/openssl.c	2019-04-16 09:27:07.661299000 +0200
 @@ -259,6 +259,14 @@
  	{ FUNC_TYPE_CIPHER, "aes-256-cbc", enc_main },
  	{ FUNC_TYPE_CIPHER, "aes-256-ecb", enc_main },
@@ -74,9 +74,9 @@ diff -Naur ./libressl-2.9.0/apps/openssl/openssl.c ./libressl-2.9.0-aria/apps/op
  #ifndef OPENSSL_NO_BF
  	{ FUNC_TYPE_CIPHER, "bf", enc_main },
  	{ FUNC_TYPE_CIPHER, "bf-cbc", enc_main },
-diff -Naur ./libressl-2.9.0/apps/openssl/pkcs12.c ./libressl-2.9.0-aria/apps/openssl/pkcs12.c
---- ./libressl-2.9.0/apps/openssl/pkcs12.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/pkcs12.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/pkcs12.c libressl-2.9.0-aria/apps/openssl/pkcs12.c
+--- libressl-2.9.0/apps/openssl/pkcs12.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/pkcs12.c	2019-04-16 09:27:07.661299000 +0200
 @@ -181,6 +181,14 @@
  			else if (!strcmp(*args, "-aes256"))
  				enc = EVP_aes_256_cbc();
@@ -103,9 +103,9 @@ diff -Naur ./libressl-2.9.0/apps/openssl/pkcs12.c ./libressl-2.9.0-aria/apps/ope
  #ifndef OPENSSL_NO_CAMELLIA
  		BIO_printf(bio_err, "-camellia128, -camellia192, -camellia256\n");
  		BIO_printf(bio_err, "              encrypt PEM output with cbc camellia\n");
-diff -Naur ./libressl-2.9.0/apps/openssl/smime.c ./libressl-2.9.0-aria/apps/openssl/smime.c
---- ./libressl-2.9.0/apps/openssl/smime.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/smime.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/smime.c libressl-2.9.0-aria/apps/openssl/smime.c
+--- libressl-2.9.0/apps/openssl/smime.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/smime.c	2019-04-16 09:27:07.661299000 +0200
 @@ -157,6 +157,14 @@
  		else if (!strcmp(*args, "-aes256"))
  			cipher = EVP_aes_256_cbc();
@@ -132,9 +132,9 @@ diff -Naur ./libressl-2.9.0/apps/openssl/smime.c ./libressl-2.9.0-aria/apps/open
  #ifndef OPENSSL_NO_CAMELLIA
  		BIO_printf(bio_err, "-camellia128, -camellia192, -camellia256\n");
  		BIO_printf(bio_err, "               encrypt PEM output with cbc camellia\n");
-diff -Naur ./libressl-2.9.0/apps/openssl/speed.c ./libressl-2.9.0-aria/apps/openssl/speed.c
---- ./libressl-2.9.0/apps/openssl/speed.c	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/apps/openssl/speed.c	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/apps/openssl/speed.c libressl-2.9.0-aria/apps/openssl/speed.c
+--- libressl-2.9.0/apps/openssl/speed.c	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/apps/openssl/speed.c	2019-04-16 09:27:07.661299000 +0200
 @@ -100,6 +100,9 @@
  #ifndef OPENSSL_NO_AES
  #include <openssl/aes.h>
@@ -318,9 +318,333 @@ diff -Naur ./libressl-2.9.0/apps/openssl/speed.c ./libressl-2.9.0-aria/apps/open
  #ifndef OPENSSL_NO_IDEA
  		printf("%s ", idea_options());
  #endif
-diff -Naur ./libressl-2.9.0/crypto/aria/aria_core.c ./libressl-2.9.0-aria/crypto/aria/aria_core.c
---- ./libressl-2.9.0/crypto/aria/aria_core.c	1970-01-01 01:00:00.000000000 +0100
-+++ ./libressl-2.9.0-aria/crypto/aria/aria_core.c	2019-04-16 09:27:07.665299000 +0200
+diff -Naur libressl-2.9.0/aria.patch libressl-2.9.0-aria/aria.patch
+--- libressl-2.9.0/aria.patch	2019-04-28 14:45:41.991993904 +0200
++++ libressl-2.9.0-aria/aria.patch	1970-01-01 01:00:00.000000000 +0100
+@@ -1,320 +0,0 @@
+-diff -Naur libressl-2.9.0/apps/openssl/gendsa.c libressl-2.9.0-aria/apps/openssl/gendsa.c
+---- libressl-2.9.0/apps/openssl/gendsa.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/gendsa.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -126,6 +126,14 @@
+- 		else if (strcmp(*argv, "-aes256") == 0)
+- 			enc = EVP_aes_256_cbc();
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		else if (strcmp(*argv, "-aria128") == 0)
+-+			enc = EVP_aria_128_cbc();
+-+		else if (strcmp(*argv, "-aria192") == 0)
+-+			enc = EVP_aria_192_cbc();
+-+		else if (strcmp(*argv, "-aria256") == 0)
+-+			enc = EVP_aria_256_cbc();
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		else if (strcmp(*argv, "-camellia128") == 0)
+- 			enc = EVP_camellia_128_cbc();
+-@@ -157,6 +165,10 @@
+- 		BIO_printf(bio_err, " -aes128, -aes192, -aes256\n");
+- 		BIO_printf(bio_err, "                 encrypt PEM output with cbc aes\n");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		BIO_printf(bio_err, " -aria128, -aria192, -aria256\n");
+-+		BIO_printf(bio_err, "                 encrypt PEM output with cbc aria\n");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		BIO_printf(bio_err, " -camellia128, -camellia192, -camellia256\n");
+- 		BIO_printf(bio_err, "                 encrypt PEM output with cbc camellia\n");
+-diff -Naur libressl-2.9.0/apps/openssl/genrsa.c libressl-2.9.0-aria/apps/openssl/genrsa.c
+---- libressl-2.9.0/apps/openssl/genrsa.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/genrsa.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -147,6 +147,14 @@
+- 		else if (strcmp(*argv, "-aes256") == 0)
+- 			enc = EVP_aes_256_cbc();
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		else if (strcmp(*argv, "-aria128") == 0)
+-+			enc = EVP_aria_128_cbc();
+-+		else if (strcmp(*argv, "-aria192") == 0)
+-+			enc = EVP_aria_192_cbc();
+-+		else if (strcmp(*argv, "-aria256") == 0)
+-+			enc = EVP_aria_256_cbc();
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		else if (strcmp(*argv, "-camellia128") == 0)
+- 			enc = EVP_camellia_128_cbc();
+-@@ -178,6 +186,10 @@
+- 		BIO_printf(bio_err, " -aes128, -aes192, -aes256\n");
+- 		BIO_printf(bio_err, "                 encrypt PEM output with cbc aes\n");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		BIO_printf(bio_err, " -aria128, -aria192, -aria256\n");
+-+		BIO_printf(bio_err, "                 encrypt PEM output with cbc aria\n");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		BIO_printf(bio_err, " -camellia128, -camellia192, -camellia256\n");
+- 		BIO_printf(bio_err, "                 encrypt PEM output with cbc camellia\n");
+-diff -Naur libressl-2.9.0/apps/openssl/openssl.c libressl-2.9.0-aria/apps/openssl/openssl.c
+---- libressl-2.9.0/apps/openssl/openssl.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/openssl.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -259,6 +259,14 @@
+- 	{ FUNC_TYPE_CIPHER, "aes-256-cbc", enc_main },
+- 	{ FUNC_TYPE_CIPHER, "aes-256-ecb", enc_main },
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+	{ FUNC_TYPE_CIPHER, "aria-128-cbc", enc_main },
+-+	{ FUNC_TYPE_CIPHER, "aria-128-ecb", enc_main },
+-+	{ FUNC_TYPE_CIPHER, "aria-192-cbc", enc_main },
+-+	{ FUNC_TYPE_CIPHER, "aria-192-ecb", enc_main },
+-+	{ FUNC_TYPE_CIPHER, "aria-256-cbc", enc_main },
+-+	{ FUNC_TYPE_CIPHER, "aria-256-ecb", enc_main },
+-+#endif
+- #ifndef OPENSSL_NO_BF
+- 	{ FUNC_TYPE_CIPHER, "bf", enc_main },
+- 	{ FUNC_TYPE_CIPHER, "bf-cbc", enc_main },
+-diff -Naur libressl-2.9.0/apps/openssl/pkcs12.c libressl-2.9.0-aria/apps/openssl/pkcs12.c
+---- libressl-2.9.0/apps/openssl/pkcs12.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/pkcs12.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -181,6 +181,14 @@
+- 			else if (!strcmp(*args, "-aes256"))
+- 				enc = EVP_aes_256_cbc();
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+			else if (!strcmp(*args, "-aria128"))
+-+				enc = EVP_aria_128_cbc();
+-+			else if (!strcmp(*args, "-aria192"))
+-+				enc = EVP_aria_192_cbc();
+-+			else if (!strcmp(*args, "-aria256"))
+-+				enc = EVP_aria_256_cbc();
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 			else if (!strcmp(*args, "-camellia128"))
+- 				enc = EVP_camellia_128_cbc();
+-@@ -325,6 +333,10 @@
+- 		BIO_printf(bio_err, "-aes128, -aes192, -aes256\n");
+- 		BIO_printf(bio_err, "              encrypt PEM output with cbc aes\n");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		BIO_printf(bio_err, "-aria128, -aria192, -aria256\n");
+-+		BIO_printf(bio_err, "              encrypt PEM output with cbc aria\n");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		BIO_printf(bio_err, "-camellia128, -camellia192, -camellia256\n");
+- 		BIO_printf(bio_err, "              encrypt PEM output with cbc camellia\n");
+-diff -Naur libressl-2.9.0/apps/openssl/smime.c libressl-2.9.0-aria/apps/openssl/smime.c
+---- libressl-2.9.0/apps/openssl/smime.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/smime.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -157,6 +157,14 @@
+- 		else if (!strcmp(*args, "-aes256"))
+- 			cipher = EVP_aes_256_cbc();
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		else if (!strcmp(*args, "-aria128"))
+-+			cipher = EVP_aria_128_cbc();
+-+		else if (!strcmp(*args, "-aria192"))
+-+			cipher = EVP_aria_192_cbc();
+-+		else if (!strcmp(*args, "-aria256"))
+-+			cipher = EVP_aria_256_cbc();
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		else if (!strcmp(*args, "-camellia128"))
+- 			cipher = EVP_camellia_128_cbc();
+-@@ -363,6 +371,10 @@
+- 		BIO_printf(bio_err, "-aes128, -aes192, -aes256\n");
+- 		BIO_printf(bio_err, "               encrypt PEM output with cbc aes\n");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		BIO_printf(bio_err, "-aria128, -aria192, -aria256\n");
+-+		BIO_printf(bio_err, "               encrypt PEM output with cbc aria\n");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		BIO_printf(bio_err, "-camellia128, -camellia192, -camellia256\n");
+- 		BIO_printf(bio_err, "               encrypt PEM output with cbc camellia\n");
+-diff -Naur libressl-2.9.0/apps/openssl/speed.c libressl-2.9.0-aria/apps/openssl/speed.c
+---- libressl-2.9.0/apps/openssl/speed.c	2019-04-28 13:51:04.705449379 +0200
+-+++ libressl-2.9.0-aria/apps/openssl/speed.c	2019-04-16 09:27:07.661299000 +0200
+-@@ -100,6 +100,9 @@
+- #ifndef OPENSSL_NO_AES
+- #include <openssl/aes.h>
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+#include <openssl/aria.h>
+-+#endif
+- #ifndef OPENSSL_NO_BF
+- #include <openssl/blowfish.h>
+- #endif
+-@@ -174,6 +177,7 @@
+- 	"rc4", "des cbc", "des ede3", "idea cbc", "seed cbc",
+- 	"rc2 cbc", "rc5-32/12 cbc", "blowfish cbc", "cast cbc",
+- 	"aes-128 cbc", "aes-192 cbc", "aes-256 cbc",
+-+	"aria-128 cbc", "aria-192-cbc", "aria-256 cbc",
+- 	"camellia-128 cbc", "camellia-192 cbc", "camellia-256 cbc",
+- 	"evp", "sha256", "sha512", "whirlpool",
+- 	"aes-128 ige", "aes-192 ige", "aes-256 ige", "ghash",
+-@@ -285,6 +289,17 @@
+- 		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
+- 	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+	static const unsigned char key24[24] =
+-+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+-+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+-+	0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34};
+-+	static const unsigned char key32[32] =
+-+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+-+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+-+		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
+-+	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 	static const unsigned char ckey24[24] =
+- 	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+-@@ -314,6 +329,9 @@
+- #ifndef OPENSSL_NO_AES
+- 	AES_KEY aes_ks1, aes_ks2, aes_ks3;
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+	ARIA_KEY aria_ks1, aria_ks2, aria_ks3;
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 	CAMELLIA_KEY camellia_ks1, camellia_ks2, camellia_ks3;
+- #endif
+-@@ -349,6 +367,9 @@
+- #define D_AES_128_GCM	29
+- #define D_AES_256_GCM	30
+- #define D_CHACHA20_POLY1305	31
+-+#define D_CBC_128_ARIA	32
+-+#define D_CBC_192_ARIA	33
+-+#define D_CBC_256_ARIA	34
+- 	double d = 0.0;
+- 	long c[ALGOR_NUM][SIZE_NUM];
+- #define	R_DSA_512	0
+-@@ -639,6 +660,15 @@
+- 			doit[D_IGE_256_AES] = 1;
+- 		else
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		if (strcmp(*argv, "aria-128-cbc") == 0)
+-+			doit[D_CBC_128_ARIA] = 1;
+-+		else if (strcmp(*argv, "aria-192-cbc") == 0)
+-+			doit[D_CBC_192_ARIA] = 1;
+-+		else if (strcmp(*argv, "aria-256-cbc") == 0)
+-+			doit[D_CBC_256_ARIA] = 1;
+-+		else
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		if (strcmp(*argv, "camellia-128-cbc") == 0)
+- 			doit[D_CBC_128_CML] = 1;
+-@@ -720,6 +750,13 @@
+- 			doit[D_AES_256_GCM]=1;
+- 		else
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		if (strcmp(*argv, "aria") == 0) {
+-+			doit[D_CBC_128_ARIA] = 1;
+-+			doit[D_CBC_192_ARIA] = 1;
+-+			doit[D_CBC_256_ARIA] = 1;
+-+		} else
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 		if (strcmp(*argv, "camellia") == 0) {
+- 			doit[D_CBC_128_CML] = 1;
+-@@ -867,6 +904,9 @@
+- 			BIO_printf(bio_err, "aes-128-ige aes-192-ige aes-256-ige\n");
+- 			BIO_printf(bio_err, "aes-128-gcm aes-256-gcm ");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+			BIO_printf(bio_err, "aria-128-cbc aria-192-cbc aria-256-cbc ");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 			BIO_printf(bio_err, "\n");
+- 			BIO_printf(bio_err, "camellia-128-cbc camellia-192-cbc camellia-256-cbc ");
+-@@ -901,6 +941,9 @@
+- #ifndef OPENSSL_NO_AES
+- 			BIO_printf(bio_err, "aes      ");
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+			BIO_printf(bio_err, "aria      ");
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 			BIO_printf(bio_err, "camellia ");
+- #endif
+-@@ -911,7 +954,8 @@
+- #if !defined(OPENSSL_NO_IDEA) || !defined(OPENSSL_NO_SEED) || \
+-     !defined(OPENSSL_NO_RC2) || !defined(OPENSSL_NO_DES) || \
+-     !defined(OPENSSL_NO_RSA) || !defined(OPENSSL_NO_BF) || \
+--    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA)
+-+    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA) \
+-+    !defined(OPENSSL_NO_ARIA)
+- 			BIO_printf(bio_err, "\n");
+- #endif
+- 
+-@@ -978,6 +1022,11 @@
+- 	AES_set_encrypt_key(key24, 192, &aes_ks2);
+- 	AES_set_encrypt_key(key32, 256, &aes_ks3);
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+	ARIA_set_encrypt_key(key16, 128, &aria_ks1);
+-+	ARIA_set_encrypt_key(key24, 192, &aria_ks2);
+-+	ARIA_set_encrypt_key(key32, 256, &aria_ks3);
+-+#endif
+- #ifndef OPENSSL_NO_CAMELLIA
+- 	Camellia_set_key(key16, 128, &camellia_ks1);
+- 	Camellia_set_key(ckey24, 192, &camellia_ks2);
+-@@ -1283,6 +1332,44 @@
+- 		EVP_AEAD_CTX_cleanup(&ctx);
+- 	}
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+	if (doit[D_CBC_128_ARIA]) {
+-+		for (j = 0; j < SIZE_NUM; j++) {
+-+			print_message(names[D_CBC_128_ARIA], c[D_CBC_128_ARIA][j], lengths[j]);
+-+			Time_F(START);
+-+			for (count = 0, run = 1; COND(c[D_CBC_128_ARIA][j]); count++)
+-+				ARIA_cbc_encrypt(buf, buf,
+-+				    (unsigned long) lengths[j], &aria_ks1,
+-+				    iv, ARIA_ENCRYPT);
+-+			d = Time_F(STOP);
+-+			print_result(D_CBC_128_ARIA, j, count, d);
+-+		}
+-+	}
+-+	if (doit[D_CBC_192_ARIA]) {
+-+		for (j = 0; j < SIZE_NUM; j++) {
+-+			print_message(names[D_CBC_192_ARIA], c[D_CBC_192_ARIA][j], lengths[j]);
+-+			Time_F(START);
+-+			for (count = 0, run = 1; COND(c[D_CBC_192_ARIA][j]); count++)
+-+				ARIA_cbc_encrypt(buf, buf,
+-+				    (unsigned long) lengths[j], &aria_ks2,
+-+				    iv, ARIA_ENCRYPT);
+-+			d = Time_F(STOP);
+-+			print_result(D_CBC_192_ARIA, j, count, d);
+-+		}
+-+	}
+-+	if (doit[D_CBC_256_ARIA]) {
+-+		for (j = 0; j < SIZE_NUM; j++) {
+-+			print_message(names[D_CBC_256_ARIA], c[D_CBC_256_ARIA][j], lengths[j]);
+-+			Time_F(START);
+-+			for (count = 0, run = 1; COND(c[D_CBC_256_ARIA][j]); count++)
+-+				ARIA_cbc_encrypt(buf, buf,
+-+				    (unsigned long) lengths[j], &aria_ks3,
+-+				    iv, ARIA_ENCRYPT);
+-+			d = Time_F(STOP);
+-+			print_result(D_CBC_256_ARIA, j, count, d);
+-+		}
+-+	}
+-+#endif
+- #if !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
+- 	if (doit[D_CHACHA20_POLY1305]) {
+- 		const EVP_AEAD *aead = EVP_aead_chacha20_poly1305();
+-@@ -1786,6 +1873,9 @@
+- #ifndef OPENSSL_NO_AES
+- 		printf("%s ", AES_options());
+- #endif
+-+#ifndef OPENSSL_NO_ARIA
+-+		printf("%s ", ARIA_options());
+-+#endif
+- #ifndef OPENSSL_NO_IDEA
+- 		printf("%s ", idea_options());
+- #endif
+diff -Naur libressl-2.9.0/crypto/aria/aria_core.c libressl-2.9.0-aria/crypto/aria/aria_core.c
+--- libressl-2.9.0/crypto/aria/aria_core.c	1970-01-01 01:00:00.000000000 +0100
++++ libressl-2.9.0-aria/crypto/aria/aria_core.c	2019-04-16 09:27:07.665299000 +0200
 @@ -0,0 +1,46 @@
 +/*********************************************
 +Author  : Chris Allard, Corentin Aulagnier
@@ -368,9 +692,9 @@ diff -Naur ./libressl-2.9.0/crypto/aria/aria_core.c ./libressl-2.9.0-aria/crypto
 +                  const ARIA_KEY *key);
 +
 +#endif /* !HEADER_ARIA_H */
-diff -Naur ./libressl-2.9.0/crypto/aria/aria_locl.h ./libressl-2.9.0-aria/crypto/aria/aria_locl.h
---- ./libressl-2.9.0/crypto/aria/aria_locl.h	1970-01-01 01:00:00.000000000 +0100
-+++ ./libressl-2.9.0-aria/crypto/aria/aria_locl.h	2019-04-16 09:27:07.665299000 +0200
+diff -Naur libressl-2.9.0/crypto/aria/aria_locl.h libressl-2.9.0-aria/crypto/aria/aria_locl.h
+--- libressl-2.9.0/crypto/aria/aria_locl.h	1970-01-01 01:00:00.000000000 +0100
++++ libressl-2.9.0-aria/crypto/aria/aria_locl.h	2019-04-16 09:27:07.665299000 +0200
 @@ -0,0 +1,27 @@
 +/*********************************************
 +Author  : Chris Allard, Corentin Aulagnier
@@ -399,9 +723,9 @@ diff -Naur ./libressl-2.9.0/crypto/aria/aria_locl.h ./libressl-2.9.0-aria/crypto
 +typedef unsigned char u8;
 +
 +#endif /* !HEADER_ARIA_LOCL_H */
-diff -Naur ./libressl-2.9.0/crypto/CMakeLists.txt ./libressl-2.9.0-aria/crypto/CMakeLists.txt
---- ./libressl-2.9.0/crypto/CMakeLists.txt	2018-12-15 16:18:52.000000000 +0100
-+++ ./libressl-2.9.0-aria/crypto/CMakeLists.txt	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/crypto/CMakeLists.txt libressl-2.9.0-aria/crypto/CMakeLists.txt
+--- libressl-2.9.0/crypto/CMakeLists.txt	2018-12-15 16:18:52.000000000 +0100
++++ libressl-2.9.0-aria/crypto/CMakeLists.txt	2019-04-16 09:27:07.661299000 +0200
 @@ -114,6 +114,8 @@
  		${CRYPTO_SRC}
  		aes/aes_cbc.c
@@ -419,9 +743,9 @@ diff -Naur ./libressl-2.9.0/crypto/CMakeLists.txt ./libressl-2.9.0-aria/crypto/C
  	asn1/a_bitstr.c
  	asn1/a_bool.c
  	asn1/a_d2i_fp.c
-diff -Naur ./libressl-2.9.0/crypto/crypto.sym ./libressl-2.9.0-aria/crypto/crypto.sym
---- ./libressl-2.9.0/crypto/crypto.sym	2018-12-15 18:11:05.000000000 +0100
-+++ ./libressl-2.9.0-aria/crypto/crypto.sym	2019-04-16 09:27:07.665299000 +0200
+diff -Naur libressl-2.9.0/crypto/crypto.sym libressl-2.9.0-aria/crypto/crypto.sym
+--- libressl-2.9.0/crypto/crypto.sym	2018-12-15 18:11:05.000000000 +0100
++++ libressl-2.9.0-aria/crypto/crypto.sym	2019-04-16 09:27:07.665299000 +0200
 @@ -16,6 +16,10 @@
  AES_set_encrypt_key
  AES_unwrap_key
@@ -433,9 +757,9 @@ diff -Naur ./libressl-2.9.0/crypto/crypto.sym ./libressl-2.9.0-aria/crypto/crypt
  ASN1_ANY_it
  ASN1_BIT_STRING_check
  ASN1_BIT_STRING_free
-diff -Naur ./libressl-2.9.0/crypto/Makefile ./libressl-2.9.0-aria/crypto/Makefile
---- ./libressl-2.9.0/crypto/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ ./libressl-2.9.0-aria/crypto/Makefile	2019-04-16 09:27:07.669299000 +0200
+diff -Naur libressl-2.9.0/crypto/Makefile libressl-2.9.0-aria/crypto/Makefile
+--- libressl-2.9.0/crypto/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ libressl-2.9.0-aria/crypto/Makefile	2019-04-16 09:27:07.669299000 +0200
 @@ -0,0 +1,8391 @@
 +# Makefile.in generated by automake 1.15.1 from Makefile.am.
 +# crypto/Makefile.  Generated from Makefile.in by configure.
@@ -8828,9 +9152,9 @@ diff -Naur ./libressl-2.9.0/crypto/Makefile ./libressl-2.9.0-aria/crypto/Makefil
 +# Tell versions [3.59,3.63) of GNU make to not export all variables.
 +# Otherwise a system limit (for SysV at least) may be exceeded.
 +.NOEXPORT:
-diff -Naur ./libressl-2.9.0/crypto/Makefile.am ./libressl-2.9.0-aria/crypto/Makefile.am
---- ./libressl-2.9.0/crypto/Makefile.am	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/crypto/Makefile.am	2019-04-16 09:27:07.661299000 +0200
+diff -Naur libressl-2.9.0/crypto/Makefile.am libressl-2.9.0-aria/crypto/Makefile.am
+--- libressl-2.9.0/crypto/Makefile.am	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/crypto/Makefile.am	2019-04-16 09:27:07.661299000 +0200
 @@ -201,6 +201,8 @@
  if !HOST_ASM_MACOSX_X86_64
  libcrypto_la_SOURCES += aes/aes_cbc.c
@@ -8867,9 +9191,9 @@ diff -Naur ./libressl-2.9.0/crypto/Makefile.am ./libressl-2.9.0-aria/crypto/Make
  libcrypto_la_SOURCES += evp/e_bf.c
  libcrypto_la_SOURCES += evp/e_camellia.c
  libcrypto_la_SOURCES += evp/e_cast.c
-diff -Naur ./libressl-2.9.0/crypto/Makefile.in ./libressl-2.9.0-aria/crypto/Makefile.in
---- ./libressl-2.9.0/crypto/Makefile.in	2019-04-28 13:51:04.709449379 +0200
-+++ ./libressl-2.9.0-aria/crypto/Makefile.in	2019-04-16 09:27:07.669299000 +0200
+diff -Naur libressl-2.9.0/crypto/Makefile.in libressl-2.9.0-aria/crypto/Makefile.in
+--- libressl-2.9.0/crypto/Makefile.in	2019-04-28 13:51:04.709449379 +0200
++++ libressl-2.9.0-aria/crypto/Makefile.in	2019-04-16 09:27:07.669299000 +0200
 @@ -150,6 +150,8 @@
  @HOST_ASM_MACOSX_X86_64_TRUE@am__append_37 = $(ASM_X86_64_MACOSX)
  @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@am__append_38 = aes/aes_cbc.c \
@@ -9062,9 +9386,9 @@ diff -Naur ./libressl-2.9.0/crypto/Makefile.in ./libressl-2.9.0-aria/crypto/Make
  	-rm -f Makefile
  maintainer-clean-am: distclean-am maintainer-clean-generic
  
-diff -Naur ./libressl-2.9.0/include/openssl/aria.h ./libressl-2.9.0-aria/include/openssl/aria.h
---- ./libressl-2.9.0/include/openssl/aria.h	1970-01-01 01:00:00.000000000 +0100
-+++ ./libressl-2.9.0-aria/include/openssl/aria.h	2019-04-16 09:27:07.669299000 +0200
+diff -Naur libressl-2.9.0/include/openssl/aria.h libressl-2.9.0-aria/include/openssl/aria.h
+--- libressl-2.9.0/include/openssl/aria.h	1970-01-01 01:00:00.000000000 +0100
++++ libressl-2.9.0-aria/include/openssl/aria.h	2019-04-16 09:27:07.669299000 +0200
 @@ -0,0 +1,44 @@
 +/*********************************************
 +Author  : Chris Allard, Corentin Aulagnier
@@ -9110,9 +9434,9 @@ diff -Naur ./libressl-2.9.0/include/openssl/aria.h ./libressl-2.9.0-aria/include
 +                  const ARIA_KEY *key);
 +
 +#endif /* !HEADER_ARIA_H */
-diff -Naur ./libressl-2.9.0/include/openssl/Makefile.am ./libressl-2.9.0-aria/include/openssl/Makefile.am
---- ./libressl-2.9.0/include/openssl/Makefile.am	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/include/openssl/Makefile.am	2019-04-16 09:27:07.669299000 +0200
+diff -Naur libressl-2.9.0/include/openssl/Makefile.am libressl-2.9.0-aria/include/openssl/Makefile.am
+--- libressl-2.9.0/include/openssl/Makefile.am	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/include/openssl/Makefile.am	2019-04-16 09:27:07.669299000 +0200
 @@ -4,6 +4,7 @@
  
  opensslinclude_HEADERS =
@@ -9121,9 +9445,9 @@ diff -Naur ./libressl-2.9.0/include/openssl/Makefile.am ./libressl-2.9.0-aria/in
  opensslinclude_HEADERS += asn1.h
  opensslinclude_HEADERS += asn1t.h
  opensslinclude_HEADERS += bio.h
-diff -Naur ./libressl-2.9.0/include/openssl/Makefile.in ./libressl-2.9.0-aria/include/openssl/Makefile.in
---- ./libressl-2.9.0/include/openssl/Makefile.in	2019-04-28 13:51:04.705449379 +0200
-+++ ./libressl-2.9.0-aria/include/openssl/Makefile.in	2019-04-16 09:27:07.669299000 +0200
+diff -Naur libressl-2.9.0/include/openssl/Makefile.in libressl-2.9.0-aria/include/openssl/Makefile.in
+--- libressl-2.9.0/include/openssl/Makefile.in	2019-04-28 13:51:04.705449379 +0200
++++ libressl-2.9.0-aria/include/openssl/Makefile.in	2019-04-16 09:27:07.669299000 +0200
 @@ -111,11 +111,11 @@
  AM_V_GEN = $(am__v_GEN_@AM_V@)
  am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
