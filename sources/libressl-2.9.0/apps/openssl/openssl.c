@@ -259,14 +259,6 @@ FUNCTION functions[] = {
 	{ FUNC_TYPE_CIPHER, "aes-256-cbc", enc_main },
 	{ FUNC_TYPE_CIPHER, "aes-256-ecb", enc_main },
 #endif
-#ifndef OPENSSL_NO_ARIA
-	{ FUNC_TYPE_CIPHER, "aria-128-cbc", enc_main },
-	{ FUNC_TYPE_CIPHER, "aria-128-ecb", enc_main },
-	{ FUNC_TYPE_CIPHER, "aria-192-cbc", enc_main },
-	{ FUNC_TYPE_CIPHER, "aria-192-ecb", enc_main },
-	{ FUNC_TYPE_CIPHER, "aria-256-cbc", enc_main },
-	{ FUNC_TYPE_CIPHER, "aria-256-ecb", enc_main },
-#endif
 #ifndef OPENSSL_NO_BF
 	{ FUNC_TYPE_CIPHER, "bf", enc_main },
 	{ FUNC_TYPE_CIPHER, "bf-cbc", enc_main },

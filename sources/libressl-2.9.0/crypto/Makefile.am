@@ -201,8 +201,6 @@ if !HOST_ASM_ELF_X86_64
 if !HOST_ASM_MACOSX_X86_64
 libcrypto_la_SOURCES += aes/aes_cbc.c
 libcrypto_la_SOURCES += aes/aes_core.c
-libcrypto_la_SOURCES += aria/aria_cbc.c
-libcrypto_la_SOURCES += aria/aria_core.c
 libcrypto_la_SOURCES += camellia/camellia.c
 libcrypto_la_SOURCES += camellia/cmll_cbc.c
 libcrypto_la_SOURCES += rc4/rc4_enc.c
@@ -243,17 +241,6 @@ libcrypto_la_SOURCES += aes/aes_misc.c
 libcrypto_la_SOURCES += aes/aes_ofb.c
 libcrypto_la_SOURCES += aes/aes_wrap.c
 noinst_HEADERS += aes/aes_locl.h
-
-# aria
-libcrypto_la_SOURCES += aria/aria_core.c
-libcrypto_la_SOURCES += aria/aria_utils.c
-#noinst_HEADERS += aria/aria_const.h
-#noinst_HEADERS += aria/aria_core.h
-#noinst_HEADERS += aria/aria_debug.h
-#noinst_HEADERS += aria/aria_test.h
-#noinst_HEADERS += aria/aria_type.h
-#noinst_HEADERS += aria/aria_utils.h
-noinst_HEADERS += aria/aria_locl.h
 
 # asn1
 libcrypto_la_SOURCES += asn1/a_bitstr.c
@@ -597,8 +584,6 @@ libcrypto_la_SOURCES += evp/c_all.c
 libcrypto_la_SOURCES += evp/digest.c
 libcrypto_la_SOURCES += evp/e_aes.c
 libcrypto_la_SOURCES += evp/e_aes_cbc_hmac_sha1.c
-libcrypto_la_SOURCES += evp/e_aria.c
-libcrypto_la_SOURCES += evp/e_aria_cbc_hmac_sha1.c
 libcrypto_la_SOURCES += evp/e_bf.c
 libcrypto_la_SOURCES += evp/e_camellia.c
 libcrypto_la_SOURCES += evp/e_cast.c

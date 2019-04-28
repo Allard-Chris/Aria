@@ -157,14 +157,6 @@ smime_main(int argc, char **argv)
 		else if (!strcmp(*args, "-aes256"))
 			cipher = EVP_aes_256_cbc();
 #endif
-#ifndef OPENSSL_NO_ARIA
-		else if (!strcmp(*args, "-aria128"))
-			cipher = EVP_aria_128_cbc();
-		else if (!strcmp(*args, "-aria192"))
-			cipher = EVP_aria_192_cbc();
-		else if (!strcmp(*args, "-aria256"))
-			cipher = EVP_aria_256_cbc();
-#endif
 #ifndef OPENSSL_NO_CAMELLIA
 		else if (!strcmp(*args, "-camellia128"))
 			cipher = EVP_camellia_128_cbc();
@@ -370,10 +362,6 @@ smime_main(int argc, char **argv)
 #ifndef OPENSSL_NO_AES
 		BIO_printf(bio_err, "-aes128, -aes192, -aes256\n");
 		BIO_printf(bio_err, "               encrypt PEM output with cbc aes\n");
-#endif
-#ifndef OPENSSL_NO_ARIA
-		BIO_printf(bio_err, "-aria128, -aria192, -aria256\n");
-		BIO_printf(bio_err, "               encrypt PEM output with cbc aria\n");
 #endif
 #ifndef OPENSSL_NO_CAMELLIA
 		BIO_printf(bio_err, "-camellia128, -camellia192, -camellia256\n");
