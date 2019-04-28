@@ -150,6 +150,8 @@ host_triplet = @host@
 @HOST_ASM_MACOSX_X86_64_TRUE@am__append_37 = $(ASM_X86_64_MACOSX)
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@am__append_38 = aes/aes_cbc.c \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aes/aes_core.c \
+@HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aria/aroa_core.c \
+@HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aria/aria_cbc.c \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	camellia/camellia.c \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	camellia/cmll_cbc.c \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	rc4/rc4_enc.c \
@@ -260,7 +262,7 @@ libcompat_la_OBJECTS = $(am_libcompat_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libcompatnoopt_la_LIBADD =
 am__libcompatnoopt_la_SOURCES_DIST = compat/explicit_bzero_win.c \
 	compat/explicit_bzero.c
@@ -279,6 +281,7 @@ am__libcrypto_la_SOURCES_DIST = aes/aes-elf-armv4.S \
 	bn/gf2m-elf-armv4.S bn/mont-elf-armv4.S sha/sha1-elf-armv4.S \
 	sha/sha512-elf-armv4.S sha/sha256-elf-armv4.S \
 	modes/ghash-elf-armv4.S armv4cpuid.S armcap.c aes/aes_cbc.c \
+	aria/aria.c aria/aria_cbc.c \
 	camellia/camellia.c camellia/cmll_cbc.c rc4/rc4_enc.c \
 	rc4/rc4_skey.c whrlpool/wp_block.c aes/aes-elf-x86_64.S \
 	aes/bsaes-elf-x86_64.S aes/vpaes-elf-x86_64.S \
@@ -816,11 +819,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_@AM_V@)
 am__v_at_ = $(am__v_at_@AM_DEFAULT_V@)
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -834,7 +837,7 @@ LTCPPASCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
 AM_V_CPPAS = $(am__v_CPPAS_@AM_V@)
 am__v_CPPAS_ = $(am__v_CPPAS_@AM_DEFAULT_V@)
 am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
+am__v_CPPAS_1 =
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -844,7 +847,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_@AM_V@)
 am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -852,7 +855,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libcompat_la_SOURCES) $(libcompatnoopt_la_SOURCES) \
 	$(libcrypto_la_SOURCES) $(EXTRA_libcrypto_la_SOURCES)
 DIST_SOURCES = $(am__libcompat_la_SOURCES_DIST) \
@@ -1011,7 +1014,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_CFLAGS = 
+AM_CFLAGS =
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/include/compat \
 	-DLIBRESSL_INTERNAL -D__BEGIN_HIDDEN_DECLS= \
 	-D__END_HIDDEN_DECLS= -I$(top_srcdir)/crypto/asn1 \
@@ -1054,6 +1057,7 @@ noinst_HEADERS = compat/arc4random.h compat/arc4random_aix.h \
 	compat/arc4random_win.h compat/chacha_private.h \
 	constant_time_locl.h cryptlib.h md32_common.h o_time.h \
 	x86_arch.h aes/aes_locl.h asn1/asn1_locl.h asn1/charmap.h \
+	aria/aria_locl.h \
 	bf/bf_locl.h bf/bf_pi.h bn/bn_lcl.h bn/bn_prime.h \
 	camellia/camellia.h camellia/cmll_locl.h cast/cast_lcl.h \
 	cast/cast_s.h conf/conf_def.h curve25519/curve25519_internal.h \
@@ -1068,6 +1072,8 @@ noinst_HEADERS = compat/arc4random.h compat/arc4random_aix.h \
 	x509v3/ext_dat.h x509v3/pcy_int.h
 
 # aes
+
+# aria
 
 # asn1
 
@@ -1480,14 +1486,14 @@ compat/getentropy_solaris.lo: compat/$(am__dirstamp) \
 compat/getentropy_win.lo: compat/$(am__dirstamp) \
 	compat/$(DEPDIR)/$(am__dirstamp)
 
-libcompat.la: $(libcompat_la_OBJECTS) $(libcompat_la_DEPENDENCIES) $(EXTRA_libcompat_la_DEPENDENCIES) 
+libcompat.la: $(libcompat_la_OBJECTS) $(libcompat_la_DEPENDENCIES) $(EXTRA_libcompat_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(LINK)  $(libcompat_la_OBJECTS) $(libcompat_la_LIBADD) $(LIBS)
 compat/libcompatnoopt_la-explicit_bzero_win.lo:  \
 	compat/$(am__dirstamp) compat/$(DEPDIR)/$(am__dirstamp)
 compat/libcompatnoopt_la-explicit_bzero.lo: compat/$(am__dirstamp) \
 	compat/$(DEPDIR)/$(am__dirstamp)
 
-libcompatnoopt.la: $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_DEPENDENCIES) $(EXTRA_libcompatnoopt_la_DEPENDENCIES) 
+libcompatnoopt.la: $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_DEPENDENCIES) $(EXTRA_libcompatnoopt_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libcompatnoopt_la_LINK) $(am_libcompatnoopt_la_rpath) $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_LIBADD) $(LIBS)
 aes/$(am__dirstamp):
 	@$(MKDIR_P) aes
@@ -2959,13 +2965,15 @@ des/libcrypto_la-ncbc_enc.lo: des/$(am__dirstamp) \
 poly1305/libcrypto_la-poly1305-donna.lo: poly1305/$(am__dirstamp) \
 	poly1305/$(DEPDIR)/$(am__dirstamp)
 
-libcrypto.la: $(libcrypto_la_OBJECTS) $(libcrypto_la_DEPENDENCIES) $(EXTRA_libcrypto_la_DEPENDENCIES) 
+libcrypto.la: $(libcrypto_la_OBJECTS) $(libcrypto_la_DEPENDENCIES) $(EXTRA_libcrypto_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libcrypto_la_LINK) -rpath $(libdir) $(libcrypto_la_OBJECTS) $(libcrypto_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f aes/*.$(OBJEXT)
 	-rm -f aes/*.lo
+	-rm -f aria/*.lo$(OBJEXT)
+	-rm -f aria/*.lo
 	-rm -f asn1/*.$(OBJEXT)
 	-rm -f asn1/*.lo
 	-rm -f bf/*.$(OBJEXT)
@@ -4095,6 +4103,13 @@ aes/libcrypto_la-aes_cbc.lo: aes/aes_cbc.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o aes/libcrypto_la-aes_cbc.lo `test -f 'aes/aes_cbc.c' || echo '$(srcdir)/'`aes/aes_cbc.c
 
+aria/libcrypto_la-aria_cbc.lo: aria/aria_cbc.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT aria/libcrypto_la-aria_cbc.lo -MD -MP -MF aria/$(DEPDIR)/libcrypto_la-aria_cbc.Tpo -c -o aria/libcrypto_la-aria_cbc.lo `test -f 'aria/aria_cbc.c' || echo '$(srcdir)/'`aria/aria_cbc.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) aria/$(DEPDIR)/libcrypto_la-aria_cbc.Tpo aria/$(DEPDIR)/libcrypto_la-aria_cbc.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aria/aria_cbc.c' object='aria/libcrypto_la-aria_cbc.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o aria/libcrypto_la-aria_cbc.lo `test -f 'aria/aria_cbc.c' || echo '$(srcdir)/'`aria/aria_cbc.c
+
 camellia/libcrypto_la-camellia.lo: camellia/camellia.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT camellia/libcrypto_la-camellia.lo -MD -MP -MF camellia/$(DEPDIR)/libcrypto_la-camellia.Tpo -c -o camellia/libcrypto_la-camellia.lo `test -f 'camellia/camellia.c' || echo '$(srcdir)/'`camellia/camellia.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) camellia/$(DEPDIR)/libcrypto_la-camellia.Tpo camellia/$(DEPDIR)/libcrypto_la-camellia.Plo
@@ -4136,6 +4151,13 @@ aes/libcrypto_la-aes_core.lo: aes/aes_core.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aes/aes_core.c' object='aes/libcrypto_la-aes_core.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o aes/libcrypto_la-aes_core.lo `test -f 'aes/aes_core.c' || echo '$(srcdir)/'`aes/aes_core.c
+
+aria/libcrypto_la-aria_core.lo: aria/aria_core.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT aria/libcrypto_la-aria_core.lo -MD -MP -MF aria/$(DEPDIR)/libcrypto_la-aria_core.Tpo -c -o aria/libcrypto_la-aria_core.lo `test -f 'aria/aria_core.c' || echo '$(srcdir)/'`aria/aria_core.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) aria/$(DEPDIR)/libcrypto_la-aria_core.Tpo aria/$(DEPDIR)/libcrypto_la-aria_core.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aria/aria_core.c' object='aria/libcrypto_la-aria_core.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o aria/libcrypto_la-aria_core.lo `test -f 'aria/aria_core.c' || echo '$(srcdir)/'`aria/aria_core.c
 
 libcrypto_la-cpt_err.lo: cpt_err.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libcrypto_la-cpt_err.lo -MD -MP -MF $(DEPDIR)/libcrypto_la-cpt_err.Tpo -c -o libcrypto_la-cpt_err.lo `test -f 'cpt_err.c' || echo '$(srcdir)/'`cpt_err.c
@@ -7951,6 +7973,7 @@ mostlyclean-libtool:
 clean-libtool:
 	-rm -rf .libs _libs
 	-rm -rf aes/.libs aes/_libs
+	-rm -rf aria/.libs aria/_libs
 	-rm -rf asn1/.libs asn1/_libs
 	-rm -rf bf/.libs bf/_libs
 	-rm -rf bio/.libs bio/_libs
@@ -8123,6 +8146,8 @@ distclean-generic:
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
 	-rm -f aes/$(DEPDIR)/$(am__dirstamp)
 	-rm -f aes/$(am__dirstamp)
+	-rm -f aria/$(DEPDIR)/$(am__dirstamp)
+	-rm -f aria/$(am__dirstamp)
 	-rm -f asn1/$(DEPDIR)/$(am__dirstamp)
 	-rm -f asn1/$(am__dirstamp)
 	-rm -f bf/$(DEPDIR)/$(am__dirstamp)
@@ -8236,8 +8261,9 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	clean-noinstLTLIBRARIES mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR)
 	-rm -f Makefile
+
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
 
@@ -8282,7 +8308,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) aes/$(DEPDIR) aria/$(DEPDIR) asn1/$(DEPDIR) bf/$(DEPDIR) bio/$(DEPDIR) bn/$(DEPDIR) buffer/$(DEPDIR) camellia/$(DEPDIR) cast/$(DEPDIR) chacha/$(DEPDIR) cmac/$(DEPDIR) comp/$(DEPDIR) compat/$(DEPDIR) conf/$(DEPDIR) curve25519/$(DEPDIR) des/$(DEPDIR) dh/$(DEPDIR) dsa/$(DEPDIR) dso/$(DEPDIR) ec/$(DEPDIR) ecdh/$(DEPDIR) ecdsa/$(DEPDIR) engine/$(DEPDIR) err/$(DEPDIR) evp/$(DEPDIR) gost/$(DEPDIR) hkdf/$(DEPDIR) hmac/$(DEPDIR) idea/$(DEPDIR) lhash/$(DEPDIR) md4/$(DEPDIR) md5/$(DEPDIR) modes/$(DEPDIR) objects/$(DEPDIR) ocsp/$(DEPDIR) pem/$(DEPDIR) pkcs12/$(DEPDIR) pkcs7/$(DEPDIR) poly1305/$(DEPDIR) rand/$(DEPDIR) rc2/$(DEPDIR) rc4/$(DEPDIR) ripemd/$(DEPDIR) rsa/$(DEPDIR) sha/$(DEPDIR) sm3/$(DEPDIR) stack/$(DEPDIR) ts/$(DEPDIR) txt_db/$(DEPDIR) ui/$(DEPDIR) whrlpool/$(DEPDIR) x509/$(DEPDIR) x509v3/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

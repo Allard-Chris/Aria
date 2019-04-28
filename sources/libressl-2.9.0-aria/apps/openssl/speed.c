@@ -100,6 +100,9 @@
 #ifndef OPENSSL_NO_AES
 #include <openssl/aes.h>
 #endif
+#ifndef OPENSSL_NO_ARIA
+#include <openssl/aria.h>
+#endif
 #ifndef OPENSSL_NO_BF
 #include <openssl/blowfish.h>
 #endif
@@ -174,6 +177,7 @@ static const char *names[ALGOR_NUM] = {
 	"rc4", "des cbc", "des ede3", "idea cbc", "seed cbc",
 	"rc2 cbc", "rc5-32/12 cbc", "blowfish cbc", "cast cbc",
 	"aes-128 cbc", "aes-192 cbc", "aes-256 cbc",
+	"aria-128 cbc", "aria-192-cbc", "aria-256 cbc",
 	"camellia-128 cbc", "camellia-192 cbc", "camellia-256 cbc",
 	"evp", "sha256", "sha512", "whirlpool",
 	"aes-128 ige", "aes-192 ige", "aes-256 ige", "ghash",
@@ -285,6 +289,17 @@ speed_main(int argc, char **argv)
 		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
 	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
 #endif
+#ifndef OPENSSL_NO_ARIA
+	static const unsigned char key24[24] =
+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+	0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34};
+	static const unsigned char key32[32] =
+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
+	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
+#endif
 #ifndef OPENSSL_NO_CAMELLIA
 	static const unsigned char ckey24[24] =
 	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
@@ -313,6 +328,9 @@ speed_main(int argc, char **argv)
 #endif
 #ifndef OPENSSL_NO_AES
 	AES_KEY aes_ks1, aes_ks2, aes_ks3;
+#endif
+#ifndef OPENSSL_NO_ARIA
+	ARIA_KEY aria_ks1, aria_ks2, aria_ks3;
 #endif
 #ifndef OPENSSL_NO_CAMELLIA
 	CAMELLIA_KEY camellia_ks1, camellia_ks2, camellia_ks3;
@@ -349,6 +367,9 @@ speed_main(int argc, char **argv)
 #define D_AES_128_GCM	29
 #define D_AES_256_GCM	30
 #define D_CHACHA20_POLY1305	31
+#define D_CBC_128_ARIA	32
+#define D_CBC_192_ARIA	33
+#define D_CBC_256_ARIA	34
 	double d = 0.0;
 	long c[ALGOR_NUM][SIZE_NUM];
 #define	R_DSA_512	0
@@ -639,6 +660,15 @@ speed_main(int argc, char **argv)
 			doit[D_IGE_256_AES] = 1;
 		else
 #endif
+#ifndef OPENSSL_NO_ARIA
+		if (strcmp(*argv, "aria-128-cbc") == 0)
+			doit[D_CBC_128_ARIA] = 1;
+		else if (strcmp(*argv, "aria-192-cbc") == 0)
+			doit[D_CBC_192_ARIA] = 1;
+		else if (strcmp(*argv, "aria-256-cbc") == 0)
+			doit[D_CBC_256_ARIA] = 1;
+		else
+#endif
 #ifndef OPENSSL_NO_CAMELLIA
 		if (strcmp(*argv, "camellia-128-cbc") == 0)
 			doit[D_CBC_128_CML] = 1;
@@ -719,6 +749,13 @@ speed_main(int argc, char **argv)
 		else if (strcmp(*argv,"aes-256-gcm") == 0)
 			doit[D_AES_256_GCM]=1;
 		else
+#endif
+#ifndef OPENSSL_NO_ARIA
+		if (strcmp(*argv, "aria") == 0) {
+			doit[D_CBC_128_ARIA] = 1;
+			doit[D_CBC_192_ARIA] = 1;
+			doit[D_CBC_256_ARIA] = 1;
+		} else
 #endif
 #ifndef OPENSSL_NO_CAMELLIA
 		if (strcmp(*argv, "camellia") == 0) {
@@ -867,6 +904,9 @@ speed_main(int argc, char **argv)
 			BIO_printf(bio_err, "aes-128-ige aes-192-ige aes-256-ige\n");
 			BIO_printf(bio_err, "aes-128-gcm aes-256-gcm ");
 #endif
+#ifndef OPENSSL_NO_ARIA
+			BIO_printf(bio_err, "aria-128-cbc aria-192-cbc aria-256-cbc ");
+#endif
 #ifndef OPENSSL_NO_CAMELLIA
 			BIO_printf(bio_err, "\n");
 			BIO_printf(bio_err, "camellia-128-cbc camellia-192-cbc camellia-256-cbc ");
@@ -901,6 +941,9 @@ speed_main(int argc, char **argv)
 #ifndef OPENSSL_NO_AES
 			BIO_printf(bio_err, "aes      ");
 #endif
+#ifndef OPENSSL_NO_ARIA
+			BIO_printf(bio_err, "aria      ");
+#endif
 #ifndef OPENSSL_NO_CAMELLIA
 			BIO_printf(bio_err, "camellia ");
 #endif
@@ -911,7 +954,8 @@ speed_main(int argc, char **argv)
 #if !defined(OPENSSL_NO_IDEA) || !defined(OPENSSL_NO_SEED) || \
     !defined(OPENSSL_NO_RC2) || !defined(OPENSSL_NO_DES) || \
     !defined(OPENSSL_NO_RSA) || !defined(OPENSSL_NO_BF) || \
-    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA)
+    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA) \
+    !defined(OPENSSL_NO_ARIA)
 			BIO_printf(bio_err, "\n");
 #endif
 
@@ -977,6 +1021,11 @@ speed_main(int argc, char **argv)
 	AES_set_encrypt_key(key16, 128, &aes_ks1);
 	AES_set_encrypt_key(key24, 192, &aes_ks2);
 	AES_set_encrypt_key(key32, 256, &aes_ks3);
+#endif
+#ifndef OPENSSL_NO_ARIA
+	ARIA_set_encrypt_key(key16, 128, &aria_ks1);
+	ARIA_set_encrypt_key(key24, 192, &aria_ks2);
+	ARIA_set_encrypt_key(key32, 256, &aria_ks3);
 #endif
 #ifndef OPENSSL_NO_CAMELLIA
 	Camellia_set_key(key16, 128, &camellia_ks1);
@@ -1281,6 +1330,44 @@ speed_main(int argc, char **argv)
 			print_result(D_AES_256_GCM, j, count, d);
 		}
 		EVP_AEAD_CTX_cleanup(&ctx);
+	}
+#endif
+#ifndef OPENSSL_NO_ARIA
+	if (doit[D_CBC_128_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_128_ARIA], c[D_CBC_128_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_128_ARIA][j]); count++)
+				ARIA_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks1,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_128_ARIA, j, count, d);
+		}
+	}
+	if (doit[D_CBC_192_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_192_ARIA], c[D_CBC_192_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_192_ARIA][j]); count++)
+				ARIA_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks2,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_192_ARIA, j, count, d);
+		}
+	}
+	if (doit[D_CBC_256_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_256_ARIA], c[D_CBC_256_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_256_ARIA][j]); count++)
+				ARIA_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks3,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_256_ARIA, j, count, d);
+		}
 	}
 #endif
 #if !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
@@ -1785,6 +1872,9 @@ show_res:
 #endif
 #ifndef OPENSSL_NO_AES
 		printf("%s ", AES_options());
+#endif
+#ifndef OPENSSL_NO_ARIA
+		printf("%s ", ARIA_options());
 #endif
 #ifndef OPENSSL_NO_IDEA
 		printf("%s ", idea_options());
