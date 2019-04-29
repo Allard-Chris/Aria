@@ -1,0 +1,5 @@
+# On a ajouté notre primitive dans le liste obj_mac.h 
+# obj_dat.pl est le programme perl pour créer le nouveau obj_dat.h
+
+
+perl obj_dat.pl obj_mac.h > obj_dat.h

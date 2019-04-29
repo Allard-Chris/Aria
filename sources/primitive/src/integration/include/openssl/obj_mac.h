@@ -4238,3 +4238,6 @@
 #define LN_auth_null		"auth-null"
 #define NID_auth_null		966
 
+#define SN_aria_128_cbc		"ARIA-128-CBC"
+#define LN_aria_128_cbc		"aria-128-cbc"
+#define NID_aria_128_cbc	967
