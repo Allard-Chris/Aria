@@ -2762,6 +2762,13 @@
 #define LN_aes_256_xts		"aes-256-xts"
 #define NID_aes_256_xts		914
 
+#define SN_aria_128_cbc		"ARIA-128-CBC"
+#define LN_aria_128_cbc		"aria-128-cbc"
+#define SN_aria_192_cbc		"ARIA-128-CBC"
+#define LN_aria_192_cbc		"aria-128-cbc"
+#define SN_aria_256_cbc		"ARIA-128-CBC"
+#define LN_aria_256_cbc		"aria-128-cbc"
+
 #define SN_des_cfb1		"DES-CFB1"
 #define LN_des_cfb1		"des-cfb1"
 #define NID_des_cfb1		656
