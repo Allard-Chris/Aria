@@ -1,5 +1,7 @@
 /* ARIA subkey Structure */
-#include "openssl/aria.h"
+#include <openssl/evp.h>
+#include <openssl/err.h>
+#include <openssl/aria.h>
 #include "evp_locl.h"
 
 typedef struct {
