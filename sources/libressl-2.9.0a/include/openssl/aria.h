@@ -33,20 +33,4 @@ void Aria_cbc_encrypt(const unsigned char *in, unsigned char *out,
 	size_t length, const ARIA_KEY *key,
 	unsigned char *ivec, const int enc);
 
-void Aria_cfb_encrypt(const unsigned char *in, unsigned char *out,
-	size_t length, const ARIA_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
-
-void Aria_cfb1_encrypt(const unsigned char *in, unsigned char *out,
-	size_t length, const ARIA_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
-
-void Aria_cfb8_encrypt(const unsigned char *in, unsigned char *out,
-	size_t length, const ARIA_KEY *key,
-	unsigned char *ivec, int *num, const int enc);
-
-void Aria_ofb_encrypt(const unsigned char *in, unsigned char *out,
-	size_t length, const ARIA_KEY *key,
-	unsigned char *ivec, int *num);
-
 #endif /* !HEADER_Aria_H */

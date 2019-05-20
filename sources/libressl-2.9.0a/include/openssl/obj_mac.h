@@ -2764,11 +2764,22 @@
 
 #define SN_aria_128_cbc		"ARIA-128-CBC"
 #define LN_aria_128_cbc		"aria-128-cbc"
+#define SN_aria_128_ecb		"ARIA-128-ECB"
+#define LN_aria_128_ecb		"aria-128-ecb"
 #define SN_aria_192_cbc		"ARIA-128-CBC"
 #define LN_aria_192_cbc		"aria-128-cbc"
+#define SN_aria_192_ecb		"ARIA-128-ECB"
+#define LN_aria_192_ecb		"aria-128-ecb"
 #define SN_aria_256_cbc		"ARIA-128-CBC"
 #define LN_aria_256_cbc		"aria-128-cbc"
+#define SN_aria_256_ecb		"ARIA-128-ECB"
+#define LN_aria_256_ecb		"aria-128-ecb"
 #define NID_aria_128_cbc	970
+#define NID_aria_128_ecb	971
+#define NID_aria_192_cbc	972
+#define NID_aria_192_ecb	973
+#define NID_aria_256_cbc	974
+#define NID_aria_256_ecb	975
 
 #define SN_des_cfb1		"DES-CFB1"
 #define LN_des_cfb1		"des-cfb1"

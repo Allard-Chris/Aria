@@ -1,4 +1,5 @@
 /* ARIA subkey Structure */
+#include <openssl/opensslconf.h>
 #include <openssl/evp.h>
 #include <openssl/err.h>
 #include <openssl/aria.h>
@@ -11,15 +12,23 @@ typedef struct {
     ARIA_KEY ks;
 } EVP_ARIA_KEY;
 
-/* Attribute operation for Aria */
-#define data(ctx)	EVP_C_DATA(EVP_ARIA_KEY,ctx)
-
-IMPLEMENT_BLOCK_CIPHER(aria_128, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_128, 16, 16, 16, 128,
-    0, aria_init_key, NULL,
-    EVP_CIPHER_set_asn1_iv,
-    EVP_CIPHER_get_asn1_iv,
-    NULL)
+IMPLEMENT_BLOCK_CIPHER(
+    aria_128, /* cname */
+    ks, /* ksched */
+    Aria, /* cprefix */
+    EVP_ARIA_KEY, /* kstruct */
+    NID_aria_128, /* NID */
+    16, /* block_size */
+    16, /* key_len */
+    16, /* iv_len */
+    128, /* cbits */
+    0, /* flags */
+    aria_init_key, /* init_key */
+    NULL, /* cleanup */
+    EVP_CIPHER_set_asn1_iv, /* set_asn1 */
+    EVP_CIPHER_get_asn1_iv, /* get_asn1 */
+    NULL /* ctrl */
+)
 IMPLEMENT_BLOCK_CIPHER(aria_192, ks, Aria, EVP_ARIA_KEY,
     NID_aria_128, 16, 24, 16, 192,
     0, aria_init_key, NULL,
@@ -32,16 +41,6 @@ IMPLEMENT_BLOCK_CIPHER(aria_256, ks, Aria, EVP_ARIA_KEY,
     EVP_CIPHER_set_asn1_iv,
     EVP_CIPHER_get_asn1_iv,
     NULL)
-
-#define IMPLEMENT_ARIA_CFBR(ksize,cbits)	IMPLEMENT_CFBR(aria,Aria,EVP_ARIA_KEY,ks,ksize,cbits,16)
-
-IMPLEMENT_ARIA_CFBR(128, 1)
-IMPLEMENT_ARIA_CFBR(192, 1)
-IMPLEMENT_ARIA_CFBR(256, 1)
-
-IMPLEMENT_ARIA_CFBR(128, 8)
-IMPLEMENT_ARIA_CFBR(192, 8)
-IMPLEMENT_ARIA_CFBR(256, 8)
 
 /* The subkey for Aria is generated. */
 static int
