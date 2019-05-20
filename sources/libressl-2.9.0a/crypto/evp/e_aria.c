@@ -12,31 +12,132 @@
 static int aria_init_key(EVP_CIPHER_CTX *ctx, const unsigned char *key,
     const unsigned char *iv, int enc);
 
+
 typedef struct {
     ARIA_KEY ks;
 } EVP_ARIA_KEY;
 
-/* Attribute operation for Aria */
-#define data(ctx)	EVP_C_DATA(EVP_ARIA_KEY,ctx)
 
-IMPLEMENT_BLOCK_CIPHER(aria_128, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_128, 16, 16, 16, 128,
-    0, aria_init_key, NULL,
-    EVP_CIPHER_set_asn1_iv,
-    EVP_CIPHER_get_asn1_iv,
-    NULL)
-IMPLEMENT_BLOCK_CIPHER(aria_192, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_192, 16, 24, 16, 128,
-    0, aria_init_key, NULL,
-    EVP_CIPHER_set_asn1_iv,
-    EVP_CIPHER_get_asn1_iv,
-    NULL)
-IMPLEMENT_BLOCK_CIPHER(aria_256, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_256, 16, 32, 16, 128,
-    0, aria_init_key, NULL,
-    EVP_CIPHER_set_asn1_iv,
-    EVP_CIPHER_get_asn1_iv,
-    NULL)
+
+/* ARIA 128 CBC */
+
+static int aria_128_cbc_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_128_cbc = {
+	.nid = NID_aria_128_cbc,
+	.block_size = 16,
+    .key_len = 16,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_128_cbc_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_128_cbc(void) { return &aria_128_cbc; }
+
+/* ARIA 128 ECB */
+
+static int aria_128_ecb_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_128_ecb = {
+    .nid = NID_aria_128_ecb,
+	.block_size = 16,
+    .key_len = 16,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_128_ecb_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_128_ecb(void) { return &aria_128_ecb; }
+
+/* ARIA 192 CBC */
+
+static int aria_192_cbc_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_192_cbc = {
+	.nid = NID_aria_192_cbc,
+	.block_size = 16,
+    .key_len = 24,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_192_cbc_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_192_cbc(void) { return &aria_192_cbc; }
+
+/* ARIA 192 ECB */
+
+static int aria_192_ecb_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_192_ecb = {
+    .nid = NID_aria_192_ecb,
+	.block_size = 16,
+    .key_len = 24,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_192_ecb_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_192_ecb(void) { return &aria_192_ecb; }
+
+/* ARIA 256 CBC */
+
+static int aria_256_cbc_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_256_cbc = {
+	.nid = NID_aria_256_cbc,
+	.block_size = 16,
+    .key_len = 32,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_256_cbc_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_256_cbc(void) { return &aria_256_cbc; }
+
+/* ARIA 256 ECB */
+
+static int aria_256_ecb_cipher(EVP_CIPHER_CTX *ctx, unsigned char *out,
+    const unsigned char *in, size_t len){
+        return 0;
+}
+
+static const EVP_CIPHER aria_256_ecb = {
+    .nid = NID_aria_256_ecb,
+	.block_size = 16,
+    .key_len = 32,
+    .iv_len = 16,
+    .flags = EVP_CIPH_CBC_MODE,
+	.init = aria_init_key,
+	.do_cipher = aria_256_ecb_cipher,
+	.ctx_size = sizeof(EVP_ARIA_KEY)
+};
+
+const EVP_CIPHER *EVP_aria_256_ecb(void) { return &aria_256_ecb; }
 
 /* The subkey for Aria is generated. */
 static int
