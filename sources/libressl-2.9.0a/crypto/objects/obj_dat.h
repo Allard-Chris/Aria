@@ -2524,12 +2524,12 @@ static const ASN1_OBJECT nid_objs[NUM_NID]={
 {"SM3","sm3",NID_sm3,8,&(lvalues[6249]),0},
 {"RSA-SM3","sm3WithRSAEncryption",NID_sm3WithRSAEncryption,8,
 	&(lvalues[6257]),0},
-{"ARIA-128-ECB", "aria-128-ecb", NID_aria_128_ecb, 9, &so[6266]},
-{"ARIA-128-CBC", "aria-128-cbc", NID_aria_128_cbc, 9, &so[6275]},
-{"ARIA-192-ECB", "aria-192-ecb", NID_aria_192_ecb, 9, &so[6284]},
-{"ARIA-192-CBC", "aria-192-cbc", NID_aria_192_cbc, 9, &so[6293]},
-{"ARIA-256-ECB", "aria-256-ecb", NID_aria_256_ecb, 9, &so[6302]},
-{"ARIA-256-CBC", "aria-256-cbc", NID_aria_256_cbc, 9, &so[6311]},
+{"ARIA-128-ECB", "aria-128-ecb", NID_aria_128_ecb, 9, &(lvalues[6266])},
+{"ARIA-128-CBC", "aria-128-cbc", NID_aria_128_cbc, 9, &(lvalues[6275])},
+{"ARIA-192-ECB", "aria-192-ecb", NID_aria_192_ecb, 9, &(lvalues[6284])},
+{"ARIA-192-CBC", "aria-192-cbc", NID_aria_192_cbc, 9, &(lvalues[6293])},
+{"ARIA-256-ECB", "aria-256-ecb", NID_aria_256_ecb, 9, &(lvalues[6302])},
+{"ARIA-256-CBC", "aria-256-cbc", NID_aria_256_cbc, 9, &(lvalues[6311])},
 };
 
 static const unsigned int sn_objs[NUM_SN]={

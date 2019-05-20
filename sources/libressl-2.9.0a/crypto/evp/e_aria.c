@@ -146,7 +146,7 @@ aria_init_key(EVP_CIPHER_CTX *ctx, const unsigned char *key,
 {
 	int ret;
 
-	ret = ARIA_set_encrypt_key(key, ctx->key_len * 8, ctx->cipher_data);
+	ret = Aria_set_encrypt_key(key, ctx->key_len * 8, ctx->cipher_data);
 
 	if (ret < 0) {
 		EVPerror(EVP_R_ARIA_KEY_SETUP_FAILED);
