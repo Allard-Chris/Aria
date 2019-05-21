@@ -8,6 +8,8 @@ Aria primitive
 **********************************************/
 #include "openssl/aria.h"
 #include "aria_locl.h"
+#include <stdlib.h>
+#include <stdint.h>
 #include <openssl/opensslconf.h>
 
 /* convert array of 16 * u8 into 2 u64 array */
@@ -170,7 +172,7 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     /* w0 = KL so avoid double array, and copy direct to w0*/
     /* copy first 128bit of Master Key */
     for (size_t i = 0; i < ARIA_BLOCK_SIZE; i++) {
-        key->wk[0][i] = ((u8)userKey + i);
+        key->wk[0][i] = userKey + i;
         key->wk[1][i] = 0;
     }
 
@@ -291,5 +293,5 @@ void Aria_encrypt(const unsigned char *in, unsigned char *out,
 
 void Aria_decrypt(const unsigned char *in, unsigned char *out,
                   const ARIA_KEY *key){
-    ARIA_encrypt(in, out, key);
+    Aria_encrypt(in, out, key);
 }

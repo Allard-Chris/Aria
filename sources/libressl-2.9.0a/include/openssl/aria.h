@@ -23,9 +23,9 @@ Aria header
 #define ARIA_MAX_ROUND  17
 
 struct aria_key_st {
-    u8 rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
-    u8 ck[3][ARIA_BLOCK_SIZE];
-    u8 wk[4][ARIA_BLOCK_SIZE];
+    unsigned char rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
+    unsigned char ck[3][ARIA_BLOCK_SIZE];
+    unsigned char wk[4][ARIA_BLOCK_SIZE];
     int rounds;
 };
 typedef struct aria_key_st ARIA_KEY;
