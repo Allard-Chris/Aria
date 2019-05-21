@@ -246,7 +246,7 @@ noinst_HEADERS += aes/aes_locl.h
 #libcrypto_la_SOURCES += aria/aria_ecb.c
 #libcrypto_la_SOURCES += aria/aria_cbc.c
 libcrypto_la_SOURCES += aria/aria.c
-#noinst_HEADERS += aria/aria_local.h
+noinst_HEADERS += aria/aria_local.h
 
 # asn1
 libcrypto_la_SOURCES += asn1/a_bitstr.c
