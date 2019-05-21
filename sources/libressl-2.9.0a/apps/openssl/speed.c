@@ -1031,9 +1031,9 @@ speed_main(int argc, char **argv)
 	Camellia_set_key(ckey32, 256, &camellia_ks3);
 #endif
 #ifndef OPENSSL_NO_ARIA
-	Aria_set_key(key16, 128, &aria_ks1);
-	Aria_set_key(akey24, 192, &aria_ks2);
-	Aria_set_key(akey32, 256, &aria_ks3);
+	Aria_set_encrypt_key(key16, 128, &aria_ks1);
+	Aria_set_encrypt_key(akey24, 192, &aria_ks2);
+	Aria_set_encrypt_key(akey32, 256, &aria_ks3);
 #endif
 #ifndef OPENSSL_NO_IDEA
 	idea_set_encrypt_key(key16, &idea_ks);
@@ -1377,7 +1377,7 @@ speed_main(int argc, char **argv)
 			print_message(names[D_CBC_192_ARIA], c[D_CBC_192_ARIA][j], lengths[j]);
 			Time_F(START);
 			for (count = 0, run = 1; COND(c[D_CBC_192_ARIA][j]); count++)
-				CAria_cbc_encrypt(buf, buf,
+				Aria_cbc_encrypt(buf, buf,
 				    (unsigned long) lengths[j], &aria_ks2,
 				    iv, ARIA_ENCRYPT);
 			d = Time_F(STOP);
