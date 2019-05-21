@@ -243,8 +243,8 @@ libcrypto_la_SOURCES += aes/aes_wrap.c
 noinst_HEADERS += aes/aes_locl.h
 
 # aria
-#libcrypto_la_SOURCES += aria/aria_ecb.c
-#libcrypto_la_SOURCES += aria/aria_cbc.c
+libcrypto_la_SOURCES += aria/aria_ecb.c
+libcrypto_la_SOURCES += aria/aria_cbc.c
 libcrypto_la_SOURCES += aria/aria.c
 noinst_HEADERS += aria/aria_locl.h
 
