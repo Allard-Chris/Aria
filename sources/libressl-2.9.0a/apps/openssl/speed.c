@@ -100,6 +100,9 @@
 #ifndef OPENSSL_NO_AES
 #include <openssl/aes.h>
 #endif
+#ifndef OPENSSL_NO_ARIA
+#include <openssl/aria.h>
+#endif
 #ifndef OPENSSL_NO_BF
 #include <openssl/blowfish.h>
 #endif
@@ -161,7 +164,7 @@ pkey_print_message(const char *str, const char *str2,
 static void print_result(int alg, int run_no, int count, double time_used);
 static int do_multi(int multi);
 
-#define ALGOR_NUM	32
+#define ALGOR_NUM	35 /* Aria +3 */
 #define SIZE_NUM	5
 #define RSA_NUM		4
 #define DSA_NUM		3
@@ -177,7 +180,8 @@ static const char *names[ALGOR_NUM] = {
 	"camellia-128 cbc", "camellia-192 cbc", "camellia-256 cbc",
 	"evp", "sha256", "sha512", "whirlpool",
 	"aes-128 ige", "aes-192 ige", "aes-256 ige", "ghash",
-	"aes-128 gcm", "aes-256 gcm", "chacha20 poly1305",
+	"aes-128 gcm", "aes-256 gcm", "aria-128-cbc", "aria-192-cbc",
+    "aria-256-cbc", "chacha20 poly1305",
 };
 static double results[ALGOR_NUM][SIZE_NUM];
 static int lengths[SIZE_NUM] = {16, 64, 256, 1024, 8 * 1024};
@@ -296,6 +300,19 @@ speed_main(int argc, char **argv)
 		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
 	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
 #endif
+
+#ifndef OPENSSL_NO_ARIA
+	static const unsigned char key24[24] =
+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+	0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34};
+	static const unsigned char key32[32] =
+	{0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0,
+		0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12,
+		0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34,
+	0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x12, 0x34, 0x56};
+#endif
+
 #ifndef OPENSSL_NO_AES
 #define MAX_BLOCK_SIZE 128
 #else
@@ -316,6 +333,9 @@ speed_main(int argc, char **argv)
 #endif
 #ifndef OPENSSL_NO_CAMELLIA
 	CAMELLIA_KEY camellia_ks1, camellia_ks2, camellia_ks3;
+#endif
+#ifndef OPENSSL_NO_ARIA
+	ARIA_KEY aria_ks1, aria_ks2, aria_ks3;
 #endif
 #define	D_MD2		0
 #define	D_MD4		1
@@ -351,6 +371,9 @@ speed_main(int argc, char **argv)
 #define D_CHACHA20_POLY1305	31
 	double d = 0.0;
 	long c[ALGOR_NUM][SIZE_NUM];
+#define D_CBC_128_ARIA 32
+#define D_CBC_192_ARIA 33
+#define D_CBC_256_ARIA 34
 #define	R_DSA_512	0
 #define	R_DSA_1024	1
 #define	R_DSA_2048	2
@@ -648,6 +671,15 @@ speed_main(int argc, char **argv)
 			doit[D_CBC_256_CML] = 1;
 		else
 #endif
+#ifndef OPENSSL_NO_ARIA
+		if (strcmp(*argv, "aria-128-cbc") == 0)
+			doit[D_CBC_128_ARIA] = 1;
+		else if (strcmp(*argv, "aria-192-cbc") == 0)
+			doit[D_CBC_192_ARIA] = 1;
+		else if (strcmp(*argv, "aria-256-cbc") == 0)
+			doit[D_CBC_256_ARIA] = 1;
+		else
+#endif
 #ifndef RSA_NULL
 		if (strcmp(*argv, "openssl") == 0) {
 			RSA_set_default_method(RSA_PKCS1_SSLeay());
@@ -725,6 +757,13 @@ speed_main(int argc, char **argv)
 			doit[D_CBC_128_CML] = 1;
 			doit[D_CBC_192_CML] = 1;
 			doit[D_CBC_256_CML] = 1;
+		} else
+#endif
+#ifndef OPENSSL_NO_ARIA
+		if (strcmp(*argv, "aria") == 0) {
+			doit[D_CBC_128_ARIA] = 1;
+			doit[D_CBC_192_ARIA] = 1;
+			doit[D_CBC_256_ARIA] = 1;
 		} else
 #endif
 #if !defined(OPENSSL_NO_CHACHA) && !defined(OPENSSL_NO_POLY1305)
@@ -871,6 +910,10 @@ speed_main(int argc, char **argv)
 			BIO_printf(bio_err, "\n");
 			BIO_printf(bio_err, "camellia-128-cbc camellia-192-cbc camellia-256-cbc ");
 #endif
+#ifndef OPENSSL_NO_ARIA
+			BIO_printf(bio_err, "\n");
+			BIO_printf(bio_err, "aria-128-cbc aria-192-cbc aria-256-cbc ");
+#endif
 #ifndef OPENSSL_NO_RC4
 			BIO_printf(bio_err, "rc4");
 #endif
@@ -904,6 +947,9 @@ speed_main(int argc, char **argv)
 #ifndef OPENSSL_NO_CAMELLIA
 			BIO_printf(bio_err, "camellia ");
 #endif
+#ifndef OPENSSL_NO_ARIA
+			BIO_printf(bio_err, "aria ");
+#endif
 			BIO_printf(bio_err, "rsa      ");
 #ifndef OPENSSL_NO_BF
 			BIO_printf(bio_err, "blowfish");
@@ -911,7 +957,8 @@ speed_main(int argc, char **argv)
 #if !defined(OPENSSL_NO_IDEA) || !defined(OPENSSL_NO_SEED) || \
     !defined(OPENSSL_NO_RC2) || !defined(OPENSSL_NO_DES) || \
     !defined(OPENSSL_NO_RSA) || !defined(OPENSSL_NO_BF) || \
-    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA)
+    !defined(OPENSSL_NO_AES) || !defined(OPENSSL_NO_CAMELLIA) || \
+    !defined(OPENSSL_NO_ARIA)
 			BIO_printf(bio_err, "\n");
 #endif
 
@@ -982,6 +1029,11 @@ speed_main(int argc, char **argv)
 	Camellia_set_key(key16, 128, &camellia_ks1);
 	Camellia_set_key(ckey24, 192, &camellia_ks2);
 	Camellia_set_key(ckey32, 256, &camellia_ks3);
+#endif
+#ifndef OPENSSL_NO_ARIA
+	Aria_set_key(key16, 128, &aria_ks1);
+	Aria_set_key(key24, 192, &aria_ks2);
+	Aria_set_key(key32, 256, &aria_ks3);
 #endif
 #ifndef OPENSSL_NO_IDEA
 	idea_set_encrypt_key(key16, &idea_ks);
@@ -1305,6 +1357,44 @@ speed_main(int argc, char **argv)
 			print_result(D_CHACHA20_POLY1305, j, count, d);
 		}
 		EVP_AEAD_CTX_cleanup(&ctx);
+	}
+#endif
+#ifndef OPENSSL_NO_ARIA
+	if (doit[D_CBC_128_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_128_ARIA], c[D_CBC_128_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_128_ARIA][j]); count++)
+				Aria_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks1,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_128_ARIA, j, count, d);
+		}
+	}
+	if (doit[D_CBC_192_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_192_ARIA], c[D_CBC_192_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_192_ARIA][j]); count++)
+				CAria_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks2,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_192_ARIA, j, count, d);
+		}
+	}
+	if (doit[D_CBC_256_ARIA]) {
+		for (j = 0; j < SIZE_NUM; j++) {
+			print_message(names[D_CBC_256_ARIA], c[D_CBC_256_ARIA][j], lengths[j]);
+			Time_F(START);
+			for (count = 0, run = 1; COND(c[D_CBC_256_ARIA][j]); count++)
+				Aria_cbc_encrypt(buf, buf,
+				    (unsigned long) lengths[j], &aria_ks3,
+				    iv, ARIA_ENCRYPT);
+			d = Time_F(STOP);
+			print_result(D_CBC_256_ARIA, j, count, d);
+		}
 	}
 #endif
 #ifndef OPENSSL_NO_CAMELLIA

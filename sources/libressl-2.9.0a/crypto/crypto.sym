@@ -719,6 +719,11 @@ Camellia_ecb_encrypt
 Camellia_encrypt
 Camellia_ofb128_encrypt
 Camellia_set_key
+Aria_cbc_encrypt
+Aria_decrypt
+Aria_ecb_encrypt
+Aria_encrypt
+Aria_set_key
 ChaCha
 ChaCha_set_iv
 ChaCha_set_key
@@ -1529,6 +1534,12 @@ EVP_camellia_256_cfb128
 EVP_camellia_256_cfb8
 EVP_camellia_256_ecb
 EVP_camellia_256_ofb
+EVP_aria_128_cbc
+EVP_aria_192_cbc
+EVP_aria_256_cbc
+EVP_aria_128_ecb
+EVP_aria_192_ecb
+EVP_aria_256_ecb
 EVP_cast5_cbc
 EVP_cast5_cfb
 EVP_cast5_cfb64

@@ -5,7 +5,7 @@
 /* These will change with each release of LibreSSL-portable */
 #define LIBRESSL_VERSION_NUMBER 0x2090000fL
 /*                                    ^ Patch starts here   */
-#define LIBRESSL_VERSION_TEXT   "LibreSSL 2.9.0"
+#define LIBRESSL_VERSION_TEXT   "LibreSSL 2.9.0a"
 
 /* These will never change */
 #define OPENSSL_VERSION_NUMBER	0x20000000L
