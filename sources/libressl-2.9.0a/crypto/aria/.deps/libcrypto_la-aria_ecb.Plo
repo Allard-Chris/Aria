@@ -1,0 +1,14 @@
+aria/libcrypto_la-aria_ecb.lo: aria/aria_ecb.c /usr/include/stdc-predef.h \
+ ../include/openssl/aria.h ../include/openssl/opensslconf.h \
+ ../include/openssl/opensslfeatures.h \
+ /usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h
+
+/usr/include/stdc-predef.h:
+
+../include/openssl/aria.h:
+
+../include/openssl/opensslconf.h:
+
+../include/openssl/opensslfeatures.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h:

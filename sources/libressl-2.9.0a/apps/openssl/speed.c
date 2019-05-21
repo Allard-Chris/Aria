@@ -1031,9 +1031,9 @@ speed_main(int argc, char **argv)
 	Camellia_set_key(ckey32, 256, &camellia_ks3);
 #endif
 #ifndef OPENSSL_NO_ARIA
-	Aria_set_encrypt_key(key16, 128, &aria_ks1);
-	Aria_set_encrypt_key(akey24, 192, &aria_ks2);
-	Aria_set_encrypt_key(akey32, 256, &aria_ks3);
+	Aria_set_key(key16, 128, &aria_ks1);
+	Aria_set_key(akey24, 192, &aria_ks2);
+	Aria_set_key(akey32, 256, &aria_ks3);
 #endif
 #ifndef OPENSSL_NO_IDEA
 	idea_set_encrypt_key(key16, &idea_ks);
