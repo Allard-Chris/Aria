@@ -1,5 +1,4 @@
 #include <openssl/aria.h>
-#include "aria_locl.h"
 
 void
 Aria_ecb_encrypt(const unsigned char *in, unsigned char *out,

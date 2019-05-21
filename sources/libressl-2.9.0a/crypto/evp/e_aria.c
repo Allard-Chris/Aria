@@ -18,10 +18,58 @@ typedef struct {
 
 #define data(ctx)	EVP_C_DATA(EVP_ARIA_KEY,ctx)
 
-IMPLEMENT_BLOCK_CIPHER_BASIC(Aria, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_128, 16, 16, 16, 128,
-    0, Aria_init_key, NULL,
-    EVP_CIPHER_set_asn1_iv, EVP_CIPHER_get_asn1_iv, NULL)
+IMPLEMENT_BLOCK_CIPHER_BASIC(
+    aria_128, /* cname */
+    ks, /* ksched */
+    Aria, /* cprefix */
+    EVP_ARIA_KEY, /* kstruct */
+    NID_aria_128, /* nid */
+    16, /* block_size */
+    16, /* key_len */
+    16, /* iv_len */
+    128, /* cbits */
+    0, /* flags */
+    Aria_init_key, /* init_key */
+    NULL, /* cleanup */
+    EVP_CIPHER_set_asn1_iv, /* set_asn1 */
+    EVP_CIPHER_get_asn1_iv, /* get_asn1 */
+    NULL /* ctrl */)
+/* The subkey for Aria is generated. */
+
+IMPLEMENT_BLOCK_CIPHER_BASIC(
+    aria_192, /* cname */
+    ks, /* ksched */
+    Aria, /* cprefix */
+    EVP_ARIA_KEY, /* kstruct */
+    NID_aria_192, /* nid */
+    16, /* block_size */
+    24, /* key_len */
+    16, /* iv_len */
+    128, /* cbits */
+    0, /* flags */
+    Aria_init_key, /* init_key */
+    NULL, /* cleanup */
+    EVP_CIPHER_set_asn1_iv, /* set_asn1 */
+    EVP_CIPHER_get_asn1_iv, /* get_asn1 */
+    NULL /* ctrl */)
+/* The subkey for Aria is generated. */
+
+IMPLEMENT_BLOCK_CIPHER_BASIC(
+    aria_256, /* cname */
+    ks, /* ksched */
+    Aria, /* cprefix */
+    EVP_ARIA_KEY, /* kstruct */
+    NID_aria_256, /* nid */
+    16, /* block_size */
+    32, /* key_len */
+    16, /* iv_len */
+    128, /* cbits */
+    0, /* flags */
+    Aria_init_key, /* init_key */
+    NULL, /* cleanup */
+    EVP_CIPHER_set_asn1_iv, /* set_asn1 */
+    EVP_CIPHER_get_asn1_iv, /* get_asn1 */
+    NULL /* ctrl */)
 /* The subkey for Aria is generated. */
 
 static int
