@@ -18,8 +18,8 @@ typedef struct {
 
 #define data(ctx)	EVP_C_DATA(EVP_ARIA_KEY,ctx)
 
-IMPLEMENT_BLOCK_CIPHER(Aria, ks, Aria, EVP_ARIA_KEY,
-    NID_aria_128_cbc, 16, 16, 16, 128,
+IMPLEMENT_BLOCK_CIPHER_BASIC(Aria, ks, Aria, EVP_ARIA_KEY,
+    NID_aria_128, 16, 16, 16, 128,
     0, Aria_init_key, NULL,
     EVP_CIPHER_set_asn1_iv, EVP_CIPHER_get_asn1_iv, NULL)
 /* The subkey for Aria is generated. */
