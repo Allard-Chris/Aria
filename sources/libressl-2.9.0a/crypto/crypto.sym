@@ -723,7 +723,8 @@ Aria_cbc_encrypt
 Aria_decrypt
 Aria_ecb_encrypt
 Aria_encrypt
-Aria_set_key
+Aria_set_encrypt_key
+Aria_set_decrypt_key
 ChaCha
 ChaCha_set_iv
 ChaCha_set_key
