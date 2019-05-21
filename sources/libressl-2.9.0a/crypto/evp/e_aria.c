@@ -82,6 +82,7 @@ Aria_init_key(EVP_CIPHER_CTX *ctx, const unsigned char *key,
 
     if (ret < 0) {
         EVPerror(EVP_R_ARIA_KEY_SETUP_FAILED);
+        fprintf(stdout, "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         return 0;
     }
 
