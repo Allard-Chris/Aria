@@ -10,6 +10,7 @@ Aria primitive
 #include "aria_locl.h"
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include <openssl/opensslconf.h>
 
 /* convert array of 16 * u8 into 2 u64 array */
@@ -172,7 +173,7 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     /* w0 = KL so avoid double array, and copy direct to w0*/
     /* copy first 128bit of Master Key */
     for (size_t i = 0; i < ARIA_BLOCK_SIZE; i++) {
-        key->wk[0][i] = userKey + i;
+        key->wk[0][i] = *(userKey + i);
         key->wk[1][i] = 0;
     }
 
@@ -185,7 +186,7 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     } else if (bits == 192) {
         for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
             /* Take 64 bits for KR filled with 0*/
-            key->wk[1][i] = ((u8)userKey + (i+16));
+            key->wk[1][i] = *(userKey + (i+16));
         }
         key->rounds=15;
         memcpy(key->ck[CK1], C2, ARIA_BLOCK_SIZE);
@@ -194,7 +195,7 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     } else {
         for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
             /* Take 128 bits for KR */
-            key->wk[1][i+8] = ((u8)userKey + (i+24));
+            key->wk[1][i+8] = *(userKey + (i+24));
         }
         key->rounds=17;
         memcpy(key->ck[CK1], C3, ARIA_BLOCK_SIZE);
@@ -245,7 +246,7 @@ int Aria_set_decrypt_key(const unsigned char *userKey, const int bits,
     int status;
 
     /* first, start with an encryption schedule */
-    status = ARIA_set_encrypt_key(userKey, bits, key);
+    status = Aria_set_encrypt_key(userKey, bits, key);
     if (status < 0)
         return status;
 
@@ -268,7 +269,7 @@ void Aria_encrypt(const unsigned char *in, unsigned char *out,
     u8 state[ARIA_BLOCK_SIZE];
     size_t i;
     for (i = 0; i < ARIA_BLOCK_SIZE; i++) {
-        input[i] = (u8)in + i;
+        input[i] = *(in + i);
     }
 
     memcpy(state, input, ARIA_BLOCK_SIZE);
