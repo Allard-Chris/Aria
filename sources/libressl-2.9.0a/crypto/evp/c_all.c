@@ -189,8 +189,8 @@ OpenSSL_add_all_ciphers_internal(void)
 #endif
 
 #ifndef OPENSSL_NO_ARIA
-    EVP_add_cipher(EVP_aria_128_ecb()); /* Dictionnaire de codes (Electronic Code Book, ECB) */
-    EVP_add_cipher(EVP_aria_128_cbc()); /* Enchaînement des blocs (Cipher Block Chaining, CBC) */
+    EVP_add_cipher(EVP_aria_128_ecb());
+    EVP_add_cipher(EVP_aria_128_cbc());
 	EVP_add_cipher_alias(SN_aria_128_cbc, "ARIA128");
 	EVP_add_cipher_alias(SN_aria_128_cbc, "aria128");
     EVP_add_cipher(EVP_aria_192_ecb());
