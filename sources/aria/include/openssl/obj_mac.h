@@ -4242,30 +4242,30 @@
 
 #define SN_aria_128_ecb         "ARIA-128-ECB"
 #define LN_aria_128_ecb         "aria-128-ecb"
-#define NID_aria_128_ecb                1065
-#define OBJ_aria_128_ecb                OBJ_aria,1L
+#define NID_aria_128_ecb        1065
+#define OBJ_aria_128_ecb        OBJ_aria,1L
 
 #define SN_aria_128_cbc         "ARIA-128-CBC"
 #define LN_aria_128_cbc         "aria-128-cbc"
-#define NID_aria_128_cbc                1066
-#define OBJ_aria_128_cbc                OBJ_aria,2L
+#define NID_aria_128_cbc        1066
+#define OBJ_aria_128_cbc        OBJ_aria,2L
 
 #define SN_aria_192_ecb         "ARIA-192-ECB"
 #define LN_aria_192_ecb         "aria-192-ecb"
-#define NID_aria_192_ecb                1070
-#define OBJ_aria_192_ecb                OBJ_aria,3L
+#define NID_aria_192_ecb        1070
+#define OBJ_aria_192_ecb        OBJ_aria,3L
 
 #define SN_aria_192_cbc         "ARIA-192-CBC"
 #define LN_aria_192_cbc         "aria-192-cbc"
-#define NID_aria_192_cbc                1071
-#define OBJ_aria_192_cbc                OBJ_aria,4L
+#define NID_aria_192_cbc        1071
+#define OBJ_aria_192_cbc        OBJ_aria,4L
 
 #define SN_aria_256_ecb         "ARIA-256-ECB"
 #define LN_aria_256_ecb         "aria-256-ecb"
-#define NID_aria_256_ecb                1075
-#define OBJ_aria_256_ecb                OBJ_aria,5L
+#define NID_aria_256_ecb        1075
+#define OBJ_aria_256_ecb        OBJ_aria,5L
 
 #define SN_aria_256_cbc         "ARIA-256-CBC"
 #define LN_aria_256_cbc         "aria-256-cbc"
-#define NID_aria_256_cbc                1076
-#define OBJ_aria_256_cbc                OBJ_aria,6L
+#define NID_aria_256_cbc        1076
+#define OBJ_aria_256_cbc        OBJ_aria,6L

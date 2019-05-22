@@ -115,6 +115,7 @@ if((NOT HOST_ASM_ELF_X86_64) AND (NOT HOST_ASM_MACOSX_X86_64))
 		aes/aes_cbc.c
 		aes/aes_core.c
 		aria/aria.c
+		aria/aria_cbc.c
 		camellia/camellia.c
 		camellia/cmll_cbc.c
 		rc4/rc4_enc.c
@@ -145,6 +146,8 @@ set(
 	aes/aes_ofb.c
 	aes/aes_wrap.c
 	aria/aria.c
+	aria/aria_cbc.c
+	aria/aria_ecb.c
 	asn1/a_bitstr.c
 	asn1/a_bool.c
 	asn1/a_d2i_fp.c
