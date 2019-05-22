@@ -509,7 +509,7 @@ am__objects_30 = aes/libcrypto_la-aes-macosx-x86_64.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@am__objects_32 = aes/libcrypto_la-aes_cbc.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aes/libcrypto_la-aes_core.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aria/libcrypto_la-aria.lo \
-@HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aria/libcrypto_la-aria.lo \
+@HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	aria/libcrypto_la-aria_cbc.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	camellia/libcrypto_la-camellia.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	camellia/libcrypto_la-cmll_cbc.lo \
 @HOST_ASM_ELF_ARM_FALSE@@HOST_ASM_ELF_X86_64_FALSE@@HOST_ASM_MACOSX_X86_64_FALSE@	rc4/libcrypto_la-rc4_enc.lo \
@@ -5255,7 +5255,7 @@ buffer/libcrypto_la-buffer.lo: buffer/buffer.c
 
 
 aria/libcrypto_la-aria_ecb.lo: aria/aria_ecb.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT aria/libcrypto_la-aria_ecb.lo -MD -MP -MF aria/$(DEPDIR)/libcrypto_la-aria_ecb.Tpo -c -o aria/libcrypto_la-aria_ecb.lo `test -f 'camellia/cmll_ecb.c' || echo '$(srcdir)/'`camellia/cmll_ecb.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT aria/libcrypto_la-aria_ecb.lo -MD -MP -MF aria/$(DEPDIR)/libcrypto_la-aria_ecb.Tpo -c -o aria/libcrypto_la-aria_ecb.lo `test -f 'aria/aria_ecb.c' || echo '$(srcdir)/'`aria/aria_ecb.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) aria/$(DEPDIR)/libcrypto_la-aria_ecb.Tpo aria/$(DEPDIR)/libcrypto_la-aria_ecb.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='aria/aria_ecb.c' object='aria/libcrypto_la-aria_ecb.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
