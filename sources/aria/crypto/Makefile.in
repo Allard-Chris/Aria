@@ -378,7 +378,7 @@ am__libcrypto_la_SOURCES_DIST = aes/aes-elf-armv4.S \
 	engine/tb_store.c err/err.c err/err_all.c err/err_prn.c \
 	evp/bio_b64.c evp/bio_enc.c evp/bio_md.c evp/c_all.c \
 	evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c \
-	evp/e_aria.c evp/e_bf.c evp/e_camellia.c evp/e_cast.c \
+	evp/e_bf.c evp/e_camellia.c evp/e_aria.c evp/e_cast.c \
 	evp/e_chacha.c evp/e_chacha20poly1305.c evp/e_des.c \
 	evp/e_des3.c evp/e_gost2814789.c evp/e_idea.c evp/e_null.c \
 	evp/e_old.c evp/e_rc2.c evp/e_rc4.c evp/e_rc4_hmac_md5.c \
@@ -671,7 +671,8 @@ am_libcrypto_la_OBJECTS = $(am__objects_27) $(am__objects_29) \
 	evp/libcrypto_la-bio_md.lo evp/libcrypto_la-c_all.lo \
 	evp/libcrypto_la-digest.lo evp/libcrypto_la-e_aes.lo \
 	evp/libcrypto_la-e_aes_cbc_hmac_sha1.lo \
-	evp/libcrypto_la-e_aria.lo evp/libcrypto_la-e_bf.lo \
+	evp/libcrypto_la-e_bf.lo \
+	evp/libcrypto_la-e_aria.lo \
 	evp/libcrypto_la-e_camellia.lo evp/libcrypto_la-e_cast.lo \
 	evp/libcrypto_la-e_chacha.lo \
 	evp/libcrypto_la-e_chacha20poly1305.lo \
@@ -1249,7 +1250,7 @@ libcrypto_la_SOURCES = $(am__append_33) $(am__append_35) \
 	engine/tb_store.c err/err.c err/err_all.c err/err_prn.c \
 	evp/bio_b64.c evp/bio_enc.c evp/bio_md.c evp/c_all.c \
 	evp/digest.c evp/e_aes.c evp/e_aes_cbc_hmac_sha1.c \
-	evp/e_aria.c evp/e_bf.c evp/e_camellia.c evp/e_cast.c \
+	evp/e_bf.c evp/e_camellia.c evp/e_cast.c evp/e_aria.c \
 	evp/e_chacha.c evp/e_chacha20poly1305.c evp/e_des.c \
 	evp/e_des3.c evp/e_gost2814789.c evp/e_idea.c evp/e_null.c \
 	evp/e_old.c evp/e_rc2.c evp/e_rc4.c evp/e_rc4_hmac_md5.c \
@@ -2335,9 +2336,9 @@ evp/libcrypto_la-e_aes.lo: evp/$(am__dirstamp) \
 	evp/$(DEPDIR)/$(am__dirstamp)
 evp/libcrypto_la-e_aes_cbc_hmac_sha1.lo: evp/$(am__dirstamp) \
 	evp/$(DEPDIR)/$(am__dirstamp)
-evp/libcrypto_la-e_aria.lo: evp/$(am__dirstamp) \
-	evp/$(DEPDIR)/$(am__dirstamp)
 evp/libcrypto_la-e_bf.lo: evp/$(am__dirstamp) \
+	evp/$(DEPDIR)/$(am__dirstamp)
+evp/libcrypto_la-e_aria.lo: evp/$(am__dirstamp) \
 	evp/$(DEPDIR)/$(am__dirstamp)
 evp/libcrypto_la-e_camellia.lo: evp/$(am__dirstamp) \
 	evp/$(DEPDIR)/$(am__dirstamp)
@@ -3450,8 +3451,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-digest.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_aes.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_aes_cbc_hmac_sha1.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_aria.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_bf.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_aria.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_camellia.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_cast.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@evp/$(DEPDIR)/libcrypto_la-e_chacha.Plo@am__quote@
@@ -6225,19 +6226,19 @@ evp/libcrypto_la-e_aes_cbc_hmac_sha1.lo: evp/e_aes_cbc_hmac_sha1.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o evp/libcrypto_la-e_aes_cbc_hmac_sha1.lo `test -f 'evp/e_aes_cbc_hmac_sha1.c' || echo '$(srcdir)/'`evp/e_aes_cbc_hmac_sha1.c
 
-evp/libcrypto_la-e_aria.lo: evp/e_aria.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT evp/libcrypto_la-e_aria.lo -MD -MP -MF evp/$(DEPDIR)/libcrypto_la-e_aria.Tpo -c -o evp/libcrypto_la-e_aria.lo `test -f 'evp/e_aria.c' || echo '$(srcdir)/'`evp/e_aria.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) evp/$(DEPDIR)/libcrypto_la-e_aria.Tpo evp/$(DEPDIR)/libcrypto_la-e_aria.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='evp/e_aria.c' object='evp/libcrypto_la-e_aria.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o evp/libcrypto_la-e_aria.lo `test -f 'evp/e_aria.c' || echo '$(srcdir)/'`evp/e_aria.c
-
 evp/libcrypto_la-e_bf.lo: evp/e_bf.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT evp/libcrypto_la-e_bf.lo -MD -MP -MF evp/$(DEPDIR)/libcrypto_la-e_bf.Tpo -c -o evp/libcrypto_la-e_bf.lo `test -f 'evp/e_bf.c' || echo '$(srcdir)/'`evp/e_bf.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) evp/$(DEPDIR)/libcrypto_la-e_bf.Tpo evp/$(DEPDIR)/libcrypto_la-e_bf.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='evp/e_bf.c' object='evp/libcrypto_la-e_bf.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o evp/libcrypto_la-e_bf.lo `test -f 'evp/e_bf.c' || echo '$(srcdir)/'`evp/e_bf.c
+
+evp/libcrypto_la-e_aria.lo: evp/e_aria.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT evp/libcrypto_la-e_aria.lo -MD -MP -MF evp/$(DEPDIR)/libcrypto_la-e_aria.Tpo -c -o evp/libcrypto_la-e_aria.lo `test -f 'evp/e_aria.c' || echo '$(srcdir)/'`evp/e_aria.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) evp/$(DEPDIR)/libcrypto_la-e_aria.Tpo evp/$(DEPDIR)/libcrypto_la-e_aria.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='evp/e_aria.c' object='evp/libcrypto_la-e_aria.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o evp/libcrypto_la-e_aria.lo `test -f 'evp/e_aria.c' || echo '$(srcdir)/'`evp/e_aria.c
 
 evp/libcrypto_la-e_camellia.lo: evp/e_camellia.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libcrypto_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT evp/libcrypto_la-e_camellia.lo -MD -MP -MF evp/$(DEPDIR)/libcrypto_la-e_camellia.Tpo -c -o evp/libcrypto_la-e_camellia.lo `test -f 'evp/e_camellia.c' || echo '$(srcdir)/'`evp/e_camellia.c

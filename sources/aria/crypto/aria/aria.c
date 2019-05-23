@@ -163,114 +163,114 @@ u8* ariaFeistelRound(u8* expansion_key, u8* constants_key, const int type){
 
 int Aria_set_key(const unsigned char *userKey, const int bits,
                          ARIA_KEY *key){
-    /* First check arguments */
-    if (!userKey || !key)
-        return -1;
-    if (bits != 128 && bits != 192 && bits != 256)
-        return -2;
-
-    /* constant kl and kr generation */
-    /* w0 = KL so avoid double array, and copy direct to w0*/
-    /* copy first 128bit of Master Key */
-    for (size_t i = 0; i < ARIA_BLOCK_SIZE; i++) {
-        key->wk[0][i] = *(userKey + i);
-        key->wk[1][i] = 0;
-    }
-
-    /* Initialisation constants */
-    if (bits == 128) { /* KL defined and KR empty */
-        key->rounds=13;
-        memcpy(key->ck[CK1], C1, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK2], C2, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK3], C3, ARIA_BLOCK_SIZE);
-    } else if (bits == 192) {
-        for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
-            /* Take 64 bits for KR filled with 0*/
-            key->wk[1][i] = *(userKey + (i+16));
-        }
-        key->rounds=15;
-        memcpy(key->ck[CK1], C2, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK2], C3, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK3], C1, ARIA_BLOCK_SIZE);
-    } else {
-        for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
-            /* Take 128 bits for KR */
-            key->wk[1][i+8] = *(userKey + (i+24));
-        }
-        key->rounds=17;
-        memcpy(key->ck[CK1], C3, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK2], C1, ARIA_BLOCK_SIZE);
-        memcpy(key->ck[CK3], C2, ARIA_BLOCK_SIZE);
-    }
-
-    /* expansion key generation */
-    /* W1 */
-    ariaXOR(key->wk[W1],
-        ariaFeistelRound(key->wk[W0], key->ck[CK1], ODD), key->wk[W1]);
-    /* W2 */
-    ariaXOR(key->wk[W0],
-        ariaFeistelRound(key->wk[W1], key->ck[CK2], EVEN), key->wk[W2]);
-    /* W3 */
-    ariaXOR(key->wk[W1],
-        ariaFeistelRound(key->wk[W2], key->ck[CK3], ODD), key->wk[W3]);
-
-    /* round keys generation */
-    /* ! Warning: index 0 to 16 but in Aria paper it's 1 to 17 */
-    ariaXOR(key->wk[W0], rCircleRotation(key->wk[W1], 19), key->rd_key[0]);
-    ariaXOR(key->wk[W1], rCircleRotation(key->wk[W2], 19), key->rd_key[1]);
-    ariaXOR(key->wk[W2], rCircleRotation(key->wk[W3], 19), key->rd_key[2]);
-    ariaXOR(key->wk[W3], rCircleRotation(key->wk[W0], 19), key->rd_key[3]);
-    ariaXOR(key->wk[W0], rCircleRotation(key->wk[W1], 31), key->rd_key[4]);
-    ariaXOR(key->wk[W1], rCircleRotation(key->wk[W2], 31), key->rd_key[5]);
-    ariaXOR(key->wk[W2], rCircleRotation(key->wk[W2], 31), key->rd_key[6]);
-    ariaXOR(key->wk[W3], rCircleRotation(key->wk[W0], 31), key->rd_key[7]);
-    ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 61), key->rd_key[8]);
-    ariaXOR(key->wk[W1], lCircleRotation(key->wk[W2], 61), key->rd_key[9]);
-    ariaXOR(key->wk[W2], lCircleRotation(key->wk[W3], 61), key->rd_key[10]);
-    ariaXOR(key->wk[W3], lCircleRotation(key->wk[W0], 61), key->rd_key[11]);
-    ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 31), key->rd_key[12]);
-
-    if (bits >= 128) {
-        ariaXOR(key->wk[W1], lCircleRotation(key->wk[W2], 31), key->rd_key[13]);
-        ariaXOR(key->wk[W2], lCircleRotation(key->wk[W3], 31), key->rd_key[14]);
-    }
-    if (bits == 256) {
-        ariaXOR(key->wk[W3], lCircleRotation(key->wk[W0], 31), key->rd_key[15]);
-        ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 19), key->rd_key[16]);
-    }
+//    /* First check arguments */
+//    if (!userKey || !key)
+//        return -1;
+//    if (bits != 128 && bits != 192 && bits != 256)
+//        return -2;
+//
+//    /* constant kl and kr generation */
+//    /* w0 = KL so avoid double array, and copy direct to w0*/
+//    /* copy first 128bit of Master Key */
+//    for (size_t i = 0; i < ARIA_BLOCK_SIZE; i++) {
+//        key->wk[0][i] = *(userKey + i);
+//        key->wk[1][i] = 0;
+//    }
+//
+//    /* Initialisation constants */
+//    if (bits == 128) { /* KL defined and KR empty */
+//        key->rounds=13;
+//        memcpy(key->ck[CK1], C1, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK2], C2, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK3], C3, ARIA_BLOCK_SIZE);
+//    } else if (bits == 192) {
+//        for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
+//            /* Take 64 bits for KR filled with 0*/
+//            key->wk[1][i] = *(userKey + (i+16));
+//        }
+//        key->rounds=15;
+//        memcpy(key->ck[CK1], C2, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK2], C3, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK3], C1, ARIA_BLOCK_SIZE);
+//    } else {
+//        for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
+//            /* Take 128 bits for KR */
+//            key->wk[1][i+8] = *(userKey + (i+24));
+//        }
+//        key->rounds=17;
+//        memcpy(key->ck[CK1], C3, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK2], C1, ARIA_BLOCK_SIZE);
+//        memcpy(key->ck[CK3], C2, ARIA_BLOCK_SIZE);
+//    }
+//
+//    /* expansion key generation */
+//    /* W1 */
+//    ariaXOR(key->wk[W1],
+//        ariaFeistelRound(key->wk[W0], key->ck[CK1], ODD), key->wk[W1]);
+//    /* W2 */
+//    ariaXOR(key->wk[W0],
+//        ariaFeistelRound(key->wk[W1], key->ck[CK2], EVEN), key->wk[W2]);
+//    /* W3 */
+//    ariaXOR(key->wk[W1],
+//        ariaFeistelRound(key->wk[W2], key->ck[CK3], ODD), key->wk[W3]);
+//
+//    /* round keys generation */
+//    /* ! Warning: index 0 to 16 but in Aria paper it's 1 to 17 */
+//    ariaXOR(key->wk[W0], rCircleRotation(key->wk[W1], 19), key->rd_key[0]);
+//    ariaXOR(key->wk[W1], rCircleRotation(key->wk[W2], 19), key->rd_key[1]);
+//    ariaXOR(key->wk[W2], rCircleRotation(key->wk[W3], 19), key->rd_key[2]);
+//    ariaXOR(key->wk[W3], rCircleRotation(key->wk[W0], 19), key->rd_key[3]);
+//    ariaXOR(key->wk[W0], rCircleRotation(key->wk[W1], 31), key->rd_key[4]);
+//    ariaXOR(key->wk[W1], rCircleRotation(key->wk[W2], 31), key->rd_key[5]);
+//    ariaXOR(key->wk[W2], rCircleRotation(key->wk[W2], 31), key->rd_key[6]);
+//    ariaXOR(key->wk[W3], rCircleRotation(key->wk[W0], 31), key->rd_key[7]);
+//    ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 61), key->rd_key[8]);
+//    ariaXOR(key->wk[W1], lCircleRotation(key->wk[W2], 61), key->rd_key[9]);
+//    ariaXOR(key->wk[W2], lCircleRotation(key->wk[W3], 61), key->rd_key[10]);
+//    ariaXOR(key->wk[W3], lCircleRotation(key->wk[W0], 61), key->rd_key[11]);
+//    ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 31), key->rd_key[12]);
+//
+//    if (bits >= 128) {
+//        ariaXOR(key->wk[W1], lCircleRotation(key->wk[W2], 31), key->rd_key[13]);
+//        ariaXOR(key->wk[W2], lCircleRotation(key->wk[W3], 31), key->rd_key[14]);
+//    }
+//    if (bits == 256) {
+//        ariaXOR(key->wk[W3], lCircleRotation(key->wk[W0], 31), key->rd_key[15]);
+//        ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 19), key->rd_key[16]);
+//    }
     return 0;
 }
 
 void Aria_encrypt(const unsigned char *in, unsigned char *out,
                   const ARIA_KEY *key) {
-    u8 input[ARIA_BLOCK_SIZE];
-    u8 state[ARIA_BLOCK_SIZE];
-    size_t i;
-    for (i = 0; i < ARIA_BLOCK_SIZE; i++) {
-        input[i] = *(in + i);
-    }
-
-    memcpy(state, input, ARIA_BLOCK_SIZE);
-
-    for (i = 0; i < key->rounds; i++) {
-        /* loop for all rounds */
-        ariaXOR(state, key->rd_key[i], state);
-
-        if (i % 2 != 0) { /* substituion layer type 1 */
-            ariaSubstitutionLayer(state, ODD);
-        } else { /* substituion layer type 2 */
-        ariaSubstitutionLayer(state, EVEN);
-        }
-
-        if (i < key->rounds) ariaDiffusionLayer(state);
-    }
-    /* Last XORing the state and the round_key */
-    ariaXOR(state, key->rd_key[key->rounds], state);
-
-    out = state;
+//    u8 input[ARIA_BLOCK_SIZE];
+//    u8 state[ARIA_BLOCK_SIZE];
+//    size_t i;
+//    for (i = 0; i < ARIA_BLOCK_SIZE; i++) {
+//        input[i] = *(in + i);
+//    }
+//
+//    memcpy(state, input, ARIA_BLOCK_SIZE);
+//
+//    for (i = 0; i < key->rounds; i++) {
+//        /* loop for all rounds */
+//        ariaXOR(state, key->rd_key[i], state);
+//
+//        if (i % 2 != 0) { /* substituion layer type 1 */
+//            ariaSubstitutionLayer(state, ODD);
+//        } else { /* substituion layer type 2 */
+//        ariaSubstitutionLayer(state, EVEN);
+//        }
+//
+//        if (i < key->rounds) ariaDiffusionLayer(state);
+//    }
+//    /* Last XORing the state and the round_key */
+//    ariaXOR(state, key->rd_key[key->rounds], state);
+//
+//    out = state;
 }
 
 void Aria_decrypt(const unsigned char *in, unsigned char *out,
                   const ARIA_KEY *key){
-    Aria_encrypt(in, out, key);
+    //Aria_encrypt(in, out, key);
 }

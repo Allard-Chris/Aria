@@ -245,17 +245,6 @@ static const EVP_CIPHER cname##_ecb = {\
 const EVP_CIPHER *EVP_##cname##_ecb(void) { return &cname##_ecb; }
 */
 
-#define IMPLEMENT_BLOCK_CIPHER_BASIC(cname, ksched, cprefix, kstruct, nid, \
-                   block_size, key_len, iv_len, cbits, \
-                   flags, init_key, \
-                   cleanup, set_asn1, get_asn1, ctrl) \
-    BLOCK_CIPHER_func_cbc(cname, cprefix, kstruct, ksched) \
-    BLOCK_CIPHER_func_ecb(cname, cprefix, kstruct, ksched) \
-    BLOCK_CIPHER_def_cbc(cname, kstruct, nid, block_size, key_len, iv_len, flags, \
-             init_key, cleanup, set_asn1, get_asn1, ctrl) \
-    BLOCK_CIPHER_def_ecb(cname, kstruct, nid, block_size, key_len, flags, \
-             init_key, cleanup, set_asn1, get_asn1, ctrl)
-
 #define IMPLEMENT_BLOCK_CIPHER(cname, ksched, cprefix, kstruct, nid, \
 			       block_size, key_len, iv_len, cbits, \
 			       flags, init_key, \
