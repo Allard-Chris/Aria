@@ -262,7 +262,7 @@ libcompat_la_OBJECTS = $(am_libcompat_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
-am__v_lt_1 = 
+am__v_lt_1 =
 libcompatnoopt_la_LIBADD =
 am__libcompatnoopt_la_SOURCES_DIST = compat/explicit_bzero_win.c \
 	compat/explicit_bzero.c
@@ -828,11 +828,11 @@ am__v_P_1 = :
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN     " $@;
-am__v_GEN_1 = 
+am__v_GEN_1 =
 AM_V_at = $(am__v_at_$(V))
 am__v_at_ = $(am__v_at_$(AM_DEFAULT_VERBOSITY))
 am__v_at_0 = @
-am__v_at_1 = 
+am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -846,7 +846,7 @@ LTCPPASCOMPILE = $(LIBTOOL) $(AM_V_lt) $(AM_LIBTOOLFLAGS) \
 AM_V_CPPAS = $(am__v_CPPAS_$(V))
 am__v_CPPAS_ = $(am__v_CPPAS_$(AM_DEFAULT_VERBOSITY))
 am__v_CPPAS_0 = @echo "  CPPAS   " $@;
-am__v_CPPAS_1 = 
+am__v_CPPAS_1 =
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -856,7 +856,7 @@ LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CC = $(am__v_CC_$(V))
 am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
+am__v_CC_1 =
 CCLD = $(CC)
 LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
@@ -864,7 +864,7 @@ LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
+am__v_CCLD_1 =
 SOURCES = $(libcompat_la_SOURCES) $(libcompatnoopt_la_SOURCES) \
 	$(libcrypto_la_SOURCES) $(EXTRA_libcrypto_la_SOURCES)
 DIST_SOURCES = $(am__libcompat_la_SOURCES_DIST) \
@@ -920,13 +920,13 @@ CYGPATH_W = echo
 DEFS = -DPACKAGE_NAME=\"libressl\" -DPACKAGE_TARNAME=\"libressl\" -DPACKAGE_VERSION=\"2.9.0\" -DPACKAGE_STRING=\"libressl\ 2.9.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"libressl\" -DVERSION=\"2.9.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DLFCN_H=1 -DLT_OBJDIR=\".libs/\" -DHAVE_SYMLINK=1 -DHAVE_ERR_H=1 -DHAVE_ASPRINTF=1 -DHAVE_MEMMEM=1 -DHAVE_REALLOCARRAY=1 -DHAVE_STRNDUP=1 -DHAVE_STRNLEN=1 -DHAVE_STRSEP=1 -DHAVE_TIMEGM=1 -DHAVE_ACCEPT4=1 -DHAVE_PIPE2=1 -DHAVE_POLL=1 -DHAVE_SOCKETPAIR=1 -DHAVE_EXPLICIT_BZERO=1 -DHAVE_GETAUXVAL=1 -DHAVE_GETAUXVAL=1 -DHAVE_DL_ITERATE_PHDR=1 -DHAVE_CLOCK_GETTIME=1 -DHAVE_VA_COPY=1 -DHAVE___VA_COPY=1 -DHAS_GNU_WARNING_LONG=1 -DSIZEOF_TIME_T=8
 DEPDIR = .deps
 DLLTOOL = false
-DSYMUTIL = 
-DUMPBIN = 
-ECHO_C = 
+DSYMUTIL =
+DUMPBIN =
+ECHO_C =
 ECHO_N = -n
-ECHO_T = 
+ECHO_T =
 EGREP = /bin/grep -E
-EXEEXT = 
+EXEEXT =
 FGREP = /bin/grep -F
 GREP = /bin/grep
 INSTALL = /usr/bin/install -c
@@ -935,39 +935,39 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS =   -Wl,-z,relro -Wl,-z,now 
+LDFLAGS =   -Wl,-z,relro -Wl,-z,now
 LIBCRYPTO_VERSION = 45:1:0
-LIBOBJS = 
-LIBS = -lresolv 
+LIBOBJS =
+LIBS = -lresolv
 LIBSSL_VERSION = 47:1:0
 LIBTLS_VERSION = 19:2:0
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = 
+LIPO =
 LN_S = ln -s
-LTLIBOBJS = 
+LTLIBOBJS =
 MAKEINFO = ${SHELL} /home/allardc/Documents/Aria/sources/libressl-2.9.0a/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /bin/mkdir -p
 NM = /usr/bin/nm -B
-NMEDIT = 
+NMEDIT =
 OBJDUMP = objdump
 OBJEXT = o
-OPENSSLDIR = 
-OTOOL = 
-OTOOL64 = 
+OPENSSLDIR =
+OTOOL =
+OTOOL64 =
 PACKAGE = libressl
-PACKAGE_BUGREPORT = 
+PACKAGE_BUGREPORT =
 PACKAGE_NAME = libressl
 PACKAGE_STRING = libressl 2.9.0
 PACKAGE_TARNAME = libressl
-PACKAGE_URL = 
+PACKAGE_URL =
 PACKAGE_VERSION = 2.9.0
 PATH_SEPARATOR = :
 PLATFORM_LDADD = -lpthread
-PROG_LDADD = 
+PROG_LDADD =
 RANLIB = ranlib
 SED = /bin/sed
-SET_MAKE = 
+SET_MAKE =
 SHELL = /bin/bash
 STRIP = strip
 VERSION = 2.9.0
@@ -977,15 +977,15 @@ abs_top_builddir = /home/allardc/Documents/Aria/sources/libressl-2.9.0a
 abs_top_srcdir = /home/allardc/Documents/Aria/sources/libressl-2.9.0a
 ac_ct_AR = ar
 ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
+ac_ct_DUMPBIN =
 am__include = include
 am__leading_dot = .
-am__quote = 
+am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
 build = x86_64-pc-linux-gnu
-build_alias = 
+build_alias =
 build_cpu = x86_64
 build_os = linux-gnu
 build_vendor = pc
@@ -996,7 +996,7 @@ docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
 host = x86_64-pc-linux-gnu
-host_alias = 
+host_alias =
 host_cpu = x86_64
 host_os = linux-gnu
 host_vendor = pc
@@ -1020,11 +1020,11 @@ sbindir = ${exec_prefix}/sbin
 sharedstatedir = ${prefix}/com
 srcdir = .
 sysconfdir = ${prefix}/etc
-target_alias = 
+target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-AM_CFLAGS = 
+AM_CFLAGS =
 AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir)/include/compat \
 	-DLIBRESSL_INTERNAL -D__BEGIN_HIDDEN_DECLS= \
 	-D__END_HIDDEN_DECLS= -I$(top_srcdir)/crypto/asn1 \
@@ -1060,13 +1060,14 @@ libcompat_la_SOURCES = $(am__append_9) $(am__append_10) \
 libcompat_la_LIBADD = $(PLATFORM_LDADD)
 
 # rc4
+#
 noinst_HEADERS = compat/arc4random.h compat/arc4random_aix.h \
 	compat/arc4random_freebsd.h compat/arc4random_hpux.h \
 	compat/arc4random_linux.h compat/arc4random_netbsd.h \
 	compat/arc4random_osx.h compat/arc4random_solaris.h \
 	compat/arc4random_win.h compat/chacha_private.h \
 	constant_time_locl.h cryptlib.h md32_common.h o_time.h \
-	x86_arch.h aes/aes_locl.h aria/aria.h aria/aria_locl.h asn1/asn1_locl.h \
+	x86_arch.h aes/aes_locl.h aria/aria_locl.h aria/aria.h asn1/asn1_locl.h \
 	asn1/charmap.h bf/bf_locl.h bf/bf_pi.h bn/bn_lcl.h \
 	bn/bn_prime.h camellia/camellia.h camellia/cmll_locl.h \
 	cast/cast_lcl.h cast/cast_s.h conf/conf_def.h \
@@ -1338,7 +1339,6 @@ ASM_ARM_ELF = aes/aes-elf-armv4.S bn/gf2m-elf-armv4.S \
 	bn/mont-elf-armv4.S sha/sha1-elf-armv4.S \
 	sha/sha512-elf-armv4.S sha/sha256-elf-armv4.S \
 	modes/ghash-elf-armv4.S armv4cpuid.S armcap.c aes/aes_cbc.c \
-	aria/aria.c aria/aria_cbc.c \
 	camellia/camellia.c camellia/cmll_cbc.c rc4/rc4_enc.c \
 	rc4/rc4_skey.c whrlpool/wp_block.c
 ASM_X86_64_ELF = aes/aes-elf-x86_64.S aes/bsaes-elf-x86_64.S \
@@ -1497,14 +1497,14 @@ compat/getentropy_solaris.lo: compat/$(am__dirstamp) \
 compat/getentropy_win.lo: compat/$(am__dirstamp) \
 	compat/$(DEPDIR)/$(am__dirstamp)
 
-libcompat.la: $(libcompat_la_OBJECTS) $(libcompat_la_DEPENDENCIES) $(EXTRA_libcompat_la_DEPENDENCIES) 
+libcompat.la: $(libcompat_la_OBJECTS) $(libcompat_la_DEPENDENCIES) $(EXTRA_libcompat_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(LINK)  $(libcompat_la_OBJECTS) $(libcompat_la_LIBADD) $(LIBS)
 compat/libcompatnoopt_la-explicit_bzero_win.lo:  \
 	compat/$(am__dirstamp) compat/$(DEPDIR)/$(am__dirstamp)
 compat/libcompatnoopt_la-explicit_bzero.lo: compat/$(am__dirstamp) \
 	compat/$(DEPDIR)/$(am__dirstamp)
 
-libcompatnoopt.la: $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_DEPENDENCIES) $(EXTRA_libcompatnoopt_la_DEPENDENCIES) 
+libcompatnoopt.la: $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_DEPENDENCIES) $(EXTRA_libcompatnoopt_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libcompatnoopt_la_LINK) $(am_libcompatnoopt_la_rpath) $(libcompatnoopt_la_OBJECTS) $(libcompatnoopt_la_LIBADD) $(LIBS)
 aes/$(am__dirstamp):
 	@$(MKDIR_P) aes
@@ -2990,7 +2990,7 @@ des/libcrypto_la-ncbc_enc.lo: des/$(am__dirstamp) \
 poly1305/libcrypto_la-poly1305-donna.lo: poly1305/$(am__dirstamp) \
 	poly1305/$(DEPDIR)/$(am__dirstamp)
 
-libcrypto.la: $(libcrypto_la_OBJECTS) $(libcrypto_la_DEPENDENCIES) $(EXTRA_libcrypto_la_DEPENDENCIES) 
+libcrypto.la: $(libcrypto_la_OBJECTS) $(libcrypto_la_DEPENDENCIES) $(EXTRA_libcrypto_la_DEPENDENCIES)
 	$(AM_V_CCLD)$(libcrypto_la_LINK) -rpath $(libdir) $(libcrypto_la_OBJECTS) $(libcrypto_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:

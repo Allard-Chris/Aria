@@ -10,11 +10,11 @@ Aria local headere
 #ifndef HEADER_ARIA_LOCL_H
 #define HEADER_ARIA_LOCL_H
 
-#include <openssl/opensslconf.h>
-
 #ifdef OPENSSL_NO_ARIA
 #error ARIA is disabled.
 #endif
+
+__BEGIN_HIDDEN_DECLS
 
 typedef unsigned long long u64; // 64 bits variable
 typedef unsigned char      u8; // 8 bits variable
@@ -30,6 +30,7 @@ typedef unsigned char      u8; // 8 bits variable
 #define CK1 0
 #define CK2 1
 #define CK3 2
+
 
 static const u8 S1_BOX[256] = {
     /* 0     1     2     3     4     5     6     7     8     9     a     b     c     d     e     f */
@@ -130,5 +131,16 @@ static const u8* sl_type[2][16] = {
     {S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX,
      S1_INVBOX, S2_INVBOX, S1_BOX, S2_BOX, S1_INVBOX, S2_INVBOX, S1_BOX,
      S2_BOX}};
+
+void u8ArrayToU64(const u8* input, u64* low_bytes, u64* high_bytes);
+void u64ToU8Array(u8* output, const u64* low_bytes, const u64* high_bytes);
+u8* lCircleRotation(const u8* a, const unsigned int length);
+u8* rCircleRotation(const u8* a, const unsigned int length);
+void ariaXOR(const u8* a, const u8* b, u8* c);
+void ariaSubstitutionLayer(u8* state, const int type);
+void ariaDiffusionLayer(u8* state);
+u8* ariaFeistelRound(u8* expansion_key, u8* constants_key, const int type);
+
+__END_HIDDEN_DECLS
 
 #endif /* !HEADER_ARIA_LOCL_H */

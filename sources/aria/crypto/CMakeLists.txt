@@ -114,8 +114,6 @@ if((NOT HOST_ASM_ELF_X86_64) AND (NOT HOST_ASM_MACOSX_X86_64))
 		${CRYPTO_SRC}
 		aes/aes_cbc.c
 		aes/aes_core.c
-		aria/aria.c
-		aria/aria_cbc.c
 		camellia/camellia.c
 		camellia/cmll_cbc.c
 		rc4/rc4_enc.c
