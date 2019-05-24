@@ -1,11 +1,21 @@
-/*********************************************
-Author  : Chris Allard, Corentin Aulagnier
-Date    : 2019-02
-Source  : https://github.com/Allard-Chris/Aria
-Version : 0.1
-###
-Aria primitive
-**********************************************/
+/***********************************************************************
+* FILENAME :        aria.c
+*
+* DESCRIPTION :
+*       All aria core functions to perform cipher encryption/decryption
+*
+*
+* NOTES :
+*
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 #include "openssl/aria.h"
 #include "aria_locl.h"
 #include <stdlib.h>

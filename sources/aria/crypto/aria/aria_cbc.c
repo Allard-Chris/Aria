@@ -1,3 +1,21 @@
+/***********************************************************************
+* FILENAME :        aria_cbc.c
+*
+* DESCRIPTION :
+*       Function to perform cbc encrypt/decrypt
+*
+*
+* NOTES :
+*       Based on camellia cipher
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 #include <openssl/aria.h>
 #include <openssl/modes.h>
 

@@ -1,3 +1,21 @@
+/***********************************************************************
+* FILENAME :        aria_ecb.c
+*
+* DESCRIPTION :
+*       Function to perform ecb encrypt/decrypt
+*
+*
+* NOTES :
+*       Based on camellia cipher
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 #include <openssl/aria.h>
 
 void

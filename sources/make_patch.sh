@@ -1,7 +1,26 @@
 #!/bin/bash
-####################################################
-# Run security audit tests
-####################################################
+#***********************************************************************
+# FILENAME :        make_patch.sh
+#
+# DESCRIPTION :
+#       List all files inside source (aria) directory to perform a diff
+#       base on dest (libressl) directory.
+#       All differents are reported inside output file
+#
+#
+# NOTES :
+#        Install patch command: patch -p0 < aria.patch
+#        Launch command inside sources directory
+#
+#
+#
+# AUTHOR :    Allard Chris & Aulagnier Corentin
+# START DATE :  02-2019
+#
+# Version : 0.1
+#
+#
+#**********************************************************************
 
 # Output name for patch file
 output="aria.patch"
@@ -24,7 +43,7 @@ for file in $(find $source/* -type f); do
 
 	#Get diff between destination and source
 	diff -Naur $dest${file#./aria} $source${file#./aria} > $tmp
-	
+
 	#Set target to destination file
 	echo "+++ $dest${file#./aria}" >>$output
 

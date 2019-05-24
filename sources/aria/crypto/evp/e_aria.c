@@ -1,4 +1,24 @@
-/* ARIA subkey Structure */
+/***********************************************************************
+* FILENAME :        e_aria.c
+*
+* DESCRIPTION :
+*       All envelope functions used by libressl to collect all data
+*       from user and call aria functions
+*
+*
+* NOTES :
+*       See evp_locl.h to understand all meaning for cipher creation
+*       and declaration
+*
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 #include <string.h>
 
 #include <openssl/opensslconf.h>

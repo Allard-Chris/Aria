@@ -1,11 +1,21 @@
-/*********************************************
-Author  : Chris Allard, Corentin Aulagnier
-Date    : 2019-02
-Source  : https://github.com/Allard-Chris/Aria
-Version : 0.1
-###
-Aria local headere
-**********************************************/
+/***********************************************************************
+* FILENAME :        aria_cbc.c
+*
+* DESCRIPTION :
+*       Header for all internal functions used by aria core
+*
+*
+* NOTES :
+*
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 
 #ifndef HEADER_ARIA_LOCL_H
 #define HEADER_ARIA_LOCL_H

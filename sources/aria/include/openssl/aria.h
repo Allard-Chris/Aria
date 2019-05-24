@@ -1,11 +1,22 @@
-/*********************************************
-Author  : Chris Allard, Corentin Aulagnier
-Date    : 2019-02
-Source  : https://github.com/Allard-Chris/Aria
-Version : 0.1
-###
-Aria header
-**********************************************/
+/***********************************************************************
+* FILENAME :        aria.h
+*
+* DESCRIPTION :
+*       All main functions for decrypt/encrypt header
+*
+*
+* NOTES :
+*        Copy from crypto/aria/aria.h
+*
+*
+*
+* AUTHOR :    Allard Chris & Aulagnier Corentin
+* START DATE :  02-2019
+*
+* Version : 0.1
+*
+*
+***********************************************************************/
 #ifndef HEADER_ARIA_H
 #define HEADER_ARIA_H
 
