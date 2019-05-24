@@ -45,9 +45,10 @@ void Aria_encrypt(const unsigned char *in, unsigned char *out,
                   const ARIA_KEY *key);
 void Aria_decrypt(const unsigned char *in, unsigned char *out,
                   const ARIA_KEY *key);
-int Aria_set_key(const unsigned char *userKey, const int bits,
+int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
                          ARIA_KEY *key);
-
+int Aria_set_decrypt_key(const unsigned char *userKey, const int bits,
+                         ARIA_KEY *key);
 void Aria_ecb_encrypt(const unsigned char *in, unsigned char *out,
 	const ARIA_KEY *key, const int enc);
 

@@ -171,7 +171,7 @@ u8* ariaFeistelRound(u8* expansion_key, u8* constants_key, const int type){
     return output;
 }
 
-int Aria_set_key(const unsigned char *userKey, const int bits,
+int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
                          ARIA_KEY *key){
 //    /* First check arguments */
 //    if (!userKey || !key)
@@ -249,6 +249,28 @@ int Aria_set_key(const unsigned char *userKey, const int bits,
 //        ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 19), key->rd_key[16]);
 //    }
     return 0;
+}
+
+int Aria_set_decrypt_key(const unsigned char *userKey, const int bits,
+  ARIA_KEY *key){
+
+//  int status;
+//
+//  /* first, start with an encryption schedule */
+//  status = ARIA_set_encrypt_key(userKey, bits, key);
+//  if (status < 0)
+//    return status;
+//
+//  u8 temp_rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
+//  memcpy(temp_rd_key, key->rd_key, sizeof(key->rd_key));
+//  for (size_t i = key->rounds; i >= 0; i--) {
+//    if ((i != key->rounds) & (i != 0)){
+//      ariaDiffusionLayer(key->rd_key[(key->rounds - i)]);
+//    }
+//    memcpy(key->rd_key[(key->rounds - i)], temp_rd_key[i],
+//      sizeof(key->rd_key[i]));
+//  }
+  return 0;
 }
 
 void Aria_encrypt(const unsigned char *in, unsigned char *out,

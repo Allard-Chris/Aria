@@ -178,16 +178,17 @@ static int
 Aria_init_key(EVP_CIPHER_CTX *ctx, const unsigned char *key,
     const unsigned char *iv, int enc)
 {
-//    int ret;
-//
-//    ret = Aria_set_key(key, ctx->key_len * 8, ctx->cipher_data);
-//
-//    if (ret < 0) {
-//        EVPerror(EVP_R_ARIA_KEY_SETUP_FAILED);
-//        fprintf(stdout, "HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-//        return 0;
-//    }
+    int ret;
 
+    if (enc)
+        ret = Aria_set_encrypt_key(key, ctx->key_len * 8, ctx->cipher_data);
+    else
+        ret = Aria_set_decrypt_key(key, ctx->key_len * 8, ctx->cipher_data);
+
+   if (ret < 0) {
+        EVPerror(EVP_R_ARIA_KEY_SETUP_FAILED);
+        return 0;
+    }
     return 1;
 }
 #endif
