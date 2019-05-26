@@ -1,0 +1,72 @@
+.Dd Fev 2019
+.Dt ARIA 3
+.Os
+.Sh NAME
+Inside crypto/aria/aria.c
+
+.Nm ARIA_set_encrypt_key,
+.Nm ARIA_set_decrypt_key
+.Nd Generate aria key
+
+.Nm ARIA_encrypt,
+.Nm ARIA_decrypt
+.Nd Doing cipher aria
+
+.Sh SYNOPSIS
+.Ft void
+.Fo Aria_set_encrypt_key
+.Fa const unsigned char *userKey
+.Fa const int bits
+.Fa const ARIA_KEY *key
+.Fc
+.Ft void
+.Fo Aria_set_decrypt_key
+.Fa const unsigned char *userKey
+.Fa const int bits
+.Fa const ARIA_KEY *key
+.Fc
+.Ft void
+.Fo Aria_encrypt_key
+.Fa const unsigned char *in
+.Fa unsigned char *out
+.Fa const ARIA_KEY *key
+.Fc
+.Ft void
+.Fo Aria_decrypt_key
+.Fa const unsigned char *in
+.Fa unsigned char *out
+.Fa const ARIA_KEY *key
+.Fc
+.Sh DESCRIPTION
+\fBAria (Academia, Research Institute and Agency)\fP is a symmetrical encryption algorithm developed in 2003 by a team of South Korean researchers.
+In December 2004, ATS(Agency for Technology and Standards) of KoreastandardizedARIAas ‘128-bit Block Encryption AlgorithmARIA(KS X 1213)
+Since 2011 it is an encryption supported by the communication protocol TLS (Transport Layer Security).
+It is a 128bit block encryption using three different key sizes: 128, 192 and 256 bits.
+This implementation provide all the necessary functions to perform Aria encryption and decryption.
+
+- [\fBrfc5794\fP]
+A Description of the ARIA Encryption Algorithm
+https://tools.ietf.org/html/rfc5794
+
+- [\fBrfc6209\fP]
+Addition of the ARIA Cipher Suites to Transport Layer Security (TLS) 
+https://tools.ietf.org/html/rfc6209
+
+- [\fBOriginal WebSite\fP]
+http://210.104.33.10/ARIA/index-e.html
+
+.Sh LICENCE
+Copyright 2019 Allard Chris, Aulagnier Correntin
+.br
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+.Sh BUGS
+No bugs.
+Anyway, if you find any, please send a report to lyon.allard.chris@gmail.com.
+
+.Sh AUTHOR
+\fBAllard Chris\fP.
+\fBAulagnier Corentin\fP.
+
+.Sh SEE ALSO
+OpenSSL, LibreSSL
