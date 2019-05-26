@@ -24,17 +24,18 @@
 #include <string.h>
 #include <openssl/opensslconf.h>
 
+/* Only use for debug */
 #define DBG(_x)                                                            \
-  (fprintf(stdout, "[FILE]:%s [FUNC]:%s [LINE]:%d - ", __FILE__, __func__, \
-           __LINE__),                                                      \
-   (void)(_x))
+    (fprintf(stdout, "[FILE]:%s [FUNC]:%s [LINE]:%d - ", __FILE__, __func__, \
+            __LINE__),                                                      \
+    (void)(_x))
 
 void printBuffer(u8* buffer, unsigned int length) {
-  fprintf(stdout, "Buffer Data: ");
-  for (unsigned int i = 0; i < length; i++) {
-    fprintf(stdout, "0x%hhx ", buffer[i]);
-  }
-  fprintf(stdout, "\n");
+    fprintf(stdout, "Buffer Data: ");
+    for (unsigned int i = 0; i < length; i++) {
+        fprintf(stdout, "0x%hhx ", buffer[i]);
+    }
+    fprintf(stdout, "\n");
 }
 
 /* convert array of 16 * u8 into 2 u64 array */
@@ -200,10 +201,6 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
         key->wk[0][i] = *(userKey + i);
         key->wk[1][i] = 0;
     }
-    DBG(fprintf(stdout,"KL:\n"));
-    DBG(printBuffer(key->wk[0], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"KR:\n"));
-    DBG(printBuffer(key->wk[1], ARIA_BLOCK_SIZE));
 
     /* Initialisation constants */
     if (bits == 128) { /* KL defined and KR empty */
@@ -221,23 +218,15 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
         memcpy(key->ck[CK2], C3, ARIA_BLOCK_SIZE);
         memcpy(key->ck[CK3], C1, ARIA_BLOCK_SIZE);
     } else {
-        for (size_t i = 0; i < (ARIA_BLOCK_SIZE/2); i++) {
+        for (size_t i = 0; i < (ARIA_BLOCK_SIZE); i++) {
             /* Take 128 bits for KR */
-            key->wk[1][i+8] = *(userKey + (i+24));
+            key->wk[1][i] = *(userKey + (i+16));
         }
         key->rounds=17;
         memcpy(key->ck[CK1], C3, ARIA_BLOCK_SIZE);
         memcpy(key->ck[CK2], C1, ARIA_BLOCK_SIZE);
         memcpy(key->ck[CK3], C2, ARIA_BLOCK_SIZE);
     }
-
-    DBG(fprintf(stdout,"CK1:\n"));
-    DBG(printBuffer(key->ck[CK1], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"CK2:\n"));
-    DBG(printBuffer(key->ck[CK2], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"CK3:\n"));
-    DBG(printBuffer(key->ck[CK3], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout, "round nb %d\n", key->rounds));
 
     /* expansion key generation */
     /* W1 */
@@ -250,12 +239,6 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     ariaXOR(key->wk[W1],
         ariaFeistelRound(key->wk[W2], key->ck[CK3], ODD), key->wk[W3]);
 
-    DBG(fprintf(stdout,"WK0:\n"));
-    DBG(printBuffer(key->wk[W0], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"WK1:\n"));
-    DBG(printBuffer(key->wk[W1], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"WK2:\n"));
-    DBG(printBuffer(key->wk[W2], ARIA_BLOCK_SIZE));
     /* round keys generation */
     /* ! Warning: index 0 to 16 but in Aria paper it's 1 to 17 */
     ariaXOR(key->wk[W0], rCircleRotation(key->wk[W1], 19), key->rd_key[0]);
@@ -271,32 +254,6 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
     ariaXOR(key->wk[W2], lCircleRotation(key->wk[W3], 61), key->rd_key[10]);
     ariaXOR(key->wk[W3], lCircleRotation(key->wk[W0], 61), key->rd_key[11]);
     ariaXOR(key->wk[W0], lCircleRotation(key->wk[W1], 31), key->rd_key[12]);
-    DBG(fprintf(stdout,"rd_key0:\n"));
-    DBG(printBuffer(key->rd_key[0], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key1:\n"));
-    DBG(printBuffer(key->rd_key[1], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key2:\n"));
-    DBG(printBuffer(key->rd_key[2], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key3:\n"));
-    DBG(printBuffer(key->rd_key[3], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key4:\n"));
-    DBG(printBuffer(key->rd_key[4], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key5:\n"));
-    DBG(printBuffer(key->rd_key[5], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key6:\n"));
-    DBG(printBuffer(key->rd_key[6], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key7:\n"));
-    DBG(printBuffer(key->rd_key[7], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key8:\n"));
-    DBG(printBuffer(key->rd_key[8], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key9:\n"));
-    DBG(printBuffer(key->rd_key[9], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key10:\n"));
-    DBG(printBuffer(key->rd_key[10], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key11:\n"));
-    DBG(printBuffer(key->rd_key[11], ARIA_BLOCK_SIZE));
-    DBG(fprintf(stdout,"rd_key12:\n"));
-    DBG(printBuffer(key->rd_key[12], ARIA_BLOCK_SIZE));
 
     if (bits >= 128) {
         ariaXOR(key->wk[W1], lCircleRotation(key->wk[W2], 31), key->rd_key[13]);
@@ -310,25 +267,35 @@ int Aria_set_encrypt_key(const unsigned char *userKey, const int bits,
 }
 
 int Aria_set_decrypt_key(const unsigned char *userKey, const int bits,
-  ARIA_KEY *key){
+    ARIA_KEY *key){
 
-  int status;
+    int status;
 
-  /* first, start with an encryption schedule */
-  status = Aria_set_encrypt_key(userKey, bits, key);
-  if (status < 0)
-    return status;
+    /* first, start with an encryption schedule */
+    status = Aria_set_encrypt_key(userKey, bits, key);
+    if (status < 0)
+        return status;
 
-  u8 temp_rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
-  memcpy(temp_rd_key, key->rd_key, sizeof(key->rd_key));
-  for (size_t i = key->rounds; i >= 0; i--) {
-    if ((i != key->rounds) & (i != 0)){
-      ariaDiffusionLayer(key->rd_key[(key->rounds - i)]);
+    u8 temp_rd_key[ARIA_MAX_ROUND][ARIA_BLOCK_SIZE];
+    memcpy(temp_rd_key, key->rd_key, sizeof(key->rd_key));
+
+    /* The first rd_key is a last one in encrypt key */
+    memcpy(key->rd_key[0], temp_rd_key[key->rounds-1],
+        sizeof(key->rd_key[0]));
+
+    int k;
+    int j=1;
+    for (k = (key->rounds)-2; k > 0; k--) {
+        ariaDiffusionLayer(temp_rd_key[k]);
+        memcpy(key->rd_key[j], temp_rd_key[k],
+            sizeof(key->rd_key[j]));
+        j++;
     }
-    memcpy(key->rd_key[(key->rounds - i)], temp_rd_key[i],
-      sizeof(key->rd_key[i]));
-  }
-  return 0;
+    /* The last rd_key is the first one in encrypt key  */
+    memcpy(key->rd_key[key->rounds-1], temp_rd_key[0],
+        sizeof(key->rd_key[0]));
+
+    return 0;
 }
 
 void Aria_encrypt(const unsigned char *in, unsigned char *out,
@@ -342,33 +309,26 @@ void Aria_encrypt(const unsigned char *in, unsigned char *out,
 
     memcpy(state, input, ARIA_BLOCK_SIZE);
 
-    for (i = 1; i <= key->rounds; i++) {
-        DBG(fprintf(stdout,"current round%d:\n", i));
-        DBG(printBuffer(state, ARIA_BLOCK_SIZE));
-
+    for (i = 1; i <= ((key->rounds)-1); i++) {
         /* loop for all rounds */
         ariaXOR(state, key->rd_key[i-1], state);
-        DBG(fprintf(stdout,"XOR_%d:\n", i));
-        DBG(printBuffer(state, ARIA_BLOCK_SIZE));
 
         if (i % 2 != 0) { /* substituion layer type 1 */
             ariaSubstitutionLayer(state, ODD);
         } else { /* substituion layer type 2 */
             ariaSubstitutionLayer(state, EVEN);
         }
-        DBG(fprintf(stdout,"s_box_%d:\n", i));
-        DBG(printBuffer(state, ARIA_BLOCK_SIZE));
-        if (i < key->rounds) {
+
+        if (i != ((key->rounds) -1)) {
             ariaDiffusionLayer(state);
-            DBG(fprintf(stdout,"diff_lay_%d:\n", i));
-            DBG(printBuffer(state, ARIA_BLOCK_SIZE));
         }
     }
     /* Last XORing the state and the round_key */
-    ariaXOR(state, key->rd_key[key->rounds], state);
-    DBG(fprintf(stdout,"Last XOR:\n", i));
-    DBG(printBuffer(state, ARIA_BLOCK_SIZE));
-    out = state;
+    ariaXOR(state, key->rd_key[(key->rounds)-1], state);
+
+    for (i = 0; i < ARIA_BLOCK_SIZE; i++) {
+        out[i] = *(state + i);
+    }
 }
 
 void Aria_decrypt(const unsigned char *in, unsigned char *out,

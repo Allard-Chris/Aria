@@ -180,8 +180,8 @@ static const char *names[ALGOR_NUM] = {
 	"camellia-128 cbc", "camellia-192 cbc", "camellia-256 cbc",
 	"evp", "sha256", "sha512", "whirlpool",
 	"aes-128 ige", "aes-192 ige", "aes-256 ige", "ghash",
-	"aes-128 gcm", "aes-256 gcm", "aria-128-cbc", "aria-192-cbc",
-    "aria-256-cbc", "chacha20 poly1305",
+	"aes-128 gcm", "aes-256 gcm", "chacha20 poly1305",
+	"aria-128-cbc", "aria-192-cbc", "aria-256-cbc",
 };
 static double results[ALGOR_NUM][SIZE_NUM];
 static int lengths[SIZE_NUM] = {16, 64, 256, 1024, 8 * 1024};
