@@ -1,0 +1,23 @@
+## Generate new patch
+cd sources/
+./make_patch.sh
+
+## Apply the patch
+cd sources/
+patch -p0 < aria.patch
+
+## Compile project
+1. ./config
+2. make
+3. echo $? must return 0
+4. make check
+5. echo $? must return 0
+6. sudo make install
+
+## Option: Adding man page
+cd sources/libressl/man
+sudo make install-man
+
+# Option: Removing man page
+cd sources/libressl/man
+sudo make uninstall-man
