@@ -1,5 +1,5 @@
 # Aria
-Another Aria OpenSSL implementation
+Another Aria LibreSSL implementation
 
 ## Objectifs
 1. Initialisationdu projet  
@@ -9,7 +9,7 @@ Another Aria OpenSSL implementation
 1.4 Création d'un Makefile  
 2. Mise en place du banc de test  
 3. Implémentation avec clé 128bits  
-4. Intégration avec OpenSSL  
+4. Intégration avec LibreSSL  
 5. Implémentation avec clé 192 et 256bits  
 6. Optimisation avec ASM  
 
@@ -18,4 +18,4 @@ Another Aria OpenSSL implementation
 ALLARD Chris  
 AULAGNIER Corentin
 =======
-Aria OpenSSL implementation
+Aria LibreSSL implementation
