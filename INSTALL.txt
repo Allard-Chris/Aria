@@ -1,4 +1,4 @@
-## Generate new patch
+## Generate new patch (already generated)
 cd sources/
 ./make_patch.sh
 
@@ -7,6 +7,7 @@ cd sources/
 patch -p0 < aria.patch
 
 ## Compile project
+cd sources/libressl-2.9.0/
 1. ./config
 2. make
 3. echo $? must return 0
